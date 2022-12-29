@@ -19,5 +19,5 @@ public class Semester {
     private Integer number;
 
     @OneToMany(mappedBy = "semester")
-    private List<Class> classes;
+    private List<ClassEntity> classes;
 }

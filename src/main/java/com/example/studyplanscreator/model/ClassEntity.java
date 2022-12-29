@@ -10,7 +10,8 @@ import java.util.List;
 
 @Entity
 @Data
-public class Class {
+@Table(name = "class")
+public class ClassEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -53,11 +54,11 @@ public class Class {
 
     @OneToMany
     @JoinColumn(name = "groupId")
-    private List<Class> coursesInGroup;
+    private List<ClassEntity> coursesInGroup;
 
     @OneToMany
     @JoinColumn(name = "moduleId")
-    private List<Class> coursesInModule;
+    private List<ClassEntity> coursesInModule;
 
     private Long groupId;
 

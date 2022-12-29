@@ -17,5 +17,5 @@ public class LearningEffect {
     private String description;
 
     @ManyToMany(mappedBy = "learningEffects")
-    private List<Class> realisingClasses;
+    private List<ClassEntity> realisingClasses;
 }

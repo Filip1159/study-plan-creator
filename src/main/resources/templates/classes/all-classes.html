@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+</head>
+<body>
+<div class="class" th:each="c:${classes}">
+    <h3 th:text="${c.name}"></h3>
+    <div class="classDetails">
+        <span class="classDetails__span" th:text="'ID: ' + ${c.id}"></span>
+        <span class="classDetails__span" th:text="'ECTS: ' + ${c.ECTS}"></span>
+        <span class="classDetails__span" th:text="'CNPS: ' + ${c.CNPS}"></span>
+        <span class="classDetails__span" th:text="'ZZU: ' + ${c.ZZU}"></span>
+    </div>
+</div>
+</body>
+</html>
