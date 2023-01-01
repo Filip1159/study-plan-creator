@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="UTF-8">
-    <title>Plany studiów PWR</title>
-
-    <link rel="stylesheet" href="/css/classes/create-class-form.css"/>
-</head>
-<body>
-<form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
+<div th:fragment="create-class-form-base">
     <div class="createClassForm__inputWrapper">
         <label for="name">Nazwa</label>
         <input id="name" type="text" th:field="*{name}"/>
@@ -49,10 +40,8 @@
     <div class="createClassForm__inputWrapper">
         <label for="category">Kategoria zajęć</label>
         <select id="category" th:field="*{category}">
-            <option th:each="c:${categories}" th:value="${c}" th:text="${c.name()}"></option>
+            <option th:each="c:${categories}" th:value="${c.name()}" th:text="${c.name()}"></option>
         </select>
     </div>
-    <input type="submit" value="Submit"/>
-</form>
-</body>
-</html>
+    <script type="text/javascript" src="/js/create-class-form-base.js"></script>
+</div>

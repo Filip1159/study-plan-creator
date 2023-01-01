@@ -1,9 +1,6 @@
 package com.example.studyplanscreator.controller;
 
-import com.example.studyplanscreator.model.ClassCategory;
-import com.example.studyplanscreator.model.ClassEntity;
-import com.example.studyplanscreator.model.Type;
-import com.example.studyplanscreator.model.WayOfCrediting;
+import com.example.studyplanscreator.model.*;
 import com.example.studyplanscreator.service.ClassService;
 import com.example.studyplanscreator.service.LearningEffectService;
 import lombok.RequiredArgsConstructor;
@@ -12,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -22,13 +20,28 @@ public class ClassController {
     private final LearningEffectService learningEffectService;
 
     @GetMapping("/create-class-form")
-    public String createClassForm(Model model) {
+    public String createClassForm(Model model, @RequestParam String category) {
         model.addAttribute("class", new ClassEntity());
         model.addAttribute("waysOfCrediting", WayOfCrediting.values());
         model.addAttribute("types", Type.values());
         model.addAttribute("learningEffects", learningEffectService.getAll());
         model.addAttribute("categories", ClassCategory.values());
-        return "classes/create-class-form";
+        switch (category.toLowerCase()) {
+            case "group" -> {
+                model.addAttribute("courses",
+                        service.getAll().stream()
+                                .map(classEntity -> classEntity.getName() + " " + classEntity.getCourseType().name())
+                                .toList());
+                return "classes/create-course-group-form";
+            }
+            case "module" -> {
+                return "classes/create-course-module-form";
+            }
+            default -> {
+                model.addAttribute("courseTypes", CourseType.values());
+                return "classes/create-course-form";
+            }
+        }
     }
 
     @PostMapping("/class/create")

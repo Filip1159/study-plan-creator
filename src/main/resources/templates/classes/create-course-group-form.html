@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany studiów PWR</title>
+
+    <link rel="stylesheet" href="/css/classes/create-course-group-form.css"/>
+</head>
+<body>
+<form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
+    <div th:replace="classes/create-class-form-base :: create-class-form-base"></div>
+    <div class="createClassForm__inputWrapper">
+        <button id="add-course-button">Dodaj kurs do grupy</button>
+        <div id="added-courses-container"></div>
+    </div>
+    <input type="text" name="courses-input" id="courses-input" />
+    <input type="submit" value="Submit"/>
+</form>
+<div class="search-courses">
+    <span th:each="c:${courses}" th:text="${c}"></span>
+</div>
+<script type="text/javascript" src="/js/create-course-group-form.js"></script>
+</body>
+</html>

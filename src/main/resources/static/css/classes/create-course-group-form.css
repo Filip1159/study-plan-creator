@@ -1,0 +1,11 @@
+.search-courses {
+    display: none;
+}
+
+.search-courses__visible {
+    display: flex;
+}
+
+#courses-input {
+    display: none;
+}
