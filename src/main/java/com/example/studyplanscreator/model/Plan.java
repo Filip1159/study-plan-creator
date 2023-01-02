@@ -36,4 +36,10 @@ public class Plan {
 
     @OneToOne(mappedBy = "plan")
     private Approval approval;
+
+    @ManyToMany
+    @JoinTable(name = "plan_authorship",
+            joinColumns = { @JoinColumn(name = "plan_id") },
+            inverseJoinColumns = { @JoinColumn(name = "user_id") })
+    private List<User> authors;
 }

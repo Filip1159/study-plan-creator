@@ -5,7 +5,9 @@ import lombok.Data;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Data
 @Entity
@@ -27,4 +29,7 @@ public class User {
 
     @NotNull
     private String password;
+
+    @ManyToMany(mappedBy = "authors")
+    private List<Plan> plansAuthored;
 }

@@ -2,6 +2,7 @@ package com.example.studyplanscreator.service;
 
 import com.example.studyplanscreator.model.ClassEntity;
 import com.example.studyplanscreator.repo.ClassRepo;
+import com.example.studyplanscreator.service.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -13,8 +14,10 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ClassService {
     private final ClassRepo repo;
+    private final ValidatorFactory validatorFactory;
 
     public ClassEntity create(ClassEntity classEntity) {
+        validatorFactory.getValidatorFor(classEntity).validate(classEntity);
         return repo.save(classEntity);
     }
 

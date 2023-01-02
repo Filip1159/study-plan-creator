@@ -51,7 +51,28 @@ public class ClassController {
     }
 
     @GetMapping("/classes")
-    public String getAllClasses(Model model) {
+    public String getAllClasses(Model model, @RequestParam(required = false) Integer ects,
+                                @RequestParam(required = false) Integer cnps,
+                                @RequestParam(required = false) Integer zzu,
+                                @RequestParam(required = false) String category,
+                                @RequestParam(required = false) Long[] learningEffects,
+                                @RequestParam(required = false) String type,
+                                @RequestParam(required = false) String area,
+                                @RequestParam(required = false) Long lectureEcts,
+                                @RequestParam(required = false) Long projectEcts,
+                                @RequestParam(required = false) Long labEcts,
+                                @RequestParam(required = false) Long exercisesEcts,
+                                @RequestParam(required = false) Long seminaryEcts,
+                                @RequestParam(required = false) Long lectureCnps,
+                                @RequestParam(required = false) Long projectCnps,
+                                @RequestParam(required = false) Long labCnps,
+                                @RequestParam(required = false) Long exercisesCnps,
+                                @RequestParam(required = false) Long seminaryCnps,
+                                @RequestParam(required = false) Long lectureZzu,
+                                @RequestParam(required = false) Long projectZzu,
+                                @RequestParam(required = false) Long labZzu,
+                                @RequestParam(required = false) Long exercisesZzu,
+                                @RequestParam(required = false) Long seminaryZzu) {  // TODO add filtering
         model.addAttribute("classes", service.getAll());
         return "classes/all-classes";
     }
