@@ -1,0 +1,53 @@
+.appContainer__aside {
+    flex: 0.3;
+    background-color: #FFE599;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+}
+
+.appContainer__aside__userMenu__loggedAsSpan {
+    display: block;
+    background-color: #B45F06;
+    text-transform: uppercase;
+    margin: 15px 10px;
+    color: #FFE599;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.appContainer__aside__userMenu__nameSurname {
+    display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.appContainer__aside__nav__availableOptions {
+    display: block;
+    background-color: #B45F06;
+    text-transform: uppercase;
+    margin: 15px 10px 0 10px;
+    color: #FFE599;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+    font-size: 18px;
+}
+
+.appContainer__aside__nav__option {
+    display: block;
+    background-color: #FFE599;
+    margin: 4px 10px;
+    padding: 2px;
+    font-size: 12px;
+    font-weight: 700;
+    border: 2px solid black;
+    border-radius: 3px;
+}
+
+.appContainer__aside__nav__option::before {
+    content: '>  ';
+}
