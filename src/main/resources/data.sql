@@ -10,3 +10,7 @@ values ('ABCD1234', 'Lorem ipsum dolor nr 1'),
        ('MNOP1213', 'Lorem ipsum dolor nr 4'),
        ('QRST1415', 'Lorem ipsum dolor nr 5'),
        ('UWYZ1617', 'Lorem ipsum dolor nr 6');
+
+insert into faculty
+values (1, 'Wydział Informatyki i Telekomunikacji'),
+       (2, 'Wydział Zarządzania');
