@@ -32,6 +32,9 @@ public class Plan {
     private Faculty faculty;
 
     @OneToMany(mappedBy = "plan")
+    private List<Semester> semesters;
+
+    @OneToMany(mappedBy = "plan")
     private List<Opinion> opinions;
 
     @OneToOne(mappedBy = "plan")
