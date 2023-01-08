@@ -2,37 +2,49 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="UTF-8">
-  <title>Plany studiów PWR</title>
-
-  <link rel="stylesheet" href="/css/classes/create-class-form.css"/>
+  <title>Plany Studiów PWR</title>
+  <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+  <link rel="stylesheet" href="/css/fragments/header.css"/>
+  <link rel="stylesheet" href="/css/fragments/aside.css"/>
+  <link rel="stylesheet" href="/css/base.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-<form class="createPlanForm" action="#" th:action="@{/plan/create}" th:object="${plan}" method="post">
-  <div class="createClassForm__inputWrapper">
-    <label for="name">Nazwa</label>
-    <input id="name" type="text" th:field="*{name}"/>
-  </div>
-  <div class="createClassForm__inputWrapper">
-    <label for="field">Kierunek</label>
-    <input id="field" type="text" th:field="*{field}"/>
-  </div>
-  <div class="createPlanForm__inputWrapper">
-    <label for="faculty">Wydział</label>
-    <select id="faculty" th:field="*{faculty}">
-      <option th:each="f:${faculties}" th:value="${f.id}" th:text="${f.name}"></option>
-    </select>
-  </div>
-  <div class="createPlanForm__inputWrapper">
-    <label for="level">Poziom</label>
-    <select id="level" th:field="*{level}">
-      <option th:each="l:${levels}" th:value="${l.name()}" th:text="${l.name()}"></option>
-    </select>
-  </div>
-  <div class="createClassForm__inputWrapper">
-    <label for="academicYear">Rok</label>
-    <input id="academicYear" type="text" th:field="*{academicYear}"/>
-  </div>
-  <input type="submit" value="Submit"/>
-</form>
+<div class="appContainer">
+  <header th:replace="fragments/header :: header"></header>
+  <main class="appContainer__main">
+    <aside th:replace="fragments/aside :: aside"></aside>
+    <div class="appContainer__main__content">
+      <form class="createPlanForm" action="#" th:action="@{/plan/create}" th:object="${plan}" method="post">
+        <div class="createClassForm__inputWrapper">
+          <label for="name">Nazwa</label>
+          <input id="name" type="text" th:field="*{name}"/>
+        </div>
+        <div class="createClassForm__inputWrapper">
+          <label for="field">Kierunek</label>
+          <input id="field" type="text" th:field="*{field}"/>
+        </div>
+        <div class="createPlanForm__inputWrapper">
+          <label for="faculty">Wydział</label>
+          <select id="faculty" th:field="*{faculty}">
+            <option th:each="f:${faculties}" th:value="${f.id}" th:text="${f.name}"></option>
+          </select>
+        </div>
+        <div class="createPlanForm__inputWrapper">
+          <label for="level">Poziom</label>
+          <select id="level" th:field="*{level}">
+            <option th:each="l:${levels}" th:value="${l.name()}" th:text="${l.name()}"></option>
+          </select>
+        </div>
+        <div class="createClassForm__inputWrapper">
+          <label for="academicYear">Rok</label>
+          <input id="academicYear" type="text" th:field="*{academicYear}"/>
+        </div>
+        <input type="submit" value="Submit"/>
+      </form>
+    </div>
+  </main>
+</div>
 </body>
 </html>
