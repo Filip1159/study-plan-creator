@@ -1,0 +1,73 @@
+<div th:fragment="create-class-form-base">
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label createClassForm__inputWrapper__label--bold" for="name">Nazwa
+            zajęć:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <input class="createClassForm__inputWrapper__inputDiv__input" id="name" type="text"
+                   th:field="*{name}"/>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="ects">Liczba punktów ECTS:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <input class="createClassForm__inputWrapper__inputDiv__input" id="ects" type="number" th:field="*{ECTS}"/>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="cnps">Liczba godzin CNPS:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <input class="createClassForm__inputWrapper__inputDiv__input" id="cnps" type="number" th:field="*{CNPS}"/>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="zzu">Liczba godzin ZZU:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <input class="createClassForm__inputWrapper__inputDiv__input" id="zzu" type="number" th:field="*{ZZU}"/>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="wayOfCrediting">Forma zaliczenia:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <select class="createClassForm__inputWrapper__inputDiv__input" id="wayOfCrediting"
+                    th:field="*{wayOfCrediting}">
+                <option th:each="w:${waysOfCrediting}" th:value="${w}" th:text="${w.name()}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="type">Rodzaj zajęć:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <select class="createClassForm__inputWrapper__inputDiv__input" id="type" th:field="*{type}">
+                <option th:each="t:${types}" th:value="${t}" th:text="${t.name()}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="area">Obszar zajęć:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <input class="createClassForm__inputWrapper__inputDiv__input" id="area" type="text" th:field="*{area}">
+        </div>
+    </div>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label" for="learningEffectsSelect">Symbole efektów uczenia
+            się:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <select class="createClassForm__inputWrapper__inputDiv__input" id="learningEffectsSelect">
+                <option disabled selected value> -- wybierz -- </option>
+                <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}"></option>
+            </select>
+        </div>
+    </div>
+    <div class="createClassForm__learningEffects"></div>
+    <input type="text" name="learningEffects" id="learningEffects" th:field="*{learningEffects}"/>
+    <div class="createClassForm__inputWrapper">
+        <label class="createClassForm__inputWrapper__label createClassForm__inputWrapper__label--bold" for="category">Kategoria
+            zajęć:</label>
+        <div class="createClassForm__inputWrapper__inputDiv">
+            <select class="createClassForm__inputWrapper__inputDiv__input" id="category" th:field="*{category}">
+                <option th:each="c:${categories}" th:value="${c.name()}" th:text="${c.name()}"></option>
+            </select>
+        </div>
+    </div>
+    <script type="text/javascript" src="/js/create-class-form-base.js"></script>
+</div>

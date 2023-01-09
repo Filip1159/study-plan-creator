@@ -5,6 +5,8 @@
     <title>Plany studiów PWR</title>
 
     <link rel="stylesheet" href="/css/classes/create-course-group-form.css"/>
+    <link rel="stylesheet" href="/css/fragments/create-class-form-base.css"/>
+    <link rel="stylesheet" href="/css/fragments/submit-cancel-class-form-buttons.css"/>
     <link rel="stylesheet" href="/css/fragments/header.css"/>
     <link rel="stylesheet" href="/css/fragments/aside.css"/>
     <link rel="stylesheet" href="/css/base.css"/>
@@ -12,20 +14,19 @@
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-
 <div class="appContainer">
     <header th:replace="fragments/header :: header"></header>
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
             <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
-                <div th:replace="classes/create-class-form-base :: create-class-form-base"></div>
+                <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
                 <div class="createClassForm__inputWrapper">
                     <button id="add-course-button">Dodaj kurs do grupy</button>
                     <div id="added-courses-container"></div>
                 </div>
                 <input type="text" name="courses-input" id="courses-input"/>
-                <input type="submit" value="Submit"/>
+                <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
             <div class="search-courses">
                 <span th:each="c:${courses}" th:text="${c}"></span>

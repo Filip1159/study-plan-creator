@@ -18,5 +18,11 @@ body {
 }
 
 .appContainer__main__content {
-    flex: 0.7;
+    min-width: 696px;
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    margin-left: 4px;
 }
