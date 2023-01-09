@@ -4,11 +4,14 @@
     <meta charset="UTF-8">
     <title>Plany studiów PWR</title>
 
-    <link rel="stylesheet" href="/css/classes/create-class-form.css"/>
+    <link rel="stylesheet" href="/css/fragments/create-class-form-base.css"/>
+    <link rel="stylesheet" href="/css/fragments/submit-cancel-class-form-buttons.css"/>
+    <link rel="stylesheet" href="/css/classes/create-course-form.css"/>
     <link rel="stylesheet" href="/css/fragments/header.css"/>
     <link rel="stylesheet" href="/css/fragments/aside.css"/>
     <link rel="stylesheet" href="/css/base.css"/>
-    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
@@ -18,14 +21,17 @@
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
             <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
-                <div th:replace="/classes/create-class-form-base :: create-class-form-base"></div>
+                <div th:replace="/fragments/create-class-form-base :: create-class-form-base"></div>
+                <hr class="createClassForm__hr">
                 <div class="createClassForm__inputWrapper">
-                    <label for="courseType">Typ kursu</label>
-                    <select id="courseType" th:field="*{courseType}">
-                        <option th:each="c:${courseTypes}" th:value="${c}" th:text="${c.name()}"></option>
-                    </select>
+                    <label class="createClassForm__inputWrapper__label" for="courseType">Typ kursu</label>
+                    <div class="createClassForm__inputWrapper__inputDiv">
+                        <select class="createClassForm__inputWrapper__input" id="courseType" th:field="*{courseType}">
+                            <option th:each="c:${courseTypes}" th:value="${c}" th:text="${c.name()}"></option>
+                        </select>
+                    </div>
                 </div>
-                <input type="submit" value="Submit"/>
+                <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
         </div>
     </main>

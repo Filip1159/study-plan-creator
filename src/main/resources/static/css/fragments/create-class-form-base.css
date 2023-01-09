@@ -1,0 +1,64 @@
+.createClassForm__inputWrapper {
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.createClassForm__inputWrapper__label {
+    flex: 0.35;
+    margin: 5px;
+    text-align: right;
+}
+
+.createClassForm__inputWrapper__label--bold {
+    font-weight: bold;
+}
+
+.createClassForm__inputWrapper__inputDiv {
+    flex: 0.65;
+    margin: 5px;
+}
+
+.createClassForm__learningEffects {
+    margin-left: 250px;
+    display: flex;
+    flex-direction: row;
+}
+
+.createClassForm__learningEffects__badge {
+    background-color: #FFE599;
+    border: 2px dashed #B45F06;
+    border-radius: 10px;
+    font-size: 8px;
+    font-weight: 700;
+    padding: 1px 6px;
+    margin: 0 5px;
+}
+
+.createClassForm__learningEffectOption--selected {
+    background-color: #FFE599;
+}
+
+#learningEffects {
+    display: none;
+}
+
+#name {
+    width: 300px;
+}
+
+#wayOfCrediting {
+    width: 120px;
+}
+
+#type, #area {
+    width: 220px;
+}
+
+#learningEffects {
+    width: 180px;
+}
+
+#ects, #cnps, #zzu {
+    width: 80px;
+}

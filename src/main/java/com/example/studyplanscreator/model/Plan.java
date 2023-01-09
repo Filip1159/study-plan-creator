@@ -37,6 +37,9 @@ public class Plan {
     @OneToOne(mappedBy = "plan")
     private Approval approval;
 
+    @OneToMany(mappedBy = "plan")
+    private List<Semester> semesters;
+
     @ManyToMany
     @JoinTable(name = "plan_authorship",
             joinColumns = { @JoinColumn(name = "plan_id") },

@@ -20,4 +20,9 @@ public class Semester {
 
     @OneToMany(mappedBy = "semester")
     private List<ClassEntity> classes;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "plan_id")
+    private Plan plan;
 }

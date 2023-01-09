@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
+import static com.example.studyplanscreator.model.ClassCategory.*;
+
 @Controller
 @RequiredArgsConstructor
 public class ClassController {
@@ -21,7 +23,6 @@ public class ClassController {
 
     @GetMapping("/create-class-form")
     public String createClassForm(Model model, @RequestParam String category) {
-        model.addAttribute("class", new ClassEntity());
         model.addAttribute("waysOfCrediting", WayOfCrediting.values());
         model.addAttribute("types", Type.values());
         model.addAttribute("learningEffects", learningEffectService.getAll());
@@ -32,13 +33,16 @@ public class ClassController {
                         service.getAll().stream()
                                 .map(classEntity -> classEntity.getName() + " " + classEntity.getCourseType().name())
                                 .toList());
+                model.addAttribute("class", ClassEntity.builder().category(GROUP).build());
                 return "classes/create-course-group-form";
             }
             case "module" -> {
+                model.addAttribute("class", ClassEntity.builder().category(MODULE).build());
                 return "classes/create-course-module-form";
             }
             default -> {
                 model.addAttribute("courseTypes", CourseType.values());
+                model.addAttribute("class", ClassEntity.builder().category(COURSE).build());
                 return "classes/create-course-form";
             }
         }
