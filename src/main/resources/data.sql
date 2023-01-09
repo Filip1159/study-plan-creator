@@ -10,3 +10,17 @@ values ('ABCD1234', 'Lorem ipsum dolor nr 1'),
        ('MNOP1213', 'Lorem ipsum dolor nr 4'),
        ('QRST1415', 'Lorem ipsum dolor nr 5'),
        ('UWYZ1617', 'Lorem ipsum dolor nr 6');
+
+insert into faculty
+values (1, 'Wydział Informatyki i Telekomunikacji'),
+       (2, 'Wydział Zarządzania');
+
+insert into plan
+values(1, '2022/2023', 'Informatyka stosowana', 'FIRST', 'Plan 1', 1),
+      (2, '2022/2023', 'Informatyka stosowana', 'FIRST', 'Plan 2', 1);
+
+insert into semester
+values(1, 1, 1),
+        (2, 2, 1),
+        (3, 3, 1),
+        (4, 1, 2);
