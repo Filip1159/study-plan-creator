@@ -19,8 +19,11 @@ public class SemesterController {
     private final PlanService planService;
 
     @GetMapping("/semesters-in-plan")
-    private String semestersList(Model model, @RequestParam(required = false) Long planId) {
+    private String semestersList(Model model, @RequestParam(required = true) Long planId) {
         var foundSemesters = semesterService.getSemestersFromPlan(planId);
+        var foundPlan = planService.getPlanById(planId);
+
+        model.addAttribute("plan", foundPlan);
         model.addAttribute("semesters", foundSemesters);
         return "semesters/semesters-in-plan";
     }

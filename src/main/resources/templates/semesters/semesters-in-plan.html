@@ -16,8 +16,39 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
+            <div class="">
+                <h2>Dane planu</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Wydział</td>
+                            <td th:text="${plan.getFaculty().getName()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kierunek</td>
+                            <td th:text="${plan.getField()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Rocznik</td>
+                            <td th:text="${plan.getAcademicYear()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Stopień</td>
+                            <td th:text="${plan.getLevel()}"></td>
+                        </tr>
+                        <!--<tr>
+                            <td>Autor</td>
+                            <td>
+                                <ul th:each="a:${plan.getAuthors()}">
+                                    <li th:text="${a.getName()}"></li>
+                                </ul>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+            </div>
             <div class="class" th:each="s:${semesters}">
-                <h3 th:text="${s.number}"></h3>
+                <h3 th:text="'Semestr ' + ${s.number}"></h3>
             </div>
         </div>
     </main>

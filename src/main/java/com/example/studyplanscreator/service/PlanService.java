@@ -24,4 +24,8 @@ public class PlanService {
         return planRepo.getPlansByAuthorsContainingAndFacultyAndLevelAndAcademicYear(  // TODO add filtering by status
                 author, faculty, level, academicYear);
     }
+
+    public Plan getPlanById(long planId){
+        return planRepo.getPlanById(planId);
+    }
 }
