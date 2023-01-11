@@ -1,19 +1,17 @@
 package com.example.studyplanscreator.controller;
 
-import com.example.studyplanscreator.model.*;
+import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
+import com.example.studyplanscreator.model.entity.*;
 import com.example.studyplanscreator.service.ClassService;
 import com.example.studyplanscreator.service.LearningEffectService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-import static com.example.studyplanscreator.model.ClassCategory.*;
+import static com.example.studyplanscreator.model.entity.ClassCategory.*;
 
 @Controller
 @RequiredArgsConstructor
@@ -55,37 +53,8 @@ public class ClassController {
     }
 
     @GetMapping("/classes")
-    public String getAllClasses(Model model, @RequestParam(required = false) Integer ects,
-                                @RequestParam(required = false) Integer cnps,
-                                @RequestParam(required = false) Integer zzu,
-                                @RequestParam(required = false) String category,
-                                @RequestParam(required = false) Long[] learningEffects,
-                                @RequestParam(required = false) String type,
-                                @RequestParam(required = false) String area,
-                                @RequestParam(required = false) Long lectureEcts,
-                                @RequestParam(required = false) Long projectEcts,
-                                @RequestParam(required = false) Long labEcts,
-                                @RequestParam(required = false) Long exercisesEcts,
-                                @RequestParam(required = false) Long seminaryEcts,
-                                @RequestParam(required = false) Long lectureCnps,
-                                @RequestParam(required = false) Long projectCnps,
-                                @RequestParam(required = false) Long labCnps,
-                                @RequestParam(required = false) Long exercisesCnps,
-                                @RequestParam(required = false) Long seminaryCnps,
-                                @RequestParam(required = false) Long lectureZzu,
-                                @RequestParam(required = false) Long projectZzu,
-                                @RequestParam(required = false) Long labZzu,
-                                @RequestParam(required = false) Long exercisesZzu,
-                                @RequestParam(required = false) Long seminaryZzu) {  // TODO add filtering
-        model.addAttribute("classes", service.getAll());
-        return "classes/all-classes";
+    @ResponseBody
+    public List<ClassEntity> getWithFilters(ClassFiltersDto requestParams) {  // TODO add filtering
+        return service.getWithFilters(requestParams);
     }
-
-    @GetMapping("/hello")
-    public String helloWorld(Model model) {
-        model.addAttribute("hellos", List.of("Hello Filip", "Hello Mateusz", "Hello Stanisław"));
-        return "hello";
-    }
-
-
 }

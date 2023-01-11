@@ -1,7 +1,7 @@
 package com.example.studyplanscreator.service;
 
-import com.example.studyplanscreator.model.EducationLevel;
-import com.example.studyplanscreator.model.Plan;
+import com.example.studyplanscreator.model.entity.EducationLevel;
+import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.repo.FacultyRepo;
 import com.example.studyplanscreator.repo.PlanRepo;
 import com.example.studyplanscreator.repo.UserRepo;
