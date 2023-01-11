@@ -46,10 +46,27 @@
                         </tr>-->
                     </tbody>
                 </table>
+                <form action="" method="post">
+                    <input type="submit" value="Modyfikuj" />
+                </form>
             </div>
-            <div class="class" th:each="s:${semesters}">
-                <h3 th:text="'Semestr ' + ${s.number}"></h3>
-            </div>
+            <table>
+                <tbody>
+                    <tr th:each="s:${semesters}">
+                        <td th:text="'Semestr ' + ${s.number}"></td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value="Szczegóły" />
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value="Usuń" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
         </div>
     </main>
 </div>

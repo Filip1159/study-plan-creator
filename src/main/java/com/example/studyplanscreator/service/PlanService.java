@@ -28,4 +28,8 @@ public class PlanService {
     public Plan getPlanById(long planId){
         return planRepo.getPlanById(planId);
     }
+    
+    public void create(Plan plan){
+        planRepo.save(plan);
+    }
 }
