@@ -2,15 +2,13 @@ package com.example.studyplanscreator.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
 @Entity
+@Table(name="users")
 public class User {
     @Id
     @GeneratedValue
