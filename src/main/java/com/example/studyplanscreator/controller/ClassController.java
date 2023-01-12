@@ -1,6 +1,7 @@
 package com.example.studyplanscreator.controller;
 
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
+import com.example.studyplanscreator.model.AbstractClass;
 import com.example.studyplanscreator.model.entity.*;
 import com.example.studyplanscreator.service.ClassService;
 import com.example.studyplanscreator.service.LearningEffectService;
@@ -54,7 +55,7 @@ public class ClassController {
 
     @GetMapping("/classes")
     @ResponseBody
-    public List<ClassEntity> getWithFilters(ClassFiltersDto requestParams) {  // TODO add filtering
+    public List<AbstractClass> getWithFilters(ClassFiltersDto requestParams) {  // TODO add filtering
         return service.getWithFilters(requestParams);
     }
 }

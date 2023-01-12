@@ -4,22 +4,24 @@ import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.PointType;
 import com.example.studyplanscreator.model.entity.CourseType;
 import lombok.AllArgsConstructor;
+import org.springframework.stereotype.Component;
 
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.List;
 import java.util.regex.Pattern;
 
+@Component
 @AllArgsConstructor
 public class FilterCriteriaCreator {
 
-    public static List<FilterCriterion> from(ClassFiltersDto filtersDto) {
+    public List<FilterCriterion> from(ClassFiltersDto filtersDto) {
         return Arrays.stream(filtersDto.getClass().getDeclaredFields())
                 .map(field -> fromField(field, filtersDto))
                 .toList();
     }
 
-    private static FilterCriterion fromField(Field field, ClassFiltersDto instance) {
+    private FilterCriterion fromField(Field field, ClassFiltersDto instance) {
         var splitName = splitCriterionName(field.getName());
         field.setAccessible(true);
         try {
@@ -33,7 +35,7 @@ public class FilterCriteriaCreator {
         }
     }
 
-    private static String[] splitCriterionName(String name) {
+    private String[] splitCriterionName(String name) {
         var matcher = Pattern.compile("[A-Z]?[a-z]+").matcher(name);
         var result = new String[2];
         result[0] = matcher.group();

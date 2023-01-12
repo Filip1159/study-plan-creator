@@ -4,6 +4,6 @@ import com.example.studyplanscreator.model.AbstractClass;
 
 import java.util.List;
 
-public interface ClassFilters<T extends AbstractClass> {
-    boolean matchesFilters(T abstractClass, List<FilterCriterion> filters);
+public interface ClassFilters {
+    boolean matchesFilters(AbstractClass abstractClass, List<FilterCriterion> filters);
 }

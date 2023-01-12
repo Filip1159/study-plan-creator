@@ -13,7 +13,7 @@ public class FiltersFactory {
     private final CourseGroupFilters courseGroupFilters;
     private final CourseModuleFilters courseModuleFilters;
 
-    public ClassFilters<? extends AbstractClass> getFor(AbstractClass abstractClass) {
+    public ClassFilters getFor(AbstractClass abstractClass) {
         if (abstractClass instanceof Course) return courseFilters;
         else if (abstractClass instanceof CourseGroup) return courseGroupFilters;
         else return courseModuleFilters;
