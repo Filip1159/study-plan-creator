@@ -1,0 +1,26 @@
+<div th:fragment="add-course-to-group-modal" class="groupModal groupModal--hidden">
+    <div class="groupModal__searchBar">
+        <input type="text" class="groupModal__searchBar__input"/>
+        <button class="groupModal__searchBar__button">Szukaj</button>
+    </div>
+    <table class="fancyTable">
+        <thead class="fancyTable__thead">
+        <tr>
+            <th class="fancyTable__cell">Nazwa</th>
+            <th class="fancyTable__cell">ECTS</th>
+            <th class="fancyTable__cell">CNPS</th>
+            <th class="fancyTable__cell">ZZU</th>
+            <th class="fancyTable__cell">Typ</th>
+        </tr>
+        </thead>
+        <tbody class="fancyTable__tbody groupModal__tbody">
+        <tr class="fancyTable__tbody__tr" th:each="c:${courses}">
+            <td class="fancyTable__cell" th:text="${c.name()}"></td>
+            <td class="fancyTable__cell" th:text="${c.ECTS()}"></td>
+            <td class="fancyTable__cell" th:text="${c.CNPS()}"></td>
+            <td class="fancyTable__cell" th:text="${c.ZZU()}"></td>
+            <td class="fancyTable__cell" th:text="${c.type()}"></td>
+        </tr>
+        </tbody>
+    </table>
+</div>

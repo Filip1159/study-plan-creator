@@ -23,39 +23,50 @@
         <div class="appContainer__main__content">
             <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
                 <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
-                <div class="createGroupForm__addedCourses"></div>
-                <button id="add-course-button">Dodaj kurs do grupy</button>
+                <hr class="createClassForm__hr">
+                <div class="createGroupForm__addedCourses">
+                    <button class="createGroupForm__addedCourses__button">+ Dodaj kurs do grupy</button>
+                    <table class="createGroupForm__addedCourses__table fancyTable">
+                        <thead class="fancyTable__thead">
+                        <tr>
+                            <th class="fancyTable__cell">Nazwa</th>
+                            <th class="fancyTable__cell">ECTS</th>
+                            <th class="fancyTable__cell">CNPS</th>
+                            <th class="fancyTable__cell">ZZU</th>
+                            <th class="fancyTable__cell">Typ</th>
+                        </tr>
+                        </thead>
+                        <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
+                        <tr class="fancyTable__tbody__tr">
+                            <td class="fancyTable__cell">Bazy danych</td>
+                            <td class="fancyTable__cell">2</td>
+                            <td class="fancyTable__cell">70</td>
+                            <td class="fancyTable__cell">30</td>
+                            <td class="fancyTable__cell">Wykład</td>
+                        </tr>
+                        <tr class="fancyTable__tbody__tr">
+                            <td class="fancyTable__cell">Bazy danych</td>
+                            <td class="fancyTable__cell">2</td>
+                            <td class="fancyTable__cell">70</td>
+                            <td class="fancyTable__cell">30</td>
+                            <td class="fancyTable__cell">Wykład</td>
+                        </tr>
+                        <tr class="fancyTable__tbody__tr">
+                            <td class="fancyTable__cell">Bazy danych Oracle</td>
+                            <td class="fancyTable__cell">2</td>
+                            <td class="fancyTable__cell">70</td>
+                            <td class="fancyTable__cell">30</td>
+                            <td class="fancyTable__cell">Laboratorium</td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
                 <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
             <div class="search-courses">
                 <span th:each="c:${courses}" th:text="${c}"></span>
             </div>
-            <div class="groupModal">
-                <div class="groupModal__searchBar">
-                    <input type="text" class="groupModal__searchBar__input"/>
-                    <button class="groupModal__searchBar__button">Szukaj</button>
-                </div>
-                <table class="fancyTable groupModal__table">
-                    <thead class="fancyTable__thead">
-                    <tr>
-                        <th class="fancyTable__cell">Nazwa</th>
-                        <th class="fancyTable__cell">ECTS</th>
-                        <th class="fancyTable__cell">CNPS</th>
-                        <th class="fancyTable__cell">ZZU</th>
-                        <th class="fancyTable__cell">Typ</th>
-                    </tr>
-                    </thead>
-                    <tbody class="fancyTable__tbody">
-                    <tr class="fancyTable__tbody__tr" th:each="c:${courses}">
-                        <td class="fancyTable__cell" th:text="${c.name()}"></td>
-                        <td class="fancyTable__cell" th:text="${c.ECTS()}"></td>
-                        <td class="fancyTable__cell" th:text="${c.CNPS()}"></td>
-                        <td class="fancyTable__cell" th:text="${c.ZZU()}"></td>
-                        <td class="fancyTable__cell" th:text="${c.type()}"></td>
-                    </tr>
-                    </tbody>
-                </table>
-            </div>
+            <div th:replace="fragments/add-course-to-group-modal :: add-course-to-group-modal"></div>
         </div>
     </main>
 </div>
