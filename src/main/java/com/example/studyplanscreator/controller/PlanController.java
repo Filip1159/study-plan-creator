@@ -1,8 +1,9 @@
 package com.example.studyplanscreator.controller;
 
-import com.example.studyplanscreator.model.*;
-import com.example.studyplanscreator.service.PlanService;
+import com.example.studyplanscreator.model.entity.EducationLevel;
+import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.service.FacultyService;
+import com.example.studyplanscreator.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

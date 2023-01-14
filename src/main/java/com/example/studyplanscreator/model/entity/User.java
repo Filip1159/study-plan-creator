@@ -1,4 +1,4 @@
-package com.example.studyplanscreator.model;
+package com.example.studyplanscreator.model.entity;
 
 import lombok.Data;
 

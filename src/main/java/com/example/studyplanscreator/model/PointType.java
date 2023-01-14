@@ -1,5 +1,5 @@
 package com.example.studyplanscreator.model;
 
-public enum EducationLevel {
-    FIRST, SECOND
+public enum PointType {
+    ECTS, CNPS, ZZU
 }

@@ -1,7 +1,7 @@
 package com.example.studyplanscreator.repo;
 
-import com.example.studyplanscreator.model.Plan;
-import com.example.studyplanscreator.model.Semester;
+import com.example.studyplanscreator.model.entity.Plan;
+import com.example.studyplanscreator.model.entity.Semester;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

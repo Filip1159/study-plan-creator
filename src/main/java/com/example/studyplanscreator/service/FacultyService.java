@@ -1,6 +1,6 @@
 package com.example.studyplanscreator.service;
 
-import com.example.studyplanscreator.model.Faculty;
+import com.example.studyplanscreator.model.entity.Faculty;
 import com.example.studyplanscreator.repo.FacultyRepo;
 import com.example.studyplanscreator.service.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
@@ -21,4 +21,3 @@ public class FacultyService {
     }
 
 }
-

@@ -1,4 +1,4 @@
-package com.example.studyplanscreator.model;
+package com.example.studyplanscreator.model.entity;
 
 import lombok.Data;
 
@@ -7,20 +7,16 @@ import javax.validation.constraints.NotNull;
 
 @Data
 @Entity
-public class Opinion {
+public class Approval {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    @Enumerated(EnumType.STRING)
-    private OpinionStatus status;
-
-    @NotNull
     private String comment;
 
     @NotNull
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "plan_id")
     private Plan plan;
 }

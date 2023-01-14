@@ -1,22 +1,28 @@
-package com.example.studyplanscreator.model;
+package com.example.studyplanscreator.model.entity;
 
 import lombok.Data;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Positive;
+import java.util.List;
 
 @Data
 @Entity
-public class Approval {
+public class Semester {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @NotNull
-    private String comment;
+    @Positive
+    private Integer number;
+
+    @OneToMany(mappedBy = "semester")
+    private List<ClassEntity> classes;
 
     @NotNull
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "plan_id")
     private Plan plan;
 }

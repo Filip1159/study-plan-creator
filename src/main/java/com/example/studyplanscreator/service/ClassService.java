@@ -1,7 +1,11 @@
 package com.example.studyplanscreator.service;
 
-import com.example.studyplanscreator.model.ClassEntity;
+import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
+import com.example.studyplanscreator.model.AbstractClass;
+import com.example.studyplanscreator.model.entity.ClassEntity;
 import com.example.studyplanscreator.repo.ClassRepo;
+import com.example.studyplanscreator.service.filtering.FilterCriteriaCreator;
+import com.example.studyplanscreator.service.filtering.FiltersFactory;
 import com.example.studyplanscreator.service.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -15,6 +19,9 @@ import java.util.List;
 public class ClassService {
     private final ClassRepo repo;
     private final ValidatorFactory validatorFactory;
+    private final FiltersFactory filtersFactory;
+    private final FilterCriteriaCreator creator;
+    private final ClassEntityToDomainMapper mapper;
 
     public ClassEntity create(ClassEntity classEntity) {
         validatorFactory.getValidatorFor(classEntity).validate(classEntity);
@@ -27,6 +34,17 @@ public class ClassService {
 
     public List<ClassEntity> getAll() {
         return repo.findAll();
+    }
+
+    public List<AbstractClass> getWithFilters(ClassFiltersDto filters) {
+        var preFilteredClasses = repo.findByFilters(filters);
+        return preFilteredClasses.stream()
+                .filter(classEntity -> {
+                    var abstractClass = mapper.toDomain(classEntity);
+                    return filtersFactory.getFor(abstractClass).matchesFilters(abstractClass, creator.from(filters));
+                })
+                .map(mapper::toDomain)
+                .toList();
     }
 
     public ClassEntity update(Long classId, ClassEntity classEntity) {

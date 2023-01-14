@@ -1,6 +1,6 @@
 package com.example.studyplanscreator.service;
 
-import com.example.studyplanscreator.model.LearningEffect;
+import com.example.studyplanscreator.model.entity.LearningEffect;
 import com.example.studyplanscreator.repo.LearningEffectRepo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
