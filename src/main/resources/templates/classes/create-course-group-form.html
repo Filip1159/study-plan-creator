@@ -46,12 +46,12 @@
                     </tr>
                     </thead>
                     <tbody class="fancyTable__tbody">
-                    <tr class="fancyTable__tbody__tr">
-                        <td class="fancyTable__cell">Bazy danych</td>
-                        <td class="fancyTable__cell">2</td>
-                        <td class="fancyTable__cell">70</td>
-                        <td class="fancyTable__cell">30</td>
-                        <td class="fancyTable__cell">Wykład</td>
+                    <tr class="fancyTable__tbody__tr" th:each="c:${courses}">
+                        <td class="fancyTable__cell" th:text="${c.name()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.ECTS()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.CNPS()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.ZZU()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.type()}"></td>
                     </tr>
                     <tr class="fancyTable__tbody__tr">
                         <td class="fancyTable__cell">Bazy danych</td>

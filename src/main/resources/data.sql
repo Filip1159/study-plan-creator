@@ -1,5 +1,11 @@
 insert into class (ects, cnps, zzu, area, category, course_type, name, type, way_of_crediting)
-values ('5', '60', '30', 'area1', 'COURSE', 'LECTURE', 'Bazy danych', 'K', 'EXAM'),
+values ('2', '70', '30', 'area1', 'COURSE', 'LECTURE', 'Bazy danych', 'K', 'EXAM'),
+       ('2', '45', '15', 'area1', 'COURSE', 'EXERCISES', 'Bazy danych', 'K', 'EXAM'),
+       ('2', '45', '15', 'area1', 'COURSE', 'LAB', 'Bazy danych', 'K', 'EXAM'),
+       ('2', '60', '30', 'area1', 'COURSE', 'LECTURE', 'Projektowanie baz danych', 'K', 'EXAM'),
+       ('3', '60', '30', 'area1', 'COURSE', 'PROJECT', 'Projektowanie baz danych', 'K', 'EXAM'),
+       ('2', '60', '30', 'area1', 'COURSE', 'LECTURE', 'Bazy danych Oracle', 'K', 'EXAM'),
+       ('2', '60', '30', 'area1', 'COURSE', 'PROJECT', 'Bazy danych Oracle', 'K', 'EXAM'),
        ('3', '40', '20', 'area2', 'COURSE', 'SEMINARY', 'Techniki prezentacji', 'PD', 'PASS'),
        ('4', '60', '15', 'area2', 'COURSE', 'PROJECT', 'Projektowanie oprogramowania', 'KO', 'PASS');
 
