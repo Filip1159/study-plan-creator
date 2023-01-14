@@ -1,7 +1,7 @@
 package com.example.studyplanscreator.service;
 
-import com.example.studyplanscreator.model.Plan;
-import com.example.studyplanscreator.model.Semester;
+import com.example.studyplanscreator.model.entity.Plan;
+import com.example.studyplanscreator.model.entity.Semester;
 import com.example.studyplanscreator.repo.SemesterRepo;
 import com.example.studyplanscreator.repo.PlanRepo;
 import lombok.RequiredArgsConstructor;
