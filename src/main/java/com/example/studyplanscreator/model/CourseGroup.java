@@ -12,6 +12,7 @@ import java.util.List;
 public class CourseGroup extends AbstractClass implements ModuleMember {
     private List<Course> courses;
 
+    @Override
     public int getPoints(CourseType courseType, PointType pointType) {
         return courses.stream()
                 .filter(course -> course.getCourseType().equals(courseType))

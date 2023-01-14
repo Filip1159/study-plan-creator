@@ -1,6 +1,5 @@
 package com.example.studyplanscreator.repo;
 
-import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.entity.ClassEntity;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -14,12 +13,12 @@ public interface ClassRepo extends JpaRepository<ClassEntity, Long> {
 
     @Query(
             "SELECT c FROM ClassEntity c " +
-            "WHERE (:#{#filters.ects} is null or c.ECTS = :#{#filters.ects}) " +
-            "AND (:#{#filters.cnps} is null or c.CNPS = :#{#filters.cnps}) " +
-            "AND (:#{#filters.zzu} is null or c.ZZU = :#{#filters.zzu}) " +
-            "AND (:#{#filters.category} is null or c.category = :#{#filters.category}) " +
-            "AND (:#{#filters.type} is null or c.type = :#{#filters.type}) " +
-            "AND (:#{#filters.area} is null or c.area = :#{#filters.area})"
+            "WHERE (:#{#params.ects} is null or c.ECTS = :#{#params.ects}) " +
+            "AND (:#{#params.cnps} is null or c.CNPS = :#{#params.cnps}) " +
+            "AND (:#{#params.zzu} is null or c.ZZU = :#{#params.zzu}) " +
+            "AND (:#{#params.classCategory} is null or c.category = :#{#params.classCategory}) " +
+            "AND (:#{#params.type} is null or c.type = :#{#params.type}) " +
+            "AND (:#{#params.area} is null or c.area = :#{#params.area})"
     )
-    List<ClassEntity> findByFilters(@Param("filters") ClassFiltersDto filters);
+    List<ClassEntity> query(@Param("params") RepoClassesQueryParams params);
 }

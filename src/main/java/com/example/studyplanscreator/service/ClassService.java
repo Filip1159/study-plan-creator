@@ -4,6 +4,7 @@ import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.AbstractClass;
 import com.example.studyplanscreator.model.entity.ClassEntity;
 import com.example.studyplanscreator.repo.ClassRepo;
+import com.example.studyplanscreator.repo.RepoClassesQueryParams;
 import com.example.studyplanscreator.service.filtering.FilterCriteriaCreator;
 import com.example.studyplanscreator.service.filtering.FiltersFactory;
 import com.example.studyplanscreator.service.validation.ValidatorFactory;
@@ -36,12 +37,14 @@ public class ClassService {
         return repo.findAll();
     }
 
-    public List<AbstractClass> getWithFilters(ClassFiltersDto filters) {
-        var preFilteredClasses = repo.findByFilters(filters);
+    public List<AbstractClass> getWithFilters(ClassFiltersDto filtersDto) {
+        var preFilteredClasses = repo.query(RepoClassesQueryParams.from(filtersDto));
+        var criteria = creator.from(filtersDto);
         return preFilteredClasses.stream()
                 .filter(classEntity -> {
                     var abstractClass = mapper.toDomain(classEntity);
-                    return filtersFactory.getFor(abstractClass).matchesFilters(abstractClass, creator.from(filters));
+                    var filters = filtersFactory.getFor(abstractClass);
+                    return filters.matchesFilters(abstractClass, criteria);
                 })
                 .map(mapper::toDomain)
                 .toList();
