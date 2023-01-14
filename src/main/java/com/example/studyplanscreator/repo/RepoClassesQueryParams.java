@@ -3,7 +3,9 @@ package com.example.studyplanscreator.repo;
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.entity.ClassCategory;
 import com.example.studyplanscreator.model.entity.Type;
+import lombok.Builder;
 
+@Builder
 public record RepoClassesQueryParams(
         Integer ects,
         Integer cnps,
