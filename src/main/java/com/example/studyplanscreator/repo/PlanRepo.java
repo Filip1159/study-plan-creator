@@ -13,4 +13,6 @@ import java.util.List;
 public interface PlanRepo extends JpaRepository<Plan, Long> {
     List<Plan> getPlansByAuthorsContainingAndFacultyAndLevelAndAcademicYear(
             User author, Faculty faculty, EducationLevel level, String academicYear);
+
+    Plan getPlanById(long id);
 }
