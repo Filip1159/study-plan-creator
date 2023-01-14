@@ -11,8 +11,12 @@ import java.util.List;
 @EqualsAndHashCode(callSuper = true)
 @Data
 @AllArgsConstructor
-public class CourseModule<T extends ModuleMember> extends AbstractClass {
+public class CourseModule<T extends AbstractClass & ModuleMember> extends AbstractClass {
     private List<T> members;
+
+    public int getPoints(CourseType courseType, PointType pointType) {
+        return members.get(0).getPoints(courseType, pointType);
+    }
 
     @Builder
     public CourseModule(Long id, String name, int ECTS, int CNPS, int ZZU, WayOfCrediting wayOfCrediting, Type type,

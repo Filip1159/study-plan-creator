@@ -23,6 +23,7 @@ public class ClassEntityToDomainMapper {
     }
 
     public Course courseFromEntity(ClassEntity entity) {
+        System.out.println("class is a course");
         return Course.builder()
                 .id(entity.getId())
                 .name(entity.getName())
@@ -39,7 +40,7 @@ public class ClassEntityToDomainMapper {
     }
 
     @SuppressWarnings("unchecked")
-    public <T extends ModuleMember> CourseModule<T> moduleFromEntity(ClassEntity entity) {
+    public <T extends AbstractClass & ModuleMember> CourseModule<T> moduleFromEntity(ClassEntity entity) {
         var members = new ArrayList<T>();
         entity.getCoursesInModule().forEach(member -> {
             if (member.getCategory().equals(COURSE))
