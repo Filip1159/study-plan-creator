@@ -14,3 +14,41 @@
     background-color: #B45F06;
     max-width: 80%;
 }
+
+.groupModal {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 600px;
+    transform: translate(-50%, -50%);
+    background-color: #FFE599;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.groupModal__searchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+}
+
+.groupModal__searchBar__input {
+    min-width: 300px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.groupModal__searchBar__button {
+    font-size: 12px;
+    color: white;
+    padding: 4px 10px;
+    background-color: #B45F06;
+    border: 2px solid black;
+    min-width: 80px;
+    margin: 10px;
+}
+
+.groupModal__table {
+    margin: 0 10px 10px 10px;
+}
