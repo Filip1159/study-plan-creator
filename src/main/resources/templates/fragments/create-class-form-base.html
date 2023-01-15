@@ -53,7 +53,7 @@
             się:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="learningEffectsSelect">
-                <option disabled selected value> -- wybierz -- </option>
+                <option disabled selected value="default"> -- wybierz -- </option>
                 <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}"></option>
             </select>
         </div>

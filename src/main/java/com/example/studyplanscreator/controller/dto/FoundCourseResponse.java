@@ -6,6 +6,6 @@ public record FoundCourseResponse(
         int ECTS,
         int CNPS,
         int ZZU,
-        String type
+        String courseType
 ) {
 }

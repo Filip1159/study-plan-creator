@@ -29,5 +29,5 @@ learningEffectsSelect.addEventListener("change", () => {
         selectedLearningEffects.push(selectedEffectId)
     }
     console.log(learningEffectsInput.value)
-    learningEffectsSelect.value = undefined
+    learningEffectsSelect.value = 'default'
 })
