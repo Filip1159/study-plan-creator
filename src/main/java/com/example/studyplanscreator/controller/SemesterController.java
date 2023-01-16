@@ -1,6 +1,6 @@
 package com.example.studyplanscreator.controller;
 
-import com.example.studyplanscreator.model.*;
+import com.example.studyplanscreator.model.entity.Semester;
 import com.example.studyplanscreator.service.SemesterService;
 import com.example.studyplanscreator.service.PlanService;
 import lombok.RequiredArgsConstructor;
