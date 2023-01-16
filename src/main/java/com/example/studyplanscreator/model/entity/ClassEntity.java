@@ -52,13 +52,13 @@ public class ClassEntity {
     @Enumerated(EnumType.STRING)
     private CourseType courseType;
 
-    @ManyToMany
+    @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "learning_effect_realisation",
             joinColumns = { @JoinColumn(name = "class_id") },
             inverseJoinColumns = { @JoinColumn(name = "learning_effect_id") })
     private List<LearningEffect> learningEffects;
 
-    @OneToMany
+    @OneToMany(cascade = CascadeType.MERGE)
     @JoinColumn(name = "groupId")
     private List<ClassEntity> coursesInGroup;
 

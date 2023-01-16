@@ -19,7 +19,7 @@ public class LearningEffect {
 
     private String description;
 
-    @ManyToMany(mappedBy = "learningEffects")
+    @ManyToMany(mappedBy = "learningEffects", cascade = CascadeType.MERGE)
     @ToString.Exclude
     @EqualsAndHashCode.Exclude
     @JsonIgnore

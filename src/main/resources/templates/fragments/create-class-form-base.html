@@ -30,6 +30,7 @@
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="wayOfCrediting"
                     th:field="*{wayOfCrediting}">
+                <option th:disabled th:selected th:value="''"> -- wybierz -- </option>
                 <option th:each="w:${waysOfCrediting}" th:value="${w.value()}" th:text="${w.readableName()}"></option>
             </select>
         </div>
@@ -38,6 +39,7 @@
         <label class="createClassForm__inputWrapper__label" for="type">Rodzaj zajęć:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="type" th:field="*{type}">
+                <option th:disabled th:selected th:value="''"> -- wybierz -- </option>
                 <option th:each="t:${types}" th:value="${t.value()}" th:text="${t.readableName()}"></option>
             </select>
         </div>

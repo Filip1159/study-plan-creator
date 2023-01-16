@@ -29,6 +29,7 @@ public class ClassService {
 
     public ClassEntity create(ClassEntity classEntity) {
         validatorFactory.getValidatorFor(classEntity).validate(classEntity);
+        System.out.println(classEntity);
         return repo.save(classEntity);
     }
 

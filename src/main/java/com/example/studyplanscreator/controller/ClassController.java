@@ -58,8 +58,9 @@ public class ClassController {
 
     @PostMapping("/class/create")
     public String createClass(@ModelAttribute ClassEntity classEntity) {
+        System.out.println(classEntity);
         service.create(classEntity);
-        return "redirect:/classes";
+        return "redirect:/";
     }
 
     @GetMapping("/classes")

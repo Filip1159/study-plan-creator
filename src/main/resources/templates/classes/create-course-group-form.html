@@ -25,26 +25,30 @@
                 <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
                 <hr class="createClassForm__hr">
                 <div class="createGroupForm__addedCourses">
-                    <button class="createGroupForm__addedCourses__button fancyButton fancyButton--wide">+ Dodaj kurs do grupy</button>
-                    <table class="createGroupForm__addedCourses__table fancyTable">
-                        <thead class="fancyTable__thead">
-                        <tr>
-                            <th class="fancyTable__cell">Nazwa</th>
-                            <th class="fancyTable__cell">ECTS</th>
-                            <th class="fancyTable__cell">CNPS</th>
-                            <th class="fancyTable__cell">ZZU</th>
-                            <th class="fancyTable__cell">Typ</th>
-                        </tr>
-                        </thead>
-                        <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
-                        </tbody>
-                    </table>
+                    <button class="createGroupForm__addedCourses__button fancyButton fancyButton--wide">+ Dodaj kurs do
+                        grupy
+                    </button>
+                    <div class="createGroupForm__addedCourses__tableWrapper">
+                        <table class="createGroupForm__addedCourses__table fancyTable">
+                            <thead class="fancyTable__thead">
+                            <tr>
+                                <th class="fancyTable__cell">Nazwa</th>
+                                <th class="fancyTable__cell">ECTS</th>
+                                <th class="fancyTable__cell">CNPS</th>
+                                <th class="fancyTable__cell">ZZU</th>
+                                <th class="fancyTable__cell">Typ</th>
+                            </tr>
+                            </thead>
+                            <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
+                            </tbody>
+                        </table>
+                        <div class="createGroupForm__addedCourses__buttonsColumn">
+                        </div>
+                    </div>
+                    <input type="text" name="coursesInGroup" id="coursesInGroup" th:field="*{coursesInGroup}">
                 </div>
                 <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
-            <div class="search-courses">
-                <span th:each="c:${courses}" th:text="${c}"></span>
-            </div>
             <div th:replace="fragments/add-course-to-group-modal :: add-course-to-group-modal"></div>
         </div>
     </main>

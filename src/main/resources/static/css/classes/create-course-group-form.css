@@ -56,7 +56,30 @@
     margin-left: 100px;
 }
 
+.createGroupForm__addedCourses__button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    box-shadow: none !important;
+}
+
 .createGroupForm__addedCourses__table {
     margin-top: 10px;
     width: 500px;
+}
+
+.createGroupForm__addedCourses__tableWrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.createGroupForm__addedCourses__buttonsColumn {
+    display: flex;
+    flex-direction: column;
+    margin-top: 30px;
+}
+
+.fancyTable__closeButtonDiv__icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
 }
