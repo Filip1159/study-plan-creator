@@ -1,0 +1,29 @@
+body {
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    background-color: #aaa;
+    font-family: 'Lato', sans-serif;
+}
+
+.appContainer {
+    width: 1000px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.appContainer__main {
+    display: flex;
+    flex-direction: row;
+}
+
+.appContainer__main__content {
+    position: relative;
+    min-width: 696px;
+    background-color: white;
+    border: 2px solid black;
+    display: flex;
+    flex-direction: column;
+    padding-top: 50px;
+    margin-left: 4px;
+}

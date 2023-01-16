@@ -22,8 +22,10 @@ public class SemesterService {
         Plan plan = planRepo.getPlanById(planId);
         return repo.getSemestersByPlan(plan);
     }
+
     public Semester getSemesterById(long semesterId) {
         return repo.getSemesterById(semesterId);
     }
+
 
 }

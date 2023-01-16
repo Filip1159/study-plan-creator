@@ -1,4 +1,4 @@
-package com.example.studyplanscreator.model;
+package com.example.studyplanscreator.model.entity;
 
 import lombok.Data;
 
@@ -30,6 +30,9 @@ public class Plan {
     @ManyToOne
     @JoinColumn(name = "faculty_id")
     private Faculty faculty;
+
+    @OneToMany(mappedBy = "plan")
+    private List<Semester> semesters;
 
     @OneToMany(mappedBy = "plan")
     private List<Opinion> opinions;

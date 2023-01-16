@@ -4,16 +4,29 @@
     <meta charset="UTF-8">
     <title>Plany Studiów PWR</title>
     <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-<div class="class" th:each="c:${classes}">
-    <h3 th:text="${c.name}"></h3>
-    <div class="classDetails">
-        <span class="classDetails__span" th:text="'ID: ' + ${c.id}"></span>
-        <span class="classDetails__span" th:text="'ECTS: ' + ${c.ECTS}"></span>
-        <span class="classDetails__span" th:text="'CNPS: ' + ${c.CNPS}"></span>
-        <span class="classDetails__span" th:text="'ZZU: ' + ${c.ZZU}"></span>
-    </div>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+            <div class="class" th:each="c:${classes}">
+                <h3 th:text="${c.name}"></h3>
+                <div class="classDetails">
+                    <span class="classDetails__span" th:text="'ID: ' + ${c.id}"></span>
+                    <span class="classDetails__span" th:text="'ECTS: ' + ${c.ECTS}"></span>
+                    <span class="classDetails__span" th:text="'CNPS: ' + ${c.CNPS}"></span>
+                    <span class="classDetails__span" th:text="'ZZU: ' + ${c.ZZU}"></span>
+                </div>
+            </div>
+        </div>
+    </main>
 </div>
 </body>
 </html>

@@ -5,19 +5,59 @@
     <title>Plany studiów PWR</title>
 
     <link rel="stylesheet" href="/css/classes/create-course-group-form.css"/>
+    <link rel="stylesheet" href="/css/fragments/create-class-form-base.css"/>
+    <link rel="stylesheet" href="/css/fragments/submit-cancel-class-form-buttons.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="stylesheet" href="/css/fancy-table.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
 </head>
 <body>
-<form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
-    <div th:replace="classes/create-class-form-base :: create-class-form-base"></div>
-    <div class="createClassForm__inputWrapper">
-        <button id="add-course-button">Dodaj kurs do grupy</button>
-        <div id="added-courses-container"></div>
-    </div>
-    <input type="text" name="courses-input" id="courses-input" />
-    <input type="submit" value="Submit"/>
-</form>
-<div class="search-courses">
-    <span th:each="c:${courses}" th:text="${c}"></span>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+            <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
+                <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
+                <div class="createGroupForm__addedCourses"></div>
+                <button id="add-course-button">Dodaj kurs do grupy</button>
+                <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
+            </form>
+            <div class="search-courses">
+                <span th:each="c:${courses}" th:text="${c}"></span>
+            </div>
+            <div class="groupModal">
+                <div class="groupModal__searchBar">
+                    <input type="text" class="groupModal__searchBar__input"/>
+                    <button class="groupModal__searchBar__button">Szukaj</button>
+                </div>
+                <table class="fancyTable groupModal__table">
+                    <thead class="fancyTable__thead">
+                    <tr>
+                        <th class="fancyTable__cell">Nazwa</th>
+                        <th class="fancyTable__cell">ECTS</th>
+                        <th class="fancyTable__cell">CNPS</th>
+                        <th class="fancyTable__cell">ZZU</th>
+                        <th class="fancyTable__cell">Typ</th>
+                    </tr>
+                    </thead>
+                    <tbody class="fancyTable__tbody">
+                    <tr class="fancyTable__tbody__tr" th:each="c:${courses}">
+                        <td class="fancyTable__cell" th:text="${c.name()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.ECTS()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.CNPS()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.ZZU()}"></td>
+                        <td class="fancyTable__cell" th:text="${c.type()}"></td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
 </div>
 <script type="text/javascript" src="/js/create-course-group-form.js"></script>
 </body>

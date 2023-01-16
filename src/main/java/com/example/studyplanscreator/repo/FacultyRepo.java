@@ -1,6 +1,6 @@
 package com.example.studyplanscreator.repo;
 
-import com.example.studyplanscreator.model.Faculty;
+import com.example.studyplanscreator.model.entity.Faculty;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
