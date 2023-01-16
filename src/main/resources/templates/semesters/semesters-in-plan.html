@@ -16,8 +16,67 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <div class="class" th:each="s:${semesters}">
-                <h3 th:text="${s.number}"></h3>
+            <div class="">
+                <h2>Dane planu</h2>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>Wydział</td>
+                            <td th:text="${plan.getFaculty().getName()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Kierunek</td>
+                            <td th:text="${plan.getField()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Rocznik</td>
+                            <td th:text="${plan.getAcademicYear()}"></td>
+                        </tr>
+                        <tr>
+                            <td>Stopień</td>
+                            <td th:text="${plan.getLevel()}"></td>
+                        </tr>
+                        <!--<tr>
+                            <td>Autor</td>
+                            <td>
+                                <ul th:each="a:${plan.getAuthors()}">
+                                    <li th:text="${a.getName()}"></li>
+                                </ul>
+                            </td>
+                        </tr>-->
+                    </tbody>
+                </table>
+                <form action="" method="post">
+                    <input type="submit" value="Modyfikuj" />
+                </form>
+            </div>
+            <table>
+                <tbody>
+                    <tr th:each="s:${semesters}">
+                        <td th:text="'Semestr ' + ${s.number}"></td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value="Szczegóły" />
+                            </form>
+                        </td>
+                        <td>
+                            <form action="" method="post">
+                                <input type="submit" value="Usuń" />
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <button id="add_semester">Dodaj</button>
+
+            <div>
+                <p>Podaj numer semestru:</p>
+                <form action="#" th:action="@{/semester/create}" th:object="${semester}" method="post">
+                    <input id="" type="text" th:field="*{number}"/>
+                    <input type="hidden" id="faculty" name="plan" th:value="${plan.getId()}"></input>
+                    <input type="submit" value="Dodaj" />
+                </form>
+                <div id="create_semester_error"></div>
             </div>
         </div>
     </main>

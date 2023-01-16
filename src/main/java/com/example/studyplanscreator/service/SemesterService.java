@@ -12,16 +12,21 @@ import java.util.List;
 @Service
 @RequiredArgsConstructor
 public class SemesterService {
-    private final SemesterRepo repo;
+    private final SemesterRepo semesterRepo;
     private final PlanRepo planRepo;
 
     public List<Semester> getAll() {
-        return repo.findAll();
+        return semesterRepo.findAll();
     }
     public List<Semester> getSemestersFromPlan(long planId) {
         Plan plan = planRepo.getPlanById(planId);
-        return repo.getSemestersByPlan(plan);
+        return semesterRepo.getSemestersByPlan(plan);
     }
+
+    public void create(Semester semester){
+        semesterRepo.save(semester);
+    }
+    public void delete(Semester semester){ semesterRepo.delete(semester); }
 
     public Semester getSemesterById(long semesterId) {
         return repo.getSemesterById(semesterId);
