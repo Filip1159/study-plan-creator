@@ -1,0 +1,70 @@
+.planFilters {
+    margin: -30px 10px 0 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+#facultySelect {
+    width: 140px;
+}
+
+#authorInput {
+    width: 110px;
+}
+
+#fieldInput {
+    width: 110px;
+}
+
+#levelSelect {
+    width: 110px;
+}
+
+#yearSelect {
+    width: 140px;
+}
+
+.plans {
+    display: flex;
+    flex-direction: column;
+}
+
+.planItem {
+    display: flex;
+    flex-direction: column;
+    padding: 10px 20px;
+    border: 2px solid black;
+    margin: 5px 10px;
+}
+
+.planItem__header {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+
+.planItem__span {
+    font-size: 14px;
+    margin-right: 6px;
+}
+
+.planItem__span--faculty {
+    width: 40%;
+}
+
+.planItem__span--field {
+    width: 30%;
+}
+
+.planItem__span--degree {
+    width: 18%;
+}
+
+.planItem__span--year {
+    width: 12%;
+}
+
+.planItem__author {
+    font-size: 11px;
+}
