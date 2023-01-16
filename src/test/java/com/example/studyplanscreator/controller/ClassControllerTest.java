@@ -44,8 +44,8 @@ class ClassControllerTest {
 
         // then
         assertThat(result.size()).isEqualTo(3);
-        assertThat(result.get(0).getName()).isEqualTo("Bazy danych");
-        assertThat(result.get(1).getECTS()).isEqualTo(2);
+        assertThat(result.get(0).name()).isEqualTo("Bazy danych");
+        assertThat(result.get(1).ECTS()).isEqualTo(2);
         assertThat(result.get(2)).isInstanceOf(Course.class);
     }
 

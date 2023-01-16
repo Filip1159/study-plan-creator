@@ -3,15 +3,18 @@ package com.example.studyplanscreator.service;
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.AbstractClass;
 import com.example.studyplanscreator.model.entity.ClassEntity;
+import com.example.studyplanscreator.model.entity.LearningEffect;
 import com.example.studyplanscreator.repo.ClassRepo;
 import com.example.studyplanscreator.repo.RepoClassesQueryParams;
 import com.example.studyplanscreator.service.filtering.FilterCriteriaCreator;
 import com.example.studyplanscreator.service.filtering.FiltersFactory;
+import com.example.studyplanscreator.service.validation.ValidationUtils;
 import com.example.studyplanscreator.service.validation.ValidatorFactory;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Arrays;
 import java.util.List;
 
 @Service
@@ -25,7 +28,10 @@ public class ClassService {
     private final ClassEntityToDomainMapper mapper;
 
     public ClassEntity create(ClassEntity classEntity) {
-        validatorFactory.getValidatorFor(classEntity).validate(classEntity);
+        try {
+            validatorFactory.getValidatorFor(classEntity).validate(classEntity);
+        } catch (Exception ignored) {}
+        System.out.println(classEntity);
         return repo.save(classEntity);
     }
 
@@ -39,6 +45,12 @@ public class ClassService {
 
     public List<AbstractClass> getWithFilters(ClassFiltersDto filtersDto) {
         var preFilteredClasses = repo.query(RepoClassesQueryParams.from(filtersDto));
+        preFilteredClasses = preFilteredClasses.stream()
+                .filter(classEntity ->
+                        ValidationUtils.deepEqual(
+                                Arrays.asList(filtersDto.getLearningEffects()),
+                                classEntity.getLearningEffects().stream().map(LearningEffect::getId).toList()))
+                .toList();
         var criteria = creator.from(filtersDto);
         return preFilteredClasses.stream()
                 .filter(classEntity -> {

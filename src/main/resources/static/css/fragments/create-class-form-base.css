@@ -35,6 +35,8 @@
     margin: 0 5px;
 }
 
+
+
 .createClassForm__learningEffectOption--selected {
     background-color: #FFE599;
 }
@@ -61,4 +63,12 @@
 
 #ects, #cnps, #zzu {
     width: 80px;
+}
+
+select.createClassForm__inputWrapper__inputDiv__input {
+    cursor: pointer;
+}
+
+select.createClassForm__inputWrapper__inputDiv__input option {
+    cursor: pointer;
 }

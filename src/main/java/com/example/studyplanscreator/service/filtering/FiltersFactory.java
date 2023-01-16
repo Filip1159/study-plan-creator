@@ -15,7 +15,6 @@ public class FiltersFactory {
 
     public ClassFilters getFor(AbstractClass abstractClass) {
         if (abstractClass instanceof Course) {
-            System.out.println("returning filters for course");
             return courseFilters;
         }
         else if (abstractClass instanceof CourseGroup) return courseGroupFilters;

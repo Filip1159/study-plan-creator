@@ -27,3 +27,28 @@ body {
     padding-top: 50px;
     margin-left: 4px;
 }
+
+.createClassForm__hr {
+    background-color: #B45F06;
+    height: 1px;
+    max-width: 80%;
+}
+
+.fancyButton {
+    font-size: 12px;
+    color: white;
+    padding: 4px 10px;
+    background-color: #B45F06;
+    border: 2px solid black;
+    min-width: 80px;
+    letter-spacing: 1px;
+    cursor: pointer;
+}
+
+.fancyButton:hover {
+    box-shadow: 5px 5px 5px #aaa;
+}
+
+.fancyButton--wide {
+    min-width: 160px;
+}
