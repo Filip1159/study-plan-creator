@@ -1,0 +1,15 @@
+.createClassForm__buttonsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 100px 250px 30px 250px;
+}
+
+.createClassForm__buttonsWrapper__button {
+    font-size: 12px;
+    color: white;
+    padding: 4px 10px;
+    background-color: #B45F06;
+    border: 2px solid black;
+    min-width: 80px;
+}

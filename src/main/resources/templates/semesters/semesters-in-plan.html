@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+            <div class="class" th:each="s:${semesters}">
+                <h3 th:text="${s.number}"></h3>
+            </div>
+        </div>
+    </main>
+</div>
+</body>
+</html>
