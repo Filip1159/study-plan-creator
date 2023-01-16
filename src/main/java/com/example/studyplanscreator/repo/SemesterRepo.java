@@ -10,4 +10,7 @@ import java.util.List;
 @Repository
 public interface SemesterRepo extends JpaRepository<Semester, Long> {
     List<Semester> getSemestersByPlan(Plan plan);
+
+    Semester getSemesterById(long id);
+
 }

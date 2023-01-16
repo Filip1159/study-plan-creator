@@ -23,4 +23,9 @@ public class SemesterService {
         return repo.getSemestersByPlan(plan);
     }
 
+    public Semester getSemesterById(long semesterId) {
+        return repo.getSemesterById(semesterId);
+    }
+
+
 }
