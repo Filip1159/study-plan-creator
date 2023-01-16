@@ -7,6 +7,7 @@ import lombok.Builder;
 
 @Builder
 public record RepoClassesQueryParams(
+        String name,
         Integer ects,
         Integer cnps,
         Integer zzu,
@@ -15,7 +16,8 @@ public record RepoClassesQueryParams(
         String area
 ) {
     public static RepoClassesQueryParams from(ClassFiltersDto filtersDto) {
-        return new RepoClassesQueryParams(filtersDto.getEcts(), filtersDto.getCnps(), filtersDto.getZzu(),
+        return new RepoClassesQueryParams(filtersDto.getName(), filtersDto.getEcts(), filtersDto.getCnps(),
+                filtersDto.getZzu(),
                 filtersDto.getCategory() != null ? ClassCategory.valueOf(filtersDto.getCategory()) : null,
                 filtersDto.getType() != null ? Type.valueOf(filtersDto.getType()) : null,
                 filtersDto.getArea());

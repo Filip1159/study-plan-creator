@@ -26,13 +26,30 @@ values (1, 4, 105, 45, 'area1', 'GROUP', NULL, 'Bazy danych', 'K', 'EXAM', NULL,
        (25, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Routing i przełączanie', 'K', 'EXAM', 23, NULL);
 
 
-insert into learning_effect (symbol, description)
-values ('ABCD1234', 'Lorem ipsum dolor nr 1'),
-       ('EFGH5678', 'Lorem ipsum dolor nr 2'),
-       ('IJKL91011', 'Lorem ipsum dolor nr 3'),
-       ('MNOP1213', 'Lorem ipsum dolor nr 4'),
-       ('QRST1415', 'Lorem ipsum dolor nr 5'),
-       ('UWYZ1617', 'Lorem ipsum dolor nr 6');
+insert into learning_effect (id, symbol, description)
+values (1, 'ABCD1234', 'Lorem ipsum dolor nr 1'),
+       (2, 'EFGH5678', 'Lorem ipsum dolor nr 2'),
+       (3, 'IJKL91011', 'Lorem ipsum dolor nr 3'),
+       (4, 'MNOP1213', 'Lorem ipsum dolor nr 4'),
+       (5, 'QRST1415', 'Lorem ipsum dolor nr 5'),
+       (6, 'UWYZ1617', 'Lorem ipsum dolor nr 6');
+
+insert into learning_effect_realisation (class_id, learning_effect_id)
+values (1, 1),
+       (1, 3),
+       (1, 4),
+       (2, 1),
+       (2, 3),
+       (2, 4),
+       (3, 1),
+       (3, 3),
+       (3, 4),
+       (4, 1),
+       (4, 3),
+       (4, 4),
+       (13, 6),
+       (14, 6),
+       (15, 6);
 
 insert into faculty
 values (1, 'Wydział Informatyki i Telekomunikacji'),

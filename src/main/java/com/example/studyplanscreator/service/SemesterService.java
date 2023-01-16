@@ -28,4 +28,9 @@ public class SemesterService {
     }
     public void delete(Semester semester){ semesterRepo.delete(semester); }
 
+    public Semester getSemesterById(long semesterId) {
+        return repo.getSemesterById(semesterId);
+    }
+
+
 }

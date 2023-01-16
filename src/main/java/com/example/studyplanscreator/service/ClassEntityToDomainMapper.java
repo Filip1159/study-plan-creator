@@ -23,7 +23,6 @@ public class ClassEntityToDomainMapper {
     }
 
     public Course courseFromEntity(ClassEntity entity) {
-        System.out.println("class is a course");
         return Course.builder()
                 .id(entity.getId())
                 .name(entity.getName())

@@ -1,11 +1,15 @@
 package com.example.studyplanscreator.controller;
 
 import com.example.studyplanscreator.model.entity.Semester;
+import com.example.studyplanscreator.model.*;
+
+import com.example.studyplanscreator.service.FacultyService;
 import com.example.studyplanscreator.service.SemesterService;
 import com.example.studyplanscreator.service.PlanService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -50,4 +54,26 @@ public class SemesterController {
         semesterService.delete(semester);
         return "semesters/semesters-in-plan";
     }
+
+    @GetMapping("/semester")
+    private String semester(Model model, @RequestParam(required = false) Long semesterId) {
+
+        return "semesters/semester";
+    }
+
+    @GetMapping("/view-classes")
+    private String viewClasses(Model model, @RequestParam(required = false) String class_name, @RequestParam(required = false) String class_type){
+
+        if(class_type != null)
+        {
+            return switch (class_type) {
+                case "course" -> "semesters/view-classes-courses";
+                case "group" -> "semesters/view-classes-courses";
+                case "module" -> "semesters/view-classes-modules";
+                default -> "semesters/view-classes";
+            };
+        }
+        return "semesters/view-classes";
+    }
+
 }

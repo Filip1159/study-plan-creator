@@ -10,11 +10,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 public class ClassFiltersDto {
+    private String name;
     private Integer ects;
     private Integer cnps;
     private Integer zzu;
     private String category;
-    private Integer[] learningEffects;
+    private Long[] learningEffects;
     private String type;
     private String area;
     private Integer lectureEcts;
