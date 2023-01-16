@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Plany Studiów PWR</title>
+  <link rel="stylesheet" href="/css/semester/semester.css"/>
+  <link rel="stylesheet" href="/css/fragments/header.css"/>
+  <link rel="stylesheet" href="/css/fragments/aside.css"/>
+  <link rel="stylesheet" href="/css/base.css"/>
+  <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="appContainer">
+  <header th:replace="fragments/header :: header"></header>
+  <main class="appContainer__main">
+    <aside th:replace="fragments/aside :: aside"></aside>
+    <div class="appContainer__semester__content">
+      <p>
+        <button class="appContainer__semester__button">Wyjdź</button>
+      </p>
+
+      <p>
+        <form method="get" action="view-classes" style="margin-top: -30px">
+          <input type="text" id="class_name" name="class_name" placeholder="Nazwa zajęcia" style="margin-left: 130px">
+          <select id="class_type" name="class_type">
+            <option value="no_choose">Typ zajęcia</option>
+            <option value="course">Kurs</option>
+            <option value="group">Grupa Kursów</option>
+            <option value="module">Moduł</option>
+          </select>
+          <input type="submit" value="Szukaj" class="appContainer__semester__searchButton" >
+        </form>
+      </p>
+
+      <table>
+        <thead>
+        <tr>
+          <th>
+            Lp.
+          </th>
+          <th>
+            Nazwa zajęcia
+          </th>
+          <th>
+            ZZU
+          </th>
+          <th>
+            CNPS
+          </th>
+          <th>
+            ECTS
+          </th>
+          <th>
+            W
+          </th>
+          <th>
+            C
+          </th>
+          <th>
+            L
+          </th>
+          <th>
+            P
+          </th>
+          <th>
+            S
+          </th>
+          <th>
+            Symbol efektu uczenia się
+          </th>
+          <th>
+            Sposób zaliczenia
+          </th>
+          <th>
+            Rodzaj
+          </th>
+          <th>
+            Obszar
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td>
+            Lp.
+          </td>
+          <td>
+            Nazwa kursu
+          </td>
+          <td>
+            ZZU
+          </td>
+          <td>
+            CNPS
+          </td>
+          <td>
+            ECTS
+          </td>
+          <td>
+            W
+          </td>
+          <td>
+            C
+          </td>
+          <td>
+            L
+          </td>
+          <td>
+            P
+          </td>
+          <td>
+            S
+          </td>
+          <td>
+            Symbol efektu uczenia się
+          </td>
+          <td>
+            Sposób zaliczenia
+          </td>
+          <td>
+            Rodzaj
+          </td>
+          <td>
+            Obszar
+          </td>
+        </tr>
+        <tr>
+          <td>
+            Lp.
+          </td>
+          <td>
+            Nazwa kursu
+          </td>
+          <td>
+            ZZU
+          </td>
+          <td>
+            CNPS
+          </td>
+          <td>
+            ECTS
+          </td>
+          <td>
+            W
+          </td>
+          <td>
+            C
+          </td>
+          <td>
+            L
+          </td>
+          <td>
+            P
+          </td>
+          <td>
+            S
+          </td>
+          <td>
+            Symbol efektu uczenia się
+          </td>
+          <td>
+            Sposób zaliczenia
+          </td>
+          <td>
+            Rodzaj
+          </td>
+          <td>
+            Obszar
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </main>
+</div>
+</body>
+</html>
