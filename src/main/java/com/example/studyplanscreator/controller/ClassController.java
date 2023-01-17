@@ -1,8 +1,8 @@
 package com.example.studyplanscreator.controller;
 
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
-import com.example.studyplanscreator.controller.dto.FoundCourseResponse;
-import com.example.studyplanscreator.controller.dto.FoundCourseResponseMapper;
+import com.example.studyplanscreator.controller.dto.CourseResponse;
+import com.example.studyplanscreator.controller.dto.CourseResponseMapper;
 import com.example.studyplanscreator.model.Course;
 import com.example.studyplanscreator.model.entity.*;
 import com.example.studyplanscreator.service.ClassEntityToDomainMapper;
@@ -25,7 +25,7 @@ public class ClassController {
     private final ClassEntityToDomainMapper mapper;
     private final LearningEffectService learningEffectService;
     private final TranslationService translationService;
-    private final FoundCourseResponseMapper foundCourseResponseMapper;
+    private final CourseResponseMapper foundCourseResponseMapper;
 
     @GetMapping("/create-class-form")
     public String createClassForm(Model model, @RequestParam String category) {
@@ -65,7 +65,7 @@ public class ClassController {
 
     @GetMapping("/classes")
     @ResponseBody
-    public List<FoundCourseResponse> getWithFilters(ClassFiltersDto requestParams) {
+    public List<CourseResponse> getWithFilters(ClassFiltersDto requestParams) {
         return service.getWithFilters(requestParams).stream()
                 .filter(abstractClass -> abstractClass instanceof Course)
                 .map(abstractClass -> foundCourseResponseMapper.from((Course) abstractClass))

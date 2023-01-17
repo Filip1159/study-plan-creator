@@ -36,6 +36,15 @@
     padding: 10px 20px;
     border: 2px solid black;
     margin: 5px 10px;
+    cursor: pointer;
+}
+
+.planItem:hover {
+    border-color: #B45F06;
+}
+
+.planItem__link {
+    all: unset;
 }
 
 .planItem__header {
@@ -57,7 +66,7 @@
     width: 30%;
 }
 
-.planItem__span--degree {
+.planItem__span--level {
     width: 18%;
 }
 

@@ -21,53 +21,42 @@
             <div class="planFilters">
                 <select id="facultySelect">
                     <option value="">--wydział--</option>
-                    <option th:each="f:${faculties}" th:text="${f.name}" th:value="${f.id}" th:selected="${f.id == facultySelected}"></option>
+                    <option th:each="f:${faculties}" th:text="${f.name}" th:value="${f.id}"
+                            th:selected="${f.id == filters.facultyId}"></option>
                 </select>
-                <input type="text" id="authorInput" placeholder="szukaj autora" th:value="${authorTyped}">
-                <input type="text" id="fieldInput" placeholder="szukaj kierunku" th:value="${fieldTyped}">
+                <input type="text" id="authorInput" placeholder="szukaj autora" th:value="${filters.author}">
+                <input type="text" id="fieldInput" placeholder="szukaj kierunku" th:value="${filters.field}">
                 <select id="levelSelect">
                     <option selected value="">--poziom--</option>
-                    <option th:each="l:${levels}" th:text="${l.readableName()}" th:value="${l.value()}" th:selected="${l.value() == levelSelected}"></option>
+                    <option th:each="l:${levels}" th:text="${l.readableName()}" th:value="${l.value()}"
+                            th:selected="${l.value() == filters.academicYear}"></option>
                 </select>
                 <select id="yearSelect">
                     <option selected value="">--rok akademicki--</option>
-                    <option th:value="'2022/2023'" th:selected="${'2022/2023' == yearSelected}">2022/2023</option>
-                    <option th:value="'2021/2022'" th:selected="${'2021/2022' == yearSelected}">2021/2022</option>
-                    <option th:value="'2020/2021'" th:selected="${'2020/2021' == yearSelected}">2020/2021</option>
-                    <option th:value="'2019/2020'" th:selected="${'2019/2020' == yearSelected}">2019/2020</option>
-                    <option th:value="'2018/2019'" th:selected="${'2018/2019' == yearSelected}">2018/2019</option>
+                    <option th:value="'2022/2023'" th:selected="${'2022/2023' == filters.academicYear}">2022/2023
+                    </option>
+                    <option th:value="'2021/2022'" th:selected="${'2021/2022' == filters.academicYear}">2021/2022
+                    </option>
+                    <option th:value="'2020/2021'" th:selected="${'2020/2021' == filters.academicYear}">2020/2021
+                    </option>
+                    <option th:value="'2019/2020'" th:selected="${'2019/2020' == filters.academicYear}">2019/2020
+                    </option>
+                    <option th:value="'2018/2019'" th:selected="${'2018/2019' == filters.academicYear}">2018/2019
+                    </option>
                 </select>
             </div>
             <div class="plans">
-                <div class="planItem">
-                    <div class="planItem__header">
-                        <span class="planItem__span planItem__span--faculty">Wydział Informatyki i telekomunikacji</span>
-                        <span class="planItem__span planItem__span--field">Informatyka stosowana</span>
-                        <span class="planItem__span planItem__span--level">Studia II stopnia</span>
-                        <span class="planItem__span planItem__span--year">2022/2023</span>
+                <a th:href="'/semesters-in-plan?planId=' + ${p.id}" th:each="p:${plans}" class="planItem__link">
+                    <div class="planItem">
+                        <div class="planItem__header">
+                            <span class="planItem__span planItem__span--faculty" th:text="${p.facultyName}"></span>
+                            <span class="planItem__span planItem__span--field" th:text="${p.field}"></span>
+                            <span class="planItem__span planItem__span--level" th:text="${p.educationLevel}"></span>
+                            <span class="planItem__span planItem__span--year" th:text="${p.academicYear}"></span>
+                        </div>
+                        <div class="planItem__author" th:each="a:${p.authors}" th:text="${a}"></div>
                     </div>
-                    <div class="planItem__author">Filip Marcin Wiśniewski</div>
-                    <div class="planItem__author">Filip Marcin Wiśniewski</div>
-                    <div class="planItem__author">Filip Marcin Wiśniewski</div>
-                </div>
-                <div class="planItem">
-                    <div class="planItem__header">
-                        <span class="planItem__span planItem__span--faculty">Wydział Chemiczny</span>
-                        <span class="planItem__span planItem__span--field">Biotechnologia</span>
-                        <span class="planItem__span planItem__span--level">II stopień</span>
-                        <span class="planItem__span planItem__span--year">2022/2023</span>
-                    </div>
-                    <div class="planItem__author">Filip Marcin Wiśniewski</div>
-                </div>
-            </div>
-            <div class="planItem" th:each="p:${plans}">
-                <div class="planItem__header">
-                    <span class="planItem__span planItem__span--faculty" th:text="${p.faculty.name}"></span>
-                    <span class="planItem__span planItem__span--field" th:text="${p.field}"></span>
-                    <span class="planItem__span planItem__span--level" th:text="${p.level}"></span>
-                    <span class="planItem__span planItem__span--year" th:text="${p.academicYear}"></span>
-                </div>
-                <div class="planItem__author" th:each="a:${p.authors}" th:text="${a.name} + ' ' + ${a.surname}"></div>
+                </a>
             </div>
         </div>
     </main>

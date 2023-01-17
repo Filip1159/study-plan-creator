@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class FoundCourseResponseMapper {
+public class CourseResponseMapper {
     private final TranslationService translationService;
 
-    public FoundCourseResponse from(Course course) {
-        return new FoundCourseResponse(
+    public CourseResponse from(Course course) {
+        return new CourseResponse(
                 course.getId(),
                 course.getName(),
                 course.getECTS(),

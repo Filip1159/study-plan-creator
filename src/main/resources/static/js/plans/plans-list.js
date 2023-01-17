@@ -9,7 +9,7 @@ const updateUrlWithParam = (paramName, paramValue) => {
     console.log(currentUrl)
     const paramToRegex = new Map([
         ['facultyId', /[&|?]facultyId=\d+/],
-        ['author', /[&|?]author=\w+/],
+        ['author', /[&|?]author=[\w%20]+/],
         ['field', /[&|?]field=\w+/],
         ['level', /[&|?]level=\w+/],
         ['academicYear', /[&|?]academicYear=[0-9/]+/]

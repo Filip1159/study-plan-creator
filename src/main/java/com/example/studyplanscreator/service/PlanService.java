@@ -20,6 +20,7 @@ public class PlanService {
     public List<Plan> getPlansWithFilters(Long facultyId, String field, String authorQuery, EducationLevel level, String academicYear) {
         var faculty = facultyId == null ? null : facultyRepo.findById(facultyId).orElseThrow();
         var author = userRepo.findUserByNameContaining(authorQuery);
+        if (author == null) return List.of();
         return planRepo.query(author, faculty, field, level, academicYear);
     }
 

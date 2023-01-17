@@ -53,14 +53,54 @@ values (1, 1),
 
 insert into faculty
 values (1, 'Wydział Informatyki i Telekomunikacji'),
-       (2, 'Wydział Zarządzania');
+       (2, 'Wydział Zarządzania'),
+       (3, 'Wydział Chemiczny'),
+       (4, 'Wydział Architektury'),
+       (5, 'Wydział Medyczny'),
+       (6, 'Wydział Mechaniczny'),
+       (7, 'Wydział Imprez i Zabaw (LEGACY)');
 
 insert into plan
 values (1, '2022/2023', 'Informatyka stosowana', 'FIRST', 'Plan 1', 1),
-       (2, '2022/2023', 'Informatyka stosowana', 'FIRST', 'Plan 2', 1);
+       (2, '2021/2022', 'Cyberbezpieczeńśtwo', 'FIRST', 'Plan 2', 1),
+       (3, '2019/2020', 'Weterynaria', 'FIRST', 'Plan 3', 5),
+       (4, '2021/2022', 'Informatyka stosowana', 'SECOND', 'Plan 4', 1),
+       (5, '2020/2021', 'Zarządzanie', 'FIRST', 'Plan 5', 2),
+       (6, '2022/2023', 'Mechanika i budowa maszyn', 'SECOND', 'Plan 6', 6),
+       (7, '2018/2019', 'Architektura i budownictwo', 'FIRST', 'Plan 7', 4),
+       (8, '2022/2023', 'Biotechnologia', 'FIRST', 'Plan 8', 3),
+       (9, '2021/2022', 'Farmaceutyka', 'SECOND', 'Plan 9', 3),
+       (10, '2022/2023', 'Elektrotechnika', 'FIRST', 'Plan 10', 6);
 
 insert into semester
 values (1, 1, 1),
        (2, 2, 1),
        (3, 3, 1),
        (4, 1, 2);
+
+insert into users (id, institution_name, job_title, login, name, password, surname, username)
+values (1, 'Wydział Informatyki i Telekomunikacji', 'dziekan', 'zygmunt.mazur@pwr.edu.pl', 'Zygmunt',
+        'drefc4refef', 'Mazur', 'zyga420'),
+       (2, 'Samorząd studencki', 'pracownik', 'filip.wisniewski@pwr.edu.pl', 'Filip',
+        '09ermf09ecmxx', 'Wiśniewski', 'fifi5411'),
+       (3, 'Senat PWr', 'senator', 'adam.burak@pwr.edu.pl', 'Adam',
+        'c43m09cm3', 'Burak', 'adamoo'),
+       (4, 'Komisja ds. jakości kształcenia PWr', 'pracownik', 'jadwiga.olszewska@pwr.edu.pl', 'Jadwiga',
+        '34r0349r4x2er', 'Olszewska-Witkowska', 'jadzka777');
+
+insert into plan_authorship (plan_id, user_id)
+values (1, 1),
+       (1, 4),
+       (2, 2),
+       (3, 3),
+       (3, 2),
+       (4, 1),
+       (4, 2),
+       (5, 4),
+       (6, 3),
+       (7, 2),
+       (8, 4),
+       (9, 1),
+       (9, 3),
+       (10, 4),
+       (10, 2);
