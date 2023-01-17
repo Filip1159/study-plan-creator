@@ -1,6 +1,6 @@
 package com.example.studyplanscreator.controller.dto;
 
-public record FoundCourseResponse(
+public record CourseResponse(
         Long id,
         String name,
         int ECTS,

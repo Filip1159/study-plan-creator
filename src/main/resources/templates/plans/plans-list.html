@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/plans/plans-list.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+            <div class="planFilters">
+                <select id="facultySelect">
+                    <option value="">--wydział--</option>
+                    <option th:each="f:${faculties}" th:text="${f.name}" th:value="${f.id}"
+                            th:selected="${f.id == filters.facultyId}"></option>
+                </select>
+                <input type="text" id="authorInput" placeholder="szukaj autora" th:value="${filters.author}">
+                <input type="text" id="fieldInput" placeholder="szukaj kierunku" th:value="${filters.field}">
+                <select id="levelSelect">
+                    <option selected value="">--poziom--</option>
+                    <option th:each="l:${levels}" th:text="${l.readableName()}" th:value="${l.value()}"
+                            th:selected="${l.value() == filters.academicYear}"></option>
+                </select>
+                <select id="yearSelect">
+                    <option selected value="">--rok akademicki--</option>
+                    <option th:value="'2022/2023'" th:selected="${'2022/2023' == filters.academicYear}">2022/2023
+                    </option>
+                    <option th:value="'2021/2022'" th:selected="${'2021/2022' == filters.academicYear}">2021/2022
+                    </option>
+                    <option th:value="'2020/2021'" th:selected="${'2020/2021' == filters.academicYear}">2020/2021
+                    </option>
+                    <option th:value="'2019/2020'" th:selected="${'2019/2020' == filters.academicYear}">2019/2020
+                    </option>
+                    <option th:value="'2018/2019'" th:selected="${'2018/2019' == filters.academicYear}">2018/2019
+                    </option>
+                </select>
+            </div>
+            <div class="plans">
+                <a th:href="'/semesters-in-plan?planId=' + ${p.id}" th:each="p:${plans}" class="planItem__link">
+                    <div class="planItem">
+                        <div class="planItem__header">
+                            <span class="planItem__span planItem__span--faculty" th:text="${p.facultyName}"></span>
+                            <span class="planItem__span planItem__span--field" th:text="${p.field}"></span>
+                            <span class="planItem__span planItem__span--level" th:text="${p.educationLevel}"></span>
+                            <span class="planItem__span planItem__span--year" th:text="${p.academicYear}"></span>
+                        </div>
+                        <div class="planItem__author" th:each="a:${p.authors}" th:text="${a}"></div>
+                    </div>
+                </a>
+            </div>
+        </div>
+    </main>
+</div>
+<script type="text/javascript" src="/js/plans/plans-list.js"></script>
+</body>
+</html>

@@ -30,8 +30,8 @@ public class TranslationService {
     );
 
     private static final Map<EducationLevel, String> educationLevelTranslations = Map.of(
-            EducationLevel.FIRST, "Studia pierwszego stopnia",
-            EducationLevel.SECOND, "Studia drugiego stopnia"
+            EducationLevel.FIRST, "Studia I stopnia",
+            EducationLevel.SECOND, "Studia II stopnia"
     );
 
     private static final Map<Type, String> typeTranslations = Map.of(

@@ -17,12 +17,11 @@ public class PlanService {
     private final FacultyRepo facultyRepo;
     private final UserRepo userRepo;
 
-    public List<Plan> getPlansWithFilters(Long facultyId, Long authorId, EducationLevel level, String academicYear,
-                                          String status) {
-        var faculty = facultyRepo.findById(facultyId).orElseThrow();
-        var author = userRepo.findById(authorId).orElseThrow();
-        return planRepo.getPlansByAuthorsContainingAndFacultyAndLevelAndAcademicYear(  // TODO add filtering by status
-                author, faculty, level, academicYear);
+    public List<Plan> getPlansWithFilters(Long facultyId, String field, String authorQuery, EducationLevel level, String academicYear) {
+        var faculty = facultyId == null ? null : facultyRepo.findById(facultyId).orElseThrow();
+        var author = userRepo.findUserByNameContaining(authorQuery);
+        if (author == null) return List.of();
+        return planRepo.query(author, faculty, field, level, academicYear);
     }
 
     public Plan getPlanById(long planId){
