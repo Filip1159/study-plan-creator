@@ -41,7 +41,20 @@ public class ClassController {
                                 .map(mapper::courseFromEntity)
                                 .map(foundCourseResponseMapper::from)
                                 .toList());
-                model.addAttribute("class", ClassEntity.builder().category(GROUP).build());
+                model.addAttribute("class", ClassEntity.builder()
+                                .name("Bazy")
+                                .ECTS(4)
+                                .CNPS(120)
+                                .ZZU(60)
+                                .wayOfCrediting(WayOfCrediting.EXAM)
+                                .type(Type.K)
+                                .area("area1")
+                                .learningEffects(List.of(
+                                        new LearningEffect(1L, "ABCD1234", "x"),
+                                        new LearningEffect(3L, "IJKL91011", "x"),
+                                        new LearningEffect(4L, "MNOP1213", "x")
+                                ))
+                        .category(GROUP).build());
                 return "classes/create-course-group-form";
             }
             case "module" -> {

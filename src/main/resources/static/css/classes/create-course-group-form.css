@@ -12,10 +12,10 @@
 
 .groupModal {
     position: absolute;
-    top: 50%;
+    top: 200px;
     left: 50%;
     width: 600px;
-    transform: translate(-50%, -50%);
+    transform: translateX(-50%);
     background-color: #FFE599;
     display: flex;
     flex-direction: column;
@@ -49,11 +49,59 @@
     margin: 0 10px 10px 10px;
 }
 
+.groupModal__table__foundCourseTr {
+    cursor: pointer;
+}
+
+.createGroupForm__addedCourses__table__cell--name {
+    width: 48%;
+    text-align: left;
+}
+
+.createGroupForm__addedCourses__table__cell--ECTS {
+    width: 10%;
+    text-align: right;
+}
+
+.createGroupForm__addedCourses__table__cell--CNPS {
+    width: 10%;
+    text-align: right;
+}
+
+.createGroupForm__addedCourses__table__cel--ZZU {
+    width: 10%;
+    text-align: right;
+}
+
+.createGroupForm__addedCourses__table__cell--courseType {
+    width: 22%;
+    text-align: left;
+}
+
+.groupModal__table__foundCourseTr:hover {
+    color: #B45F06;
+}
+
+.groupModal__table__foundCourseTr:hover > .createGroupForm__addedCourses__table__cell--name:before {
+    margin-left: 3px;
+    margin-right: 3px;
+    content: '+';
+}
+
+.groupModal__noResultsSpan {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    color: #B45F06;
+    margin: 15px;
+}
+
 .createGroupForm__addedCourses {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    margin-left: 100px;
+    margin: 0 auto;
+    width: 580px;
 }
 
 .createGroupForm__addedCourses__button:disabled {
@@ -64,22 +112,35 @@
 
 .createGroupForm__addedCourses__table {
     margin-top: 10px;
-    width: 500px;
+    width: 100%;
 }
 
 .createGroupForm__addedCourses__tableWrapper {
     display: flex;
     flex-direction: row;
+    width: 100%;
+    justify-content: center;
 }
 
 .createGroupForm__addedCourses__buttonsColumn {
     display: flex;
     flex-direction: column;
-    margin-top: 30px;
+    margin-top: 32px;
 }
 
 .fancyTable__closeButtonDiv__icon {
     width: 20px;
     height: 20px;
     cursor: pointer;
+    margin: 6px;
+}
+
+.fancyTable__closeButtonDiv__icon:hover {
+    filter: brightness(0.75);
+}
+
+.createGroupForm__noAddedCoursesSpan {
+    font-size: 14px;
+    font-style: italic;
+    color: #B45F06;
 }

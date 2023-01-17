@@ -13,7 +13,7 @@ public interface ClassRepo extends JpaRepository<ClassEntity, Long> {
 
     @Query(
             "SELECT c FROM ClassEntity c " +
-            "WHERE (:#{#params.name} is null or lower(c.name) LIKE lower(concat('%', :#{#params.name}, '%'))) " +
+            "WHERE (:#{#params.name} is not null and :#{#params.name} != '' and lower(c.name) LIKE lower(concat('%', :#{#params.name}, '%'))) " +
             "AND (:#{#params.ects} is null or c.ECTS = :#{#params.ects}) " +
             "AND (:#{#params.cnps} is null or c.CNPS = :#{#params.cnps}) " +
             "AND (:#{#params.zzu} is null or c.ZZU = :#{#params.zzu}) " +

@@ -29,21 +29,7 @@
                         grupy
                     </button>
                     <div class="createGroupForm__addedCourses__tableWrapper">
-                        <table class="createGroupForm__addedCourses__table fancyTable">
-                            <thead class="fancyTable__thead">
-                            <tr>
-                                <th class="fancyTable__cell">Nazwa</th>
-                                <th class="fancyTable__cell">ECTS</th>
-                                <th class="fancyTable__cell">CNPS</th>
-                                <th class="fancyTable__cell">ZZU</th>
-                                <th class="fancyTable__cell">Typ</th>
-                            </tr>
-                            </thead>
-                            <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
-                            </tbody>
-                        </table>
-                        <div class="createGroupForm__addedCourses__buttonsColumn">
-                        </div>
+                        <span class="createGroupForm__noAddedCoursesSpan">Brak kursów w grupie</span>
                     </div>
                     <input type="text" name="coursesInGroup" id="coursesInGroup" th:field="*{coursesInGroup}">
                 </div>
