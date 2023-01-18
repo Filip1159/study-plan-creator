@@ -12,8 +12,10 @@ import com.example.studyplanscreator.service.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 import static com.example.studyplanscreator.model.entity.ClassCategory.*;
@@ -28,7 +30,8 @@ public class ClassController {
     private final CourseResponseMapper foundCourseResponseMapper;
 
     @GetMapping("/create-class-form")
-    public String createClassForm(Model model, @RequestParam String category) {
+    public String createClassForm(Model model, @RequestParam String category, ClassEntity classEntity) {
+        System.out.println(classEntity);
         model.addAttribute("waysOfCrediting", translationService.readableNames(WayOfCrediting.values()));
         model.addAttribute("types", translationService.readableNames(Type.values()));
         model.addAttribute("learningEffects", learningEffectService.getAll());
@@ -37,7 +40,7 @@ public class ClassController {
             case "group" -> {
                 model.addAttribute("courses",
                         service.getAll().stream()
-                                .filter(classEntity -> classEntity.getCategory().equals(COURSE))
+                                .filter(c -> c.getCategory().equals(COURSE))
                                 .map(mapper::courseFromEntity)
                                 .map(foundCourseResponseMapper::from)
                                 .toList());
@@ -54,23 +57,35 @@ public class ClassController {
                                         new LearningEffect(3L, "IJKL91011", "x"),
                                         new LearningEffect(4L, "MNOP1213", "x")
                                 ))
-                        .category(GROUP).build());
+                        .build());
                 return "classes/create-course-group-form";
             }
             case "module" -> {
-                model.addAttribute("class", ClassEntity.builder().category(MODULE).build());
+                classEntity.setCategory(MODULE);
                 return "classes/create-course-module-form";
             }
             default -> {
                 model.addAttribute("courseTypes", translationService.readableNames(CourseType.values()));
-                model.addAttribute("class", ClassEntity.builder().category(COURSE).build());
+                classEntity.setCategory(COURSE);
                 return "classes/create-course-form";
             }
         }
     }
 
     @PostMapping("/class/create")
-    public String createClass(@ModelAttribute ClassEntity classEntity) {
+    public String createClass(Model model, @Valid @ModelAttribute ClassEntity classEntity, BindingResult result) {
+        if (result.hasErrors()) {
+            model.addAttribute("waysOfCrediting", translationService.readableNames(WayOfCrediting.values()));
+            model.addAttribute("types", translationService.readableNames(Type.values()));
+            model.addAttribute("learningEffects", learningEffectService.getAll());
+            model.addAttribute("categories", translationService.readableNames(ClassCategory.values()));
+            model.addAttribute("courseTypes", translationService.readableNames(CourseType.values()));
+            return switch (classEntity.getCategory()) {
+                case COURSE -> "classes/create-course-form";
+                case GROUP -> "classes/create-course-group-form";
+                case MODULE -> "classes/create-course-module-form";
+            };
+        }
         System.out.println(classEntity);
         service.create(classEntity);
         return "redirect:/";

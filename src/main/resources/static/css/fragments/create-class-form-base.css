@@ -35,10 +35,14 @@
     margin: 0 5px;
 }
 
-
-
 .createClassForm__learningEffectOption--selected {
     background-color: #FFE599;
+}
+
+.createClassForm__errorMessage {
+    display: block;
+    font-size: 11px;
+    color: #f33;
 }
 
 #learningEffects {

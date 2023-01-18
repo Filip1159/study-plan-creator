@@ -1,21 +1,4 @@
-const form = document.querySelector(".createClassForm")
-const addCourseButton = document.querySelector(".createGroupForm__addedCourses__button")
-let addedCoursesTbody = document.querySelector(".createGroupForm__addedCourses__tbody")
-const groupModal = document.querySelector(".groupModal")
-let searchCoursesInput = document.querySelector(".groupModal__searchBar__input")
-const modalCloseButton = document.querySelector(".groupModal__closeButton")
-const nameInput = document.querySelector("#name")
-const ectsInput = document.querySelector("#ects")
-const cnpsInput = document.querySelector("#cnps")
-const zzuInput = document.querySelector("#zzu")
-const wayOfCreditingInput = document.querySelector("#wayOfCrediting")
-const typeInput = document.querySelector("#type")
-const areaInput = document.querySelector("#area")
-const learningEffectsInput2 = document.querySelector("#learningEffects")
-let tbody = document.querySelector(".groupModal__tbody")
-const coursesInGroupInput = document.querySelector("#coursesInGroup")
-let deleteIconsColumn = document.querySelector(".createGroupForm__addedCourses__buttonsColumn")
-const tableWrapper = document.querySelector(".createGroupForm__addedCourses__tableWrapper")
+const addedCoursesInput = document.querySelector("#coursesInGroup")
 
 console.log(nameInput.value)
 console.log(ectsInput.value)
@@ -45,58 +28,30 @@ const setBaseInputsEnabled = enabled => {
 //     }
 // })
 
-addCourseButton.addEventListener("click", e => {
-    e.preventDefault()
-    groupModal.classList.remove("groupModal--hidden")
-    searchCoursesInput.focus()
-})
-
 const renderAddedCourseTableRow = courseData => {
-    const tr = document.createElement('tr')
-    tr.classList.add('fancyTable__tbody__tr')
-    tr.id = `courseAddedToGroup${courseData.id}`
-    const itemFields = ['name', 'ECTS', 'CNPS', 'ZZU', 'courseType']
-    for (let field of itemFields) {
-        const td = document.createElement('td')
-        td.classList.add('fancyTable__cell')
-        td.classList.add(`createGroupForm__addedCourses__table__cell--${field}`)
-        td.innerText = courseData[field]
-        tr.appendChild(td)
-    }
+    const tr = renderCellsInTableRowForGroupForm(courseData)
+    tr.id = `addedCourse${courseData.id}`
     return tr
 }
 
 const renderFoundCourseTableRow = courseData => {
+    const tr = renderCellsInTableRowForGroupForm(courseData)
+    tr.classList.add('modal__table__foundCourseTr')
+    return tr
+}
+
+const renderCellsInTableRowForGroupForm = courseData => {
     const tr = document.createElement('tr')
     tr.classList.add('fancyTable__tbody__tr')
-    tr.classList.add('groupModal__table__foundCourseTr')
     const itemFields = ['name', 'ECTS', 'CNPS', 'ZZU', 'courseType']
     for (let field of itemFields) {
         const td = document.createElement('td')
         td.classList.add('fancyTable__cell')
-        td.classList.add(`createGroupForm__addedCourses__table__cell--${field}`)
+        td.classList.add(`createClassForm__addedCourses__table__cell--${field}`)
         td.innerText = courseData[field]
         tr.appendChild(td)
     }
     return tr
-}
-
-const renderDeleteIcon = itemIdToDelete => {
-    const img = document.createElement('img')
-    img.classList.add('fancyTable__closeButtonDiv__icon')
-    img.id = `deleteIcon${itemIdToDelete}`
-    img.src = '/img/close-icon.png'
-    img.addEventListener('click', () => {
-        const trToDelete = document.querySelector(`#courseAddedToGroup${itemIdToDelete}`)
-        const deleteIconToDelete = document.querySelector(`#deleteIcon${itemIdToDelete}`)
-        addedCoursesTbody.removeChild(trToDelete)
-        deleteIconsColumn.removeChild(deleteIconToDelete)
-        coursesInGroupInput.value = coursesInGroupInput.value.replace(`${itemIdToDelete}`, '')
-        coursesInGroupInput.value = coursesInGroupInput.value.replace(',,', ',')
-        coursesInGroupInput.value = coursesInGroupInput.value.replace(/^,/, '')
-        if (!coursesInGroupInput.value) renderNoAddedCoursesSpan()
-    })
-    return img
 }
 
 const coursesQuery = async e => {
@@ -112,15 +67,15 @@ const coursesQuery = async e => {
     console.log(data)
     if (data.length === 0) renderNoResultsSpan()
     else {
-        if (document.querySelector('.groupModal__noResultsSpan')) renderEmptyFoundCoursesTable()
+        if (document.querySelector('.modal__noResultsSpan')) renderEmptyFoundCoursesTable()
         tbody.innerHTML = ''
         for (let item of data) {
             const tr = renderFoundCourseTableRow(item)
             tr.addEventListener('click', () => {
-                if (!coursesInGroupInput.value) renderEmptyAddedCoursesTable()
+                if (!addedCoursesInput.value) renderEmptyAddedCoursesTable()
                 addedCoursesTbody.appendChild(renderAddedCourseTableRow(item))
                 deleteIconsColumn.appendChild(renderDeleteIcon(item.id))
-                coursesInGroupInput.value += `${coursesInGroupInput.value === '' ? '' : ','}${item.id}`
+                addedCoursesInput.value += `${addedCoursesInput.value === '' ? '' : ','}${item.id}`
                 setBaseInputsEnabled(false)
             })
             tbody.appendChild(tr)
@@ -130,13 +85,9 @@ const coursesQuery = async e => {
 
 searchCoursesInput.addEventListener("input", coursesQuery)
 
-modalCloseButton.addEventListener('click', () => {
-    groupModal.classList.add('groupModal--hidden')
-})
-
 const renderEmptyAddedCoursesTable = () => {
     tableWrapper.innerHTML =
-        `<table class="createGroupForm__addedCourses__table fancyTable">
+        `<table class="createClassForm__addedCourses__table fancyTable">
             <thead class="fancyTable__thead">
             <tr>
                 <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--name">Nazwa</th>
@@ -146,26 +97,26 @@ const renderEmptyAddedCoursesTable = () => {
                 <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--courseType">Typ</th>
             </tr>
             </thead>
-            <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
+            <tbody class="fancyTable__tbody createClassForm__addedCourses__tbody">
             </tbody>
         </table>
-        <div class="createGroupForm__addedCourses__buttonsColumn"></div>`
-    addedCoursesTbody = document.querySelector(".createGroupForm__addedCourses__tbody")
-    deleteIconsColumn = document.querySelector(".createGroupForm__addedCourses__buttonsColumn")
+        <div class="createClassForm__addedCourses__buttonsColumn"></div>`
+    addedCoursesTbody = document.querySelector(".createClassForm__addedCourses__tbody")
+    deleteIconsColumn = document.querySelector(".createClassForm__addedCourses__buttonsColumn")
 }
 
 const renderNoAddedCoursesSpan = () => {
     tableWrapper.innerHTML =
-        `<span class="createGroupForm__noAddedCoursesSpan">Brak kursów w grupie</span>`
+        `<span class="createClassForm__noAddedCoursesSpan">Brak kursów w grupie</span>`
 }
 
 const renderEmptyFoundCoursesTable = () => {
     try {
-        groupModal.removeChild(document.querySelector('.groupModal__noResultsSpan'))
+        modal.removeChild(document.querySelector('.modal__noResultsSpan'))
     } catch (e) {}
     const table = document.createElement('table')
     table.classList.add('fancyTable')
-    table.classList.add('groupModal__table')
+    table.classList.add('modal__table')
     table.innerHTML = `
         <thead class="fancyTable__thead">
         <tr>
@@ -176,16 +127,8 @@ const renderEmptyFoundCoursesTable = () => {
             <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--courseType">Typ</th>
         </tr>
         </thead>
-        <tbody class="fancyTable__tbody groupModal__tbody">
+        <tbody class="fancyTable__tbody modal__tbody">
         </tbody>`
-    groupModal.appendChild(table)
-    tbody = document.querySelector(".groupModal__tbody")
-}
-
-const renderNoResultsSpan = () => {
-    groupModal.removeChild(document.querySelector('.groupModal__table'))
-    const span = document.createElement('span')
-    span.classList.add('groupModal__noResultsSpan')
-    span.innerText = 'Brak wyników'
-    groupModal.appendChild(span)
+    modal.appendChild(table)
+    tbody = document.querySelector(".modal__tbody")
 }

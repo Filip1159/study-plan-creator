@@ -6,9 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Positive;
-import javax.validation.constraints.PositiveOrZero;
+import javax.validation.constraints.*;
 import java.util.List;
 
 @Entity
@@ -22,27 +20,32 @@ public class ClassEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotNull
+    @NotNull(message = "nazwa nie może być pusta")
+    @NotBlank(message = "nazwa nie może być pusta")
     private String name;
 
-    @PositiveOrZero
+    @PositiveOrZero(message = "liczba ECTS musi być większa lub równa 0")
+    @NotNull(message = "liczba ECTS musi być większa lub równa 0")
     private Integer ECTS;
 
-    @Positive
+    @Positive(message = "liczba CNPS musi być większa od 0")
+    @NotNull(message = "liczba CNPS musi być większa od 0")
     private Integer CNPS;
 
-    @Positive
+    @Positive(message = "liczba ZZU musi być większa od 0")
+    @NotNull(message = "liczba ZZU musi być większa od 0")
     private Integer ZZU;
 
-    @NotNull
+    @NotNull(message = "forma zaliczenia nie może być pusta")
     @Enumerated(EnumType.STRING)
     private WayOfCrediting wayOfCrediting;
 
-    @NotNull
+    @NotNull(message = "typ nie może być pusty")
     @Enumerated(EnumType.STRING)
     private Type type;
 
-    @NotNull
+    @NotNull(message = "obszar nie może być pusty")
+    @NotBlank(message = "obszar nie moze być pusty")
     private String area;
 
     @NotNull
@@ -52,6 +55,7 @@ public class ClassEntity {
     @Enumerated(EnumType.STRING)
     private CourseType courseType;
 
+    @NotEmpty(message = "kurs musi realizować co najmniej 1 efekt uczenia się")
     @ManyToMany(cascade = CascadeType.MERGE)
     @JoinTable(name = "learning_effect_realisation",
             joinColumns = { @JoinColumn(name = "class_id") },

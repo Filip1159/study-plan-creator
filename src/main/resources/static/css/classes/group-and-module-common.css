@@ -1,0 +1,39 @@
+
+
+.createClassForm__addedCourses {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 0 auto;
+    width: 580px;
+}
+
+.createClassForm__addedCourses__button:disabled {
+    opacity: 0.5;
+    cursor: default;
+    box-shadow: none !important;
+}
+
+.createClassForm__addedCourses__table {
+    margin-top: 10px;
+    width: 100%;
+}
+
+.createClassForm__addedCourses__tableWrapper {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: center;
+}
+
+.createClassForm__addedCourses__buttonsColumn {
+    display: flex;
+    flex-direction: column;
+    margin-top: 32px;
+}
+
+.createClassForm__noAddedCoursesSpan {
+    font-size: 14px;
+    font-style: italic;
+    color: #B45F06;
+}

@@ -20,7 +20,7 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
+            <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${classEntity}" method="post">
                 <div th:replace="/fragments/create-class-form-base :: create-class-form-base"></div>
                 <hr class="createClassForm__hr">
                 <div class="createClassForm__inputWrapper">

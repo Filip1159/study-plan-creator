@@ -5,24 +5,28 @@
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="name" type="text"
                    th:field="*{name}"/>
+            <span class="createClassForm__errorMessage" th:errors="*{name}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label" for="ects">Liczba punktów ECTS:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="ects" type="number" th:field="*{ECTS}"/>
+            <span class="createClassForm__errorMessage" th:errors="*{ECTS}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label" for="cnps">Liczba godzin CNPS:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="cnps" type="number" th:field="*{CNPS}"/>
+            <span class="createClassForm__errorMessage" th:errors="*{CNPS}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label" for="zzu">Liczba godzin ZZU:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="zzu" type="number" th:field="*{ZZU}"/>
+            <span class="createClassForm__errorMessage" th:errors="*{ZZU}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
@@ -33,6 +37,7 @@
                 <option th:disabled th:selected th:value="''"> -- wybierz -- </option>
                 <option th:each="w:${waysOfCrediting}" th:value="${w.value()}" th:text="${w.readableName()}"></option>
             </select>
+            <span class="createClassForm__errorMessage" th:errors="*{wayOfCrediting}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
@@ -42,12 +47,14 @@
                 <option th:disabled th:selected th:value="''"> -- wybierz -- </option>
                 <option th:each="t:${types}" th:value="${t.value()}" th:text="${t.readableName()}"></option>
             </select>
+            <span class="createClassForm__errorMessage" th:errors="*{type}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label" for="area">Obszar zajęć:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="area" type="text" th:field="*{area}">
+            <span class="createClassForm__errorMessage" th:errors="*{area}"></span>
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
@@ -58,6 +65,7 @@
                 <option disabled selected value="default"> -- wybierz -- </option>
                 <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}"></option>
             </select>
+            <span class="createClassForm__errorMessage" th:errors="*{learningEffects}"></span>
         </div>
     </div>
     <div class="createClassForm__learningEffects"></div>
