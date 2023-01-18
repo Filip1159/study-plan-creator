@@ -17,6 +17,21 @@ let tbody = document.querySelector(".modal__tbody")
 let deleteIconsColumn = document.querySelector(".createClassForm__addedCourses__buttonsColumn")
 const tableWrapper = document.querySelector(".createClassForm__addedCourses__tableWrapper")
 
+const areAllInputsFilled = () => {
+    return nameInput.value !== '' && ectsInput.value >= 0 && cnpsInput.value > 0 && zzuInput.value > 0
+        && wayOfCreditingInput.value && typeInput.value && areaInput.value !== '' && learningEffectsInput2.value !== ''
+}
+
+[nameInput, ectsInput, cnpsInput, zzuInput, wayOfCreditingInput, typeInput, areaInput, learningEffectsInput2].forEach(
+    input => input.addEventListener('input', () => addCourseButton.disabled = !areAllInputsFilled())
+)
+
+const setBaseInputsEnabled = enabled => {
+    [nameInput, ectsInput, cnpsInput, zzuInput, wayOfCreditingInput, typeInput, areaInput, learningEffectsSelect].forEach(
+        input => input.readOnly = !enabled
+    )
+}
+
 const renderDeleteIcon = itemIdToDelete => {
     const img = document.createElement('img')
     img.classList.add('fancyTable__closeButtonDiv__icon')

@@ -40,7 +40,7 @@ class ClassControllerTest {
         given(classRepo.query(expectedQueryParams)).willReturn(existingClasses);
 
         // when
-        var result = classController.getWithFilters(ClassFiltersDto.builder().ects(2).build());
+        var result = classController.query(ClassFiltersDto.builder().ects(2).build());
 
         // then
         assertThat(result.size()).isEqualTo(3);

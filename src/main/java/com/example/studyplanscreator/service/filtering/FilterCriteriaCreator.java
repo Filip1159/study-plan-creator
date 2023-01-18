@@ -17,6 +17,7 @@ import java.util.regex.Pattern;
 public class FilterCriteriaCreator {
 
     public List<FilterCriterion> from(ClassFiltersDto filtersDto) {
+        System.out.println(filtersDto);
         return Arrays.stream(filtersDto.getClass().getDeclaredFields())
                 .filter(field -> isFieldNonNull(field, filtersDto))
                 .filter(field -> isComplexCriterionName(field.getName()))
@@ -37,7 +38,7 @@ public class FilterCriteriaCreator {
         var matcher = Pattern.compile("[A-Z]?[a-z]+").matcher(name);
         var matches = new ArrayList<String>();
         while (matcher.find()) matches.add(matcher.group());
-        return matches.size() != 2 &&
+        return matches.size() == 2 &&
                 isValidEnumValue(CourseType.class, matches.get(0).toUpperCase()) &&
                 isValidEnumValue(PointType.class, matches.get(1).toUpperCase());
     }

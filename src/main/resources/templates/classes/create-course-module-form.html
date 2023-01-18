@@ -22,9 +22,51 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${classEntity}" method="post">
+            <form class="createClassForm" action="#" th:action="@{/classes/create?category=MODULE}" th:object="${classEntity}" method="post">
                 <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
                 <hr class="createClassForm__hr">
+                <div class="createModuleForm__filters">
+                    <span class="createModuleForm__filters__setFiltersSpan">Ustal filtry:</span>
+                    <div class="createModuleForm__filters__row">
+                        <span class="createModuleForm__filters__row__label createModuleForm__filters__row__label--bold">ECTS:</span>
+                        <span class="createModuleForm__filters__row__label">Wykład:</span>
+                        <input type="number" id="lectureEcts" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Ćwiczenia:</span>
+                        <input type="number" id="exercisesEcts" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Laboratorium:</span>
+                        <input type="number" id="labEcts" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Projekt:</span>
+                        <input type="number" id="projectEcts" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Seminarium:</span>
+                        <input type="number" id="seminaryEcts" class="createModuleForm__filters__row__input" value=0 />
+                    </div>
+                    <div class="createModuleForm__filters__row">
+                        <span class="createModuleForm__filters__row__label createModuleForm__filters__row__label--bold">CNPS:</span>
+                        <span class="createModuleForm__filters__row__label">Wykład:</span>
+                        <input type="number" id="lectureCnps" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Ćwiczenia:</span>
+                        <input type="number" id="exercisesCnps" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Laboratorium:</span>
+                        <input type="number" id="labCnps" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Projekt:</span>
+                        <input type="number" id="projectCnps" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Seminarium:</span>
+                        <input type="number" id="seminaryCnps" class="createModuleForm__filters__row__input" value=0 />
+                    </div>
+                    <div class="createModuleForm__filters__row">
+                        <span class="createModuleForm__filters__row__label createModuleForm__filters__row__label--bold">ZZU:</span>
+                        <span class="createModuleForm__filters__row__label">Wykład:</span>
+                        <input type="number" id="lectureZzu" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Ćwiczenia:</span>
+                        <input type="number" id="exercisesZzu" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Laboratorium:</span>
+                        <input type="number" id="labZzu" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Projekt:</span>
+                        <input type="number" id="projectZzu" class="createModuleForm__filters__row__input" value=0 />
+                        <span class="createModuleForm__filters__row__label">Seminarium:</span>
+                        <input type="number" id="seminaryZzu" class="createModuleForm__filters__row__input" value=0 />
+                    </div>
+                </div>
                 <div class="createClassForm__addedCourses">
                     <button class="createClassForm__addedCourses__button fancyButton fancyButton--wide">+ Dodaj kurs do
                         modułu

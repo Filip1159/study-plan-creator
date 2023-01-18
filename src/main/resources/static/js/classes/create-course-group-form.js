@@ -1,33 +1,5 @@
 const addedCoursesInput = document.querySelector("#coursesInGroup")
 
-console.log(nameInput.value)
-console.log(ectsInput.value)
-console.log(wayOfCreditingInput.value)
-console.log(learningEffectsInput2.value)
-
-const areAllInputsFilled = () => {
-    return nameInput.value !== '' && ectsInput.value >= 0 && cnpsInput.value > 0 && zzuInput.value > 0
-        && wayOfCreditingInput.value && typeInput.value && areaInput.value !== '' && learningEffectsInput2.value !== ''
-}
-
-[nameInput, ectsInput, cnpsInput, zzuInput, wayOfCreditingInput, typeInput, areaInput, learningEffectsInput2].forEach(
-    input => input.addEventListener('input', () => addCourseButton.disabled = !areAllInputsFilled())
-)
-
-const setBaseInputsEnabled = enabled => {
-    [nameInput, ectsInput, cnpsInput, zzuInput, wayOfCreditingInput, typeInput, areaInput, learningEffectsSelect].forEach(
-        input => input.readOnly = !enabled
-    )
-}
-
-// form?.addEventListener("submit", e => {
-//     // e.preventDefault()
-//     const formData = new FormData(form)
-//     for (const value of formData.values()) {
-//         console.log(value);
-//     }
-// })
-
 const renderAddedCourseTableRow = courseData => {
     const tr = renderCellsInTableRowForGroupForm(courseData)
     tr.id = `addedCourse${courseData.id}`
@@ -55,16 +27,14 @@ const renderCellsInTableRowForGroupForm = courseData => {
 }
 
 const coursesQuery = async e => {
-    console.log('input')
     const name = e.target.value
     const wayOfCrediting = wayOfCreditingInput.value
     const type = typeInput.value
     const area = areaInput.value
     const learningEffects = learningEffectsInput2.value
     const res = await fetch(
-        `/classes?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
+        `/classes/query?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
     const data = await res.json()
-    console.log(data)
     if (data.length === 0) renderNoResultsSpan()
     else {
         if (document.querySelector('.modal__noResultsSpan')) renderEmptyFoundCoursesTable()
