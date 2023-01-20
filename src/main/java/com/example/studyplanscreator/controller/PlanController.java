@@ -44,8 +44,7 @@ public class PlanController {
     @PostMapping("/plan/create")
     public String createPlan(@ModelAttribute Plan plan) {
         planService.create(plan);
-        return  "plans/create-plan-form";
-        //return "redirect:/plans";
+        return "redirect:/plans";
     }
 
 
