@@ -10,9 +10,9 @@ import com.example.studyplanscreator.service.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
@@ -45,6 +45,11 @@ public class PlanController {
     public String createPlan(@ModelAttribute Plan plan) {
         planService.create(plan);
         return "redirect:/plans";
+    }
+
+    @RequestMapping(value="/create-plan-form", params = "cancel", method = RequestMethod.POST)
+    public String cancelCreatePlan(HttpServletRequest request) {
+        return "redirect:/users.html";
     }
 
 
