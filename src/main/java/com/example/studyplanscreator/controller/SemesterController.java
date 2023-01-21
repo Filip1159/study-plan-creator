@@ -50,9 +50,12 @@ public class SemesterController {
     }
 
     @PostMapping("/delete-semester")
-    private String deleteSemester(@ModelAttribute Semester semester){
+    private String deleteSemester(@ModelAttribute Semester semester, RedirectAttributes redirectAttributes){
         semesterService.delete(semester);
-        return "semesters/semesters-in-plan";
+
+        redirectAttributes.addAttribute("planId", semester.getPlan().getId());
+
+        return "redirect:/semesters-in-plan";
     }
 
     @GetMapping("/semester")

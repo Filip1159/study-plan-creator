@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Plany Studiów PWR</title>
-    <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+    <link rel="stylesheet" href="/css/semester/semesters-list.css"/>
     <link rel="stylesheet" href="/css/fragments/header.css"/>
     <link rel="stylesheet" href="/css/fragments/aside.css"/>
     <link rel="stylesheet" href="/css/base.css"/>
@@ -16,25 +16,26 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <div class="">
+
+            <div class="plan-details">
                 <h2>Dane planu</h2>
-                <table>
+                <table class="plan-table">
                     <tbody>
-                        <tr>
-                            <td>Wydział</td>
-                            <td th:text="${plan.getFaculty().getName()}"></td>
+                        <tr class="plan-table-tr">
+                            <td class="plan-table-td">Wydział</td>
+                            <td class="plan-table-td" th:text="${plan.getFaculty().getName()}"></td>
                         </tr>
-                        <tr>
-                            <td>Kierunek</td>
-                            <td th:text="${plan.getField()}"></td>
+                        <tr class="plan-table-tr">
+                            <td class="plan-table-td">Kierunek</td>
+                            <td class="plan-table-td" th:text="${plan.getField()}"></td>
                         </tr>
-                        <tr>
-                            <td>Rocznik</td>
-                            <td th:text="${plan.getAcademicYear()}"></td>
+                        <tr class="plan-table-tr">
+                            <td class="plan-table-td">Rocznik</td>
+                            <td class="plan-table-td" th:text="${plan.getAcademicYear()}"></td>
                         </tr>
-                        <tr>
-                            <td>Stopień</td>
-                            <td th:text="${plan.getLevel()}"></td>
+                        <tr class="plan-table-tr">
+                            <td class="plan-table-td">Stopień</td>
+                            <td class="plan-table-td" th:text="${plan.getLevel()}"></td>
                         </tr>
                         <!--<tr>
                             <td>Autor</td>
@@ -47,39 +48,43 @@
                     </tbody>
                 </table>
                 <form action="" method="post">
-                    <input type="submit" value="Modyfikuj" />
+                    <input class="fancyButton" type="submit" value="Modyfikuj" />
                 </form>
             </div>
-            <table>
-                <tbody>
-                    <tr th:each="s:${semesters}">
-                        <td th:text="'Semestr ' + ${s.number}"></td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value="Szczegóły" />
-                            </form>
-                        </td>
-                        <td>
-                            <form action="" method="post">
-                                <input type="submit" value="Usuń" />
-                            </form>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <button id="add_semester">Dodaj</button>
 
-            <div>
+            <h3 class="semesters-header">Semestry</h3>
+            <ul class="semesters-list">
+                <li class="semesters-list-li" th:each="s:${semesters}">
+                    <div class="semesters-list-semester" th:text="'Semestr ' + ${s.number}"></div>
+                    <div class="semesters-list-button-1">
+                        <form action="" method="post">
+                            <input class="fancyButton"  type="submit" value="Szczegóły" />
+                        </form>
+                    </div>
+                    <div class="semesters-list-button-2">
+                        <form action="#" th:action="@{/delete-semester}" method="post">
+                            <input type="hidden" th:value="${s.getId()}" th:attr="name='semester'">
+                            <input class="fancyButton" type="submit" value="Usuń" />
+                        </form>
+                    </div>
+                </li>
+            </ul>
+            <button id="semester-add-button" class="fancyButton">Dodaj</button>
+
+            <div id="semester-create-form">
+                <div id="semester-create-form-close">X</div>
                 <p>Podaj numer semestru:</p>
                 <form action="#" th:action="@{/semester/create}" th:object="${semester}" method="post">
                     <input id="" type="text" th:field="*{number}"/>
                     <input type="hidden" id="faculty" name="plan" th:value="${plan.getId()}"></input>
-                    <input type="submit" value="Dodaj" />
+                    <input class="fancyButton" type="submit" value="Dodaj" />
                 </form>
                 <div id="create_semester_error"></div>
             </div>
+
         </div>
     </main>
 </div>
+<script type="text/javascript" src="/js/semesters/create-semester-form.js"></script>
 </body>
 </html>
