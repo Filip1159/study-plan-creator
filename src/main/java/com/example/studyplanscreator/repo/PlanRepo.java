@@ -30,4 +30,6 @@ public interface PlanRepo extends JpaRepository<Plan, Long> {
             @Param("year") String academicYear);
 
     Plan getPlanById(long id);
+
+    Plan getPlanByNameAndFieldAndFacultyAndLevelAndAcademicYear(String name, String field, Faculty faculty, EducationLevel level, String academicYear);
 }

@@ -25,12 +25,18 @@
             <input class="createPlanForm__inputWrapper__input" id="name" type="text" th:field="*{name}"/>
           </div>
         </div>
+        <div class="" th:if="${planNameError != null}">
+          <p class="createPlanForm__error_message" th:text="${planNameError}"></p>
+        </div>
 
         <div class="createPlanForm__inputWrapper">
           <label class="createPlanForm__inputWrapper__label" for="field">Kierunek</label>
           <div class="createPlanForm__inputWrapper__inputDiv">
             <input class="createPlanForm__inputWrapper__input" id="field" type="text" th:field="*{field}"/>
           </div>
+        </div>
+        <div class="" th:if="${planFieldError != null}">
+          <p class="createPlanForm__error_message" th:text="${planFieldError}"></p>
         </div>
 
         <div class="createPlanForm__inputWrapper">
@@ -42,6 +48,7 @@
           </div>
         </div>
 
+
         <div class="createPlanForm__inputWrapper">
           <label class="createPlanForm__inputWrapper__label" for="level">Poziom</label>
           <div class="createPlanForm__inputWrapper__inputDiv">
@@ -51,11 +58,19 @@
           </div>
         </div>
 
+
         <div class="createPlanForm__inputWrapper">
           <label class="createPlanForm__inputWrapper__label" for="academicYear">Rok</label>
           <div class="createPlanForm__inputWrapper__inputDiv">
             <input class="createPlanForm__inputWrapper__input" id="academicYear" type="text" th:field="*{academicYear}"/>
           </div>
+        </div>
+        <div class="" th:if="${planAcademicYearError != null}">
+          <p class="createPlanForm__error_message" th:text="${planAcademicYearError}"></p>
+        </div>
+
+        <div class="" th:if="${planNotUniqueError != null}">
+          <p class="createPlanForm__error_message" th:text="${planNotUniqueError}"></p>
         </div>
 
         <div class="createPlanForm__buttonsWrapper">

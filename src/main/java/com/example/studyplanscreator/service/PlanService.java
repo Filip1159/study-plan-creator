@@ -5,8 +5,11 @@ import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.repo.FacultyRepo;
 import com.example.studyplanscreator.repo.PlanRepo;
 import com.example.studyplanscreator.repo.UserRepo;
+import com.example.studyplanscreator.service.validation.PlanErrorContainer;
+import com.example.studyplanscreator.service.validation.PlanValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import java.util.List;
 
@@ -27,8 +30,20 @@ public class PlanService {
     public Plan getPlanById(long planId){
         return planRepo.getPlanById(planId);
     }
-    
-    public void create(Plan plan){
-        planRepo.save(plan);
+
+
+    public PlanErrorContainer create(Plan plan){
+
+        PlanErrorContainer planErrorContainer = PlanValidator.validate(plan);
+
+        // check uniqueness
+        if(planRepo.getPlanByNameAndFieldAndFacultyAndLevelAndAcademicYear(plan.getName(),
+                plan.getField(), plan.getFaculty(), plan.getLevel(), plan.getAcademicYear()) != null){
+            planErrorContainer.setNotUniqueError("Plan o podanych danych już istnieje");
+        }
+
+        if (planErrorContainer.isValid()) planRepo.save(plan);
+
+        return planErrorContainer;
     }
 }

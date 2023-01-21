@@ -26,3 +26,10 @@
     justify-content: space-around;
     padding: 100px 250px 30px 250px;
 }
+
+.createPlanForm__error_message{
+    font-size: small;
+    color: red;
+    text-align: center;
+    margin-top: 1px;
+}
