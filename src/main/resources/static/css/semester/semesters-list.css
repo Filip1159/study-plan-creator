@@ -8,6 +8,12 @@
     border-collapse: collapse;
 }
 
+.authors-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
 
 .semesters-header{
     margin-bottom: 0px;

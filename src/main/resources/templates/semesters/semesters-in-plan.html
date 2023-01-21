@@ -37,14 +37,14 @@
                             <td class="plan-table-td">Stopień</td>
                             <td class="plan-table-td" th:text="${plan.getLevel()}"></td>
                         </tr>
-                        <!--<tr>
-                            <td>Autor</td>
-                            <td>
-                                <ul th:each="a:${plan.getAuthors()}">
-                                    <li th:text="${a.getName()}"></li>
+                        <tr>
+                            <td class="plan-table-td">Autor</td>
+                            <td class="plan-table-td">
+                                <ul class="authors-list" th:each="a:${plan.getAuthors()}">
+                                    <li class="authors-list-li" th:text="${a.getName() + ' ' + a.getSurname()}"></li>
                                 </ul>
                             </td>
-                        </tr>-->
+                        </tr>
                     </tbody>
                 </table>
                 <form action="" method="post">
