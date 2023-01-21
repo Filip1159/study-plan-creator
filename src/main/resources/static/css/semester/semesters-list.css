@@ -58,3 +58,13 @@ semesters-list-button-2{
 #semester-add-button{
     margin: auto;
 }
+
+#create_semester_error{
+    text-align: center;
+    margin-top: 1px;
+}
+
+#createSemesterForm_error_message{
+    font-size: small;
+    color: red;
+}

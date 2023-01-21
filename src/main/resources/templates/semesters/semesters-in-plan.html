@@ -69,6 +69,10 @@
                     </div>
                 </li>
             </ul>
+            <div id="create_semester_error" th:if="${semesterError != null}">
+                <p id="createSemesterForm_error_message" th:text="${semesterError}"></p>
+            </div>
+
             <button id="semester-add-button" class="fancyButton">Dodaj</button>
 
             <div id="semester-create-form">
@@ -79,7 +83,7 @@
                     <input type="hidden" id="faculty" name="plan" th:value="${plan.getId()}"></input>
                     <input class="fancyButton" type="submit" value="Dodaj" />
                 </form>
-                <div id="create_semester_error"></div>
+
             </div>
 
         </div>

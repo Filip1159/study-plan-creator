@@ -1,7 +1,7 @@
 package com.example.studyplanscreator.controller;
 
+import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.model.entity.Semester;
-import com.example.studyplanscreator.model.*;
 
 import com.example.studyplanscreator.service.FacultyService;
 import com.example.studyplanscreator.service.SemesterService;
@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import java.util.Collections;
+import java.util.List;
 
 @Controller
 @RequiredArgsConstructor
@@ -26,7 +27,8 @@ public class SemesterController {
     private final PlanService planService;
 
     @GetMapping("/semesters-in-plan")
-    private String semestersList(Model model, @RequestParam(required = true) Long planId) {
+    private String semestersList(Model model, @RequestParam(required = true) Long planId,
+                                 String semesterError) {
         var foundSemesters = semesterService.getSemestersFromPlan(planId);
 
         //sort semesters so that view can only display them
@@ -36,6 +38,10 @@ public class SemesterController {
 
         model.addAttribute("plan", foundPlan);
         model.addAttribute("semesters", foundSemesters);
+        if(semesterError != null){
+            model.addAttribute("semesterError", semesterError);
+            System.out.println(semesterError);
+        }
 
         //add empty semester model so that th can recognise it in the form
         model.addAttribute("semester", new Semester());
@@ -44,8 +50,16 @@ public class SemesterController {
 
     @PostMapping("/semester/create")
     private String createSemester(@ModelAttribute Semester semester, RedirectAttributes redirectAttributes){
-        semesterService.create(semester);
+        Plan semesterPlan = semester.getPlan();
+        List<Semester> semestersInPlan = semesterService.getSemestersFromPlan(semesterPlan.getId());
+
+        if(semestersInPlan.stream().anyMatch(element -> element.getNumber() == semester.getNumber())){
+            redirectAttributes.addAttribute("semesterError", "Podany semestr już istnieje");
+        }
+        else semesterService.create(semester);
+
         redirectAttributes.addAttribute("planId", semester.getPlan().getId());
+
         return "redirect:/semesters-in-plan";
     }
 
