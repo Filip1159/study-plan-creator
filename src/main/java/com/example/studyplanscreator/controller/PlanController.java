@@ -7,12 +7,14 @@ import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.service.FacultyService;
 import com.example.studyplanscreator.service.PlanService;
 import com.example.studyplanscreator.service.TranslationService;
+import com.example.studyplanscreator.service.validation.PlanErrorContainer;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequiredArgsConstructor
@@ -34,18 +36,42 @@ public class PlanController {
     }
 
     @GetMapping("/create-plan-form")
-    public String createPlanForm(Model model) {
+    public String createPlanForm(Model model, PlanErrorContainer planErrorContainer) {
         model.addAttribute("plan", new Plan());
         model.addAttribute("faculties", facultyService.getAll());
         model.addAttribute("levels", EducationLevel.values());
+
+        if(planErrorContainer != null){
+            if(!(planErrorContainer.getAcademicYearError() == null))
+                model.addAttribute("planAcademicYearError", planErrorContainer.getAcademicYearError());
+            if(!(planErrorContainer.getNameError() == null))
+                model.addAttribute("planNameError", planErrorContainer.getNameError());
+            if(!(planErrorContainer.getFieldError() == null))
+                model.addAttribute("planFieldError", planErrorContainer.getFieldError());
+            if(!(planErrorContainer.getNotUniqueError() == null))
+                model.addAttribute("planNotUniqueError", planErrorContainer.getNotUniqueError());
+        }
+
         return "plans/create-plan-form";
     }
 
     @PostMapping("/plan/create")
-    public String createPlan(@ModelAttribute Plan plan) {
-        planService.create(plan);
-        return  "plans/create-plan-form";
-        //return "redirect:/plans";
+    public String createPlan(Model model, @ModelAttribute Plan plan, RedirectAttributes redirectAttributes) {
+        PlanErrorContainer planErrorContainer = planService.create(plan);
+
+        // plan is valid
+        if(planErrorContainer.isValid()) return "redirect:/plans";
+
+        // errors occured
+        else redirectAttributes.addFlashAttribute("planErrorContainer", planErrorContainer);
+
+        return "redirect:/create-plan-form";
+    }
+
+    //cancel parameter for cancel button in form
+    @RequestMapping(value="/plan/create", params = "cancel", method = RequestMethod.POST)
+    public String cancelCreatePlan(HttpServletRequest request) {
+        return "redirect:/plans";
     }
 
 

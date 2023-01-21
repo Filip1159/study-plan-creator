@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <title>Plany Studiów PWR</title>
-  <link rel="stylesheet" href="/css/classes/all-classes.css"/>
+  <link rel="stylesheet" href="/css/plans/create-plan-form.css"/>
   <link rel="stylesheet" href="/css/fragments/header.css"/>
   <link rel="stylesheet" href="/css/fragments/aside.css"/>
   <link rel="stylesheet" href="/css/base.css"/>
@@ -16,32 +16,68 @@
   <main class="appContainer__main">
     <aside th:replace="fragments/aside :: aside"></aside>
     <div class="appContainer__main__content">
+
       <form class="createPlanForm" action="#" th:action="@{/plan/create}" th:object="${plan}" method="post">
-        <div class="createClassForm__inputWrapper">
-          <label for="name">Nazwa</label>
-          <input id="name" type="text" th:field="*{name}"/>
-        </div>
-        <div class="createClassForm__inputWrapper">
-          <label for="field">Kierunek</label>
-          <input id="field" type="text" th:field="*{field}"/>
-        </div>
+
         <div class="createPlanForm__inputWrapper">
-          <label for="faculty">Wydział</label>
-          <select id="faculty" th:field="*{faculty}">
-            <option th:each="f:${faculties}" th:value="${f.id}" th:text="${f.name}"></option>
-          </select>
+          <label class="createPlanForm__inputWrapper__label" for="name">Nazwa</label>
+          <div class="createPlanForm__inputWrapper__inputDiv">
+            <input class="createPlanForm__inputWrapper__input" id="name" type="text" th:field="*{name}"/>
+          </div>
         </div>
+        <div class="" th:if="${planNameError != null}">
+          <p class="createPlanForm__error_message" th:text="${planNameError}"></p>
+        </div>
+
         <div class="createPlanForm__inputWrapper">
-          <label for="level">Poziom</label>
-          <select id="level" th:field="*{level}">
-            <option th:each="l:${levels}" th:value="${l.name()}" th:text="${l.name()}"></option>
-          </select>
+          <label class="createPlanForm__inputWrapper__label" for="field">Kierunek</label>
+          <div class="createPlanForm__inputWrapper__inputDiv">
+            <input class="createPlanForm__inputWrapper__input" id="field" type="text" th:field="*{field}"/>
+          </div>
         </div>
-        <div class="createClassForm__inputWrapper">
-          <label for="academicYear">Rok</label>
-          <input id="academicYear" type="text" th:field="*{academicYear}"/>
+        <div class="" th:if="${planFieldError != null}">
+          <p class="createPlanForm__error_message" th:text="${planFieldError}"></p>
         </div>
-        <input type="submit" value="Zatwierdź"/>
+
+        <div class="createPlanForm__inputWrapper">
+          <label class="createPlanForm__inputWrapper__label" for="faculty">Wydział</label>
+          <div class="createPlanForm__inputWrapper__inputDiv">
+            <select class="createPlanForm__inputWrapper__input" id="faculty" th:field="*{faculty}">
+              <option th:each="f:${faculties}" th:value="${f.id}" th:text="${f.name}"></option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="createPlanForm__inputWrapper">
+          <label class="createPlanForm__inputWrapper__label" for="level">Poziom</label>
+          <div class="createPlanForm__inputWrapper__inputDiv">
+            <select id="level" th:field="*{level}">
+              <option th:each="l:${levels}" th:value="${l.name()}" th:text="${l.name()}"></option>
+            </select>
+          </div>
+        </div>
+
+
+        <div class="createPlanForm__inputWrapper">
+          <label class="createPlanForm__inputWrapper__label" for="academicYear">Rok</label>
+          <div class="createPlanForm__inputWrapper__inputDiv">
+            <input class="createPlanForm__inputWrapper__input" id="academicYear" type="text" th:field="*{academicYear}"/>
+          </div>
+        </div>
+        <div class="" th:if="${planAcademicYearError != null}">
+          <p class="createPlanForm__error_message" th:text="${planAcademicYearError}"></p>
+        </div>
+
+        <div class="" th:if="${planNotUniqueError != null}">
+          <p class="createPlanForm__error_message" th:text="${planNotUniqueError}"></p>
+        </div>
+
+        <div class="createPlanForm__buttonsWrapper">
+          <input class="fancyButton" type="submit" value="Zatwierdź"/>
+          <input class="fancyButton" type="submit"  name="cancel" value="Anuluj">
+        </div>
+
       </form>
     </div>
   </main>
