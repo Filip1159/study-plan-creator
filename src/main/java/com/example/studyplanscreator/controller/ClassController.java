@@ -1,6 +1,7 @@
 package com.example.studyplanscreator.controller;
 
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
+import com.example.studyplanscreator.controller.dto.ClassResponseMapper;
 import com.example.studyplanscreator.controller.dto.CourseResponse;
 import com.example.studyplanscreator.controller.dto.CourseResponseMapper;
 import com.example.studyplanscreator.model.Course;
@@ -26,11 +27,17 @@ public class ClassController {
     private final ClassService service;
     private final LearningEffectService learningEffectService;
     private final TranslationService translationService;
-    private final CourseResponseMapper foundCourseResponseMapper;
+    private final CourseResponseMapper courseResponseMapper;
+    private final ClassResponseMapper classResponseMapper;
+
+    @GetMapping
+    public String allClasses(Model model) {
+        model.addAttribute("classes", service.getAll().stream().map(classResponseMapper::from).toList());
+        return "classes/all-classes";
+    }
 
     @GetMapping("/create")
     public String createClassForm(Model model, @RequestParam ClassCategory category, ClassEntity classEntity) {
-        System.out.println(classEntity);
         model.addAttribute("waysOfCrediting", translationService.readableNames(WayOfCrediting.values()));
         model.addAttribute("types", translationService.readableNames(Type.values()));
         model.addAttribute("learningEffects", learningEffectService.getAll());
@@ -66,17 +73,21 @@ public class ClassController {
                 case MODULE -> "classes/create-course-module-form";
             };
         }
-        System.out.println(classEntity);
         service.create(classEntity);
         return "redirect:/";
     }
+
+//    @GetMapping("/update/{id}")
+//    public String updateClassForm(Model model, @PathVariable Long id) {
+//        return "classes/update-class-form";
+//    }
 
     @GetMapping("/query")
     @ResponseBody
     public List<CourseResponse> query(ClassFiltersDto requestParams) {
         return service.getWithFilters(requestParams).stream()
                 .filter(abstractClass -> abstractClass instanceof Course)
-                .map(abstractClass -> foundCourseResponseMapper.from((Course) abstractClass))
+                .map(abstractClass -> courseResponseMapper.from((Course) abstractClass))
                 .toList();
     }
 }
