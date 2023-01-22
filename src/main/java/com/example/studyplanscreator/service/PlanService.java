@@ -46,4 +46,12 @@ public class PlanService {
 
         return planErrorContainer;
     }
+
+    public PlanErrorContainer update(Plan plan){
+        PlanErrorContainer planErrorContainer = new PlanErrorContainer();
+
+        planRepo.save(plan);
+
+        return planErrorContainer;
+    }
 }

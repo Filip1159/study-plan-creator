@@ -1,0 +1,87 @@
+.plan-details{
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+.plan-table, .plan-table-tr, .plan-table-td{
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.authors-list{
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+#modify-button{
+    display: inline;
+}
+
+#plan-modify-faculty{
+    display: none;
+}
+
+#submit-faculty{
+    display: none;
+}
+
+.semesters-header{
+    margin-bottom: 0px;
+    margin-top: 50px;
+    padding-left: 40px;
+}
+
+.semesters-list{
+    margin-top: 0px;
+    list-style-type: none;
+    padding-left: 40px;
+    padding-right: 40px;
+}
+
+
+.semesters-list-li{
+    display: flex;
+    border: 1px solid black;
+    border-collapse: collapse;
+}
+
+.semesters-list-semester{
+    margin-right: auto;
+}
+
+.semesters-list-button-1{
+    margin-left: auto;
+}
+
+semesters-list-button-2{
+
+}
+
+#semester-create-form{
+    display: none;
+    background-color: #FFE599;
+    position: absolute;
+    z-index:99;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#semester-create-form-close{
+    text-align: right;
+    cursor: pointer;
+}
+
+#semester-add-button{
+    margin: auto;
+}
+
+#create_semester_error{
+    text-align: center;
+    margin-top: 1px;
+}
+
+#createSemesterForm_error_message{
+    font-size: small;
+    color: red;
+}

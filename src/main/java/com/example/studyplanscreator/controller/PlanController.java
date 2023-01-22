@@ -3,6 +3,7 @@ package com.example.studyplanscreator.controller;
 import com.example.studyplanscreator.controller.dto.PlanFilters;
 import com.example.studyplanscreator.controller.dto.PlanResponseMapper;
 import com.example.studyplanscreator.model.entity.EducationLevel;
+import com.example.studyplanscreator.model.entity.Faculty;
 import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.service.FacultyService;
 import com.example.studyplanscreator.service.PlanService;
@@ -74,5 +75,16 @@ public class PlanController {
         return "redirect:/plans";
     }
 
+    @PostMapping("/plan/modify")
+    public String modifyPlan(Model model, long planId, long facultyId, RedirectAttributes redirectAttributes) {
+        Plan plan = planService.getPlanById(planId);
+        Faculty faculty = facultyService.getFaculty(facultyId);
 
+        plan.setFaculty(faculty);
+        planService.update(plan);
+
+        redirectAttributes.addAttribute("planId", plan.getId());
+
+        return "redirect:/semesters-in-plan";
+    }
 }
