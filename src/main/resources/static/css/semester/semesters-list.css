@@ -14,6 +14,17 @@
     margin: 0;
 }
 
+#modify-button{
+    display: inline;
+}
+
+#plan-modify-faculty{
+    display: none;
+}
+
+#submit-faculty{
+    display: none;
+}
 
 .semesters-header{
     margin-bottom: 0px;

@@ -25,6 +25,7 @@ public class SemesterController {
     private final SemesterService semesterService;
 
     private final PlanService planService;
+    private final FacultyService facultyService;
 
     @GetMapping("/semesters-in-plan")
     private String semestersList(Model model, @RequestParam(required = true) Long planId,
@@ -38,6 +39,7 @@ public class SemesterController {
 
         model.addAttribute("plan", foundPlan);
         model.addAttribute("semesters", foundSemesters);
+        model.addAttribute("faculties", facultyService.getAll());
         if(semesterError != null){
             model.addAttribute("semesterError", semesterError);
             System.out.println(semesterError);

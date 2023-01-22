@@ -23,7 +23,12 @@
                     <tbody>
                         <tr class="plan-table-tr">
                             <td class="plan-table-td">Wydział</td>
-                            <td class="plan-table-td" th:text="${plan.getFaculty().getName()}"></td>
+                            <td id="plan-faculty" class="plan-table-td" th:text="${plan.getFaculty().getName()}"></td>
+                            <td id="plan-modify-faculty" class="plan-table-td">
+                                <select class="" id="faculty-select">
+                                    <option th:each="f:${faculties}" th:value="${f.id}" th:text="${f.name}"></option>
+                                </select>
+                            </td>
                         </tr>
                         <tr class="plan-table-tr">
                             <td class="plan-table-td">Kierunek</td>
@@ -47,9 +52,15 @@
                         </tr>
                     </tbody>
                 </table>
-                <form action="" method="post">
-                    <input class="fancyButton" type="submit" value="Modyfikuj" />
+
+                <button id="modify-button" class="fancyButton">Modyfikuj</button>
+
+                <form id="submit-faculty" action="#" th:action="@{/plan/modify}" th:object="${plan}" method="post">
+                    <input type="hidden" th:value="${plan.getId()}" th:attr="name='planId'">
+                    <input id="faculty-modify-input" type="hidden" th:value="${plan.getFaculty().getId()}" name="facultyId">
+                    <input class="fancyButton" type="submit" value="Zatwierdź" />
                 </form>
+
             </div>
 
             <h3 class="semesters-header">Semestry</h3>

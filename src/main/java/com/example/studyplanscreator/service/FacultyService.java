@@ -20,4 +20,5 @@ public class FacultyService {
         return repo.findAll();
     }
 
+    public Faculty getFaculty(long facultyId){ return repo.getReferenceById(facultyId);}
 }
