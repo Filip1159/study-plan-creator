@@ -52,6 +52,7 @@ public class ClassService {
                                 classEntity.getLearningEffects().stream().map(LearningEffect::getId).toList()))
                 .toList();
         var criteria = creator.from(filtersDto);
+        System.out.println(criteria);
         return preFilteredClasses.stream()
                 .filter(classEntity -> {
                     var abstractClass = mapper.toDomain(classEntity);

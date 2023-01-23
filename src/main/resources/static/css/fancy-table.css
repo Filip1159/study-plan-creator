@@ -22,4 +22,16 @@
     border-left: 1px solid black;
     border-right: 1px solid black;
     margin: 0;
+    padding: 2px 4px;
+}
+
+.fancyTable__closeButtonDiv__icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    margin: 6px;
+}
+
+.fancyTable__closeButtonDiv__icon:hover {
+    filter: brightness(0.75);
 }

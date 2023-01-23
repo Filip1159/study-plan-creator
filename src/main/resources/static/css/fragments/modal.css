@@ -1,0 +1,60 @@
+.modal {
+    position: absolute;
+    top: 200px;
+    left: 50%;
+    width: 600px;
+    transform: translateX(-50%);
+    background-color: #FFE599;
+    display: flex;
+    flex-direction: column;
+    border: 2px solid black;
+}
+
+.modal--hidden {
+    display: none;
+}
+
+.modal__searchBar {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.modal__searchBar__input {
+    min-width: 300px;
+    margin: 10px;
+    border: 1px solid black;
+}
+
+.modal__closeButton {
+    margin: 10px 20px 10px 10px;
+    font-size: 18px;
+    font-weight: 900;
+    cursor: pointer;
+}
+
+.modal__table {
+    margin: 0 10px 10px 10px;
+}
+
+.modal__table__foundCourseTr {
+    cursor: pointer;
+}
+
+.modal__table__foundCourseTr:hover {
+    color: #B45F06;
+}
+
+.modal__table__foundCourseTr:hover > .createGroupForm__addedCourses__table__cell--name:before {
+    margin-left: 3px;
+    margin-right: 3px;
+    content: '+';
+}
+
+.modal__noResultsSpan {
+    text-align: center;
+    font-size: 14px;
+    font-style: italic;
+    color: #B45F06;
+    margin: 15px;
+}

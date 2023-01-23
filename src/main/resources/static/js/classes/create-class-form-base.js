@@ -6,7 +6,7 @@ const learningEffectsInput = document.querySelector("#learningEffects")
 const selectedLearningEffects = []
 
 categoryInput.addEventListener("change", () => {
-    window.location.href = `create-class-form?category=${categoryInput.value}`
+    window.location.href = `/classes/create?category=${categoryInput.value}`
 })
 
 learningEffectsSelect.addEventListener("change", () => {

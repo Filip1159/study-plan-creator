@@ -5,12 +5,14 @@
     <title>Plany studiów PWR</title>
 
     <link rel="stylesheet" href="/css/classes/create-course-group-form.css"/>
+    <link rel="stylesheet" href="/css/classes/group-and-module-common.css"/>
     <link rel="stylesheet" href="/css/fragments/create-class-form-base.css"/>
     <link rel="stylesheet" href="/css/fragments/submit-cancel-class-form-buttons.css"/>
     <link rel="stylesheet" href="/css/fragments/header.css"/>
     <link rel="stylesheet" href="/css/fragments/aside.css"/>
     <link rel="stylesheet" href="/css/base.css"/>
     <link rel="stylesheet" href="/css/fancy-table.css"/>
+    <link rel="stylesheet" href="/css/fragments/modal.css"/>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
@@ -21,38 +23,25 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <form class="createClassForm" action="#" th:action="@{/class/create}" th:object="${class}" method="post">
+            <form class="createClassForm" action="#" th:action="@{/classes/create?category=GROUP}" th:object="${class}" method="post">
                 <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
                 <hr class="createClassForm__hr">
-                <div class="createGroupForm__addedCourses">
-                    <button class="createGroupForm__addedCourses__button fancyButton fancyButton--wide">+ Dodaj kurs do
+                <div class="createClassForm__addedCourses">
+                    <button class="createClassForm__addedCourses__button fancyButton fancyButton--wide">+ Dodaj kurs do
                         grupy
                     </button>
-                    <div class="createGroupForm__addedCourses__tableWrapper">
-                        <table class="createGroupForm__addedCourses__table fancyTable">
-                            <thead class="fancyTable__thead">
-                            <tr>
-                                <th class="fancyTable__cell">Nazwa</th>
-                                <th class="fancyTable__cell">ECTS</th>
-                                <th class="fancyTable__cell">CNPS</th>
-                                <th class="fancyTable__cell">ZZU</th>
-                                <th class="fancyTable__cell">Typ</th>
-                            </tr>
-                            </thead>
-                            <tbody class="fancyTable__tbody createGroupForm__addedCourses__tbody">
-                            </tbody>
-                        </table>
-                        <div class="createGroupForm__addedCourses__buttonsColumn">
-                        </div>
+                    <div class="createClassForm__addedCourses__tableWrapper">
+                        <span class="createClassForm__noAddedCoursesSpan">Brak kursów w grupie</span>
                     </div>
                     <input type="text" name="coursesInGroup" id="coursesInGroup" th:field="*{coursesInGroup}">
                 </div>
                 <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
-            <div th:replace="fragments/add-course-to-group-modal :: add-course-to-group-modal"></div>
+            <div th:replace="fragments/modal :: modal"></div>
         </div>
     </main>
 </div>
+<script type="text/javascript" src="/js/classes/group-and-module-common.js"></script>
 <script type="text/javascript" src="/js/classes/create-course-group-form.js"></script>
 </body>
 </html>

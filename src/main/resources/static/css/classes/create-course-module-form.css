@@ -1,0 +1,36 @@
+.createModuleForm__filters {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.createModuleForm__filters__setFiltersSpan {
+    display: flex;
+    align-self: flex-start;
+    font-weight: 700;
+    margin-left: 50px;
+    margin-bottom: 10px;
+}
+
+.createModuleForm__filters__row {
+    display: flex;
+    flex-direction: row;
+    font-size: 13px;
+    margin: 4px 0;
+}
+
+.createModuleForm__filters__row__label {
+    display: block;
+    margin: 0 3px 0 10px;
+}
+
+.createModuleForm__filters__row__label--bold {
+    font-weight: 700;
+    width: 35px;
+    text-align: right;
+}
+
+.createModuleForm__filters__row__input {
+    width: 30px;
+}

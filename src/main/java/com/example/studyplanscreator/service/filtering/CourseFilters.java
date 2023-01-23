@@ -10,11 +10,14 @@ import java.util.List;
 public class CourseFilters implements ClassFilters {
     @Override
     public boolean matchesFilters(AbstractClass course, List<FilterCriterion> filters) {
-        filters.forEach(System.out::println);
         return filters.stream()
-                .allMatch(filter -> course.getPoints(filter.getPointType()) == filter.getRequiredAmount()
-                        && filter.getCourseType().equals(((Course) course).getCourseType())
-                );
+                .allMatch(criterion -> matches(criterion, (Course) course));
+    }
 
+    private boolean matches(FilterCriterion criterion, Course course) {
+        var coursePoints = course.getPoints(criterion.getPointType());
+        if (course.getCourseType().equals(criterion.getCourseType()))
+            return coursePoints == criterion.getRequiredAmount();
+        else return criterion.getRequiredAmount() == 0;
     }
 }
