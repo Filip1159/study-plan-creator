@@ -1,0 +1,101 @@
+h3{
+    text-align: center;
+}
+
+.learningEffectsHeader{
+    text-align: center;
+}
+
+.search-learning-effect{
+    display: flex;
+    flex-direction: row;
+}
+.search-learning-effect-element-left{
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.search-learning-effect-element-right{
+    margin-left: 0;
+    margin-right: auto;
+}
+
+.learningEffects{
+    margin: 30px;
+}
+
+.learningEffectItem{
+    display: flex;
+    flex-direction: row;
+    border: 1px solid black;
+    cursor: pointer;
+}
+
+.learningEffectItem-symbol{
+    width: 20%;
+    border: solid 1px black;
+}
+
+.learningEffectItem-description{
+    width: 60%;
+    border: solid 1px black;
+}
+
+.learningEffectItem-button{
+    width: 10%;
+    border: solid 1px black;
+}
+
+.addLearningEffect{
+    margin: auto;
+    text-decoration: none;
+    text-align: center;
+}
+
+.cancelButton{
+    margin: auto;
+    text-decoration: none;
+    text-align: center;
+}
+
+.createLearningEffectForm__error_message, .deleteLearningEffectForm__error_message{
+    font-size: small;
+    color: red;
+    text-align: center;
+    margin-top: 1px;
+}
+
+.createLearningEffectForm__inputWrapper{
+    margin-left: 10px;
+    margin-right: 10px;
+    display: flex;
+}
+
+.createLearningEffectForm__inputWrapper__label{
+    flex: 0.35;
+    margin: 5px;
+    text-align: right;
+}
+
+.createLearningEffectForm__inputWrapper__inputDiv{
+    flex: 0.65;
+    margin: 5px;
+}
+
+.createLearningEffectForm__inputWrapper__inputDiv__input{
+    cursor: pointer;
+}
+
+.createLearningEffectForm__buttonsWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    padding: 100px 250px 30px 250px;
+}
+
+.createLearningEffectForm__error_message{
+    font-size: small;
+    color: red;
+    text-align: center;
+    margin-top: 1px;
+}
