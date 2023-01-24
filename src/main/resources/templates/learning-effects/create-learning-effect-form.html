@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/learning-effects/learning-effects.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+
+            <h3>Utwórz efekt uczenia się</h3>
+
+            <form class="createLearningEffectForm" action="#" th:action="@{/create-learning-effect}" th:object="${learningEffect}" method="post">
+
+                <div class="createLearningEffectForm__inputWrapper">
+                    <label class="createLearningEffectForm__inputWrapper__label" for="symbol">Symbol</label>
+                    <div class="createLearningEffectForm__inputWrapper__inputDiv">
+                        <input class="createLearningEffectForm__inputWrapper__input" id="symbol" type="text" th:field="*{symbol}"/>
+                    </div>
+                </div>
+
+                <div class="" th:if="${learningEffectCreateError != null}">
+                    <p class="createLearningEffectForm__error_message" th:text="${learningEffectCreateError}"></p>
+                </div>
+
+                <div class="createLearningEffectForm__inputWrapper">
+                    <label class="createLearningEffectForm__inputWrapper__label" for="description">Opis</label>
+                    <div class="createLearningEffectForm__inputWrapper__inputDiv">
+                        <input class="createLearningEffectForm__inputWrapper__input" id="description" type="text" th:field="*{description}"/>
+                    </div>
+                </div>
+
+                <div class="createLearningEffectForm__buttonsWrapper">
+                    <input class="fancyButton" type="submit" value="Zatwierdź"/>
+                    <a th:href="@{learning-effects}" class="fancyButton">Anuluj</a>
+                </div>
+
+            </form>
+        </div>
+    </main>
+</div>
+</body>
+</html>

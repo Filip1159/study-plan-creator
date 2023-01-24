@@ -15,4 +15,22 @@ public class LearningEffectService {
     public List<LearningEffect> getAll() {
         return repo.findAll();
     }
+
+    public LearningEffect create(LearningEffect learningEffect){
+        return repo.save(learningEffect);
+    }
+
+    public boolean delete(long id){
+        LearningEffect learningEffect = repo.getLearningEffectById(id);
+        if(learningEffect.getRealisingClasses().size() > 0) return false;
+        else repo.delete(learningEffect);
+
+        return true;
+    }
+    public LearningEffect getLearningEffectById(Long id){
+        return repo.getLearningEffectById(id);
+    }
+    public LearningEffect getLearningEffectBySymbol(String symbol){
+        return repo.getLearningEffectBySymbol(symbol);
+    }
 }

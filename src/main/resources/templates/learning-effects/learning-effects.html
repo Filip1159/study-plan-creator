@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/learning-effects/learning-effects.css"/>
+    <link rel="stylesheet" href="/css/fragments/header.css"/>
+    <link rel="stylesheet" href="/css/fragments/aside.css"/>
+    <link rel="stylesheet" href="/css/base.css"/>
+    <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;900&display=swap" rel="stylesheet">
+</head>
+<body>
+<div class="appContainer">
+    <header th:replace="fragments/header :: header"></header>
+    <main class="appContainer__main">
+        <aside th:replace="fragments/aside :: aside"></aside>
+        <div class="appContainer__main__content">
+
+            <h2 class="learningEffectsHeader">Efekty uczenia się</h2>
+
+            <div class="search-learning-effect">
+                <input class="search-learning-effect-element-left" id="search-learning-effect-input" type="text">
+                <button class="search-learning-effect-element-right fancyButton" id="search-learning-effect-button">Szukaj</button>
+            </div>
+
+            <ul class="learningEffects" id="learningEffects">
+
+                <li class="learningEffectItem" th:each="l:${learningEffects}">
+                    <span class="learningEffectItem-symbol" th:text="${l.getSymbol()}"></span>
+                    <span class="learningEffectItem-description" th:text="${l.getDescription()}"></span>
+                    <form action="#" th:action="@{/modify-learning-effect-form}" method="get">
+                        <input type="hidden" th:value="${l.getId()}" th:attr="name='id'">
+                        <input class="fancyButton" type="submit" value="Modyfikuj" />
+                    </form>
+                    <form action="#" th:action="@{/delete-learning-effect}" method="post">
+                        <input type="hidden" th:value="${l.getId()}" th:attr="name='id'">
+                        <input class="fancyButton" type="submit" value="Usuń" />
+                    </form>
+                </li>
+            </ul>
+
+            <div class="" th:if="${deleteLearningEffectErrorMessage != null}">
+                <p class="deleteLearningEffectForm__error_message" th:text="${deleteLearningEffectErrorMessage}"></p>
+            </div>
+
+            <a th:href="@{create-learning-effect}" class="addLearningEffect fancyButton">Dodaj</a>
+
+        </div>
+    </main>
+</div>
+<script type="text/javascript" src="/js/learning-effects/learning-effects-list.js"></script>
+</body>
+</html>

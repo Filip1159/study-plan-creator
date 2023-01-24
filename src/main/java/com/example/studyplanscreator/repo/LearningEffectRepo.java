@@ -6,4 +6,7 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LearningEffectRepo extends JpaRepository<LearningEffect, Long> {
+    LearningEffect getLearningEffectById(long id);
+    LearningEffect getLearningEffectBySymbol(String symbol);
+
 }
