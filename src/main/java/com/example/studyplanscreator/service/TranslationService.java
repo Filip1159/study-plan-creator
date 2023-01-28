@@ -10,7 +10,7 @@ import java.util.Map;
 
 @Service
 public class TranslationService {
-    private static final Map<CourseType, String> courseTypeTranslations = Map.of(
+    public static final Map<CourseType, String> courseTypeTranslations = Map.of(
             CourseType.LECTURE, "Wykład",
             CourseType.EXERCISES, "Ćwiczenia",
             CourseType.LAB, "Laboratorium",

@@ -13,6 +13,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
@@ -73,7 +74,25 @@ public class ClassController {
                 case MODULE -> "classes/create-course-module-form";
             };
         }
-        service.create(classEntity);
+        try {
+            service.create(classEntity);
+        } catch (RuntimeException e) {
+            model.addAttribute("waysOfCrediting", translationService.readableNames(WayOfCrediting.values()));
+            model.addAttribute("types", translationService.readableNames(Type.values()));
+            model.addAttribute("learningEffects", learningEffectService.getAll());
+            model.addAttribute("categories", translationService.readableNames(ClassCategory.values()));
+            model.addAttribute("courseTypes", translationService.readableNames(CourseType.values()));
+            result.addError(new FieldError("classEntity", "coursesInGroup", e.getMessage()));
+            result.addError(new FieldError("classEntity", "coursesInModule", e.getMessage()));
+            model.addAttribute("courseTypeTranslations", TranslationService.courseTypeTranslations);
+            var coursesInGroupIds = classEntity.getCoursesInGroup().stream().reduce("", (acc, c) -> acc + c.getId() + ",", String::concat);
+            model.addAttribute("coursesInGroupIds", coursesInGroupIds.substring(0, coursesInGroupIds.length() - 1));
+            return switch (category) {
+                case COURSE -> "classes/create-course-form";
+                case GROUP -> "classes/create-course-group-form";
+                case MODULE -> "classes/create-course-module-form";
+            };
+        }
         return "redirect:/";
     }
 

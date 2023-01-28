@@ -23,7 +23,7 @@
     <main class="appContainer__main">
         <aside th:replace="fragments/aside :: aside"></aside>
         <div class="appContainer__main__content">
-            <form class="createClassForm" action="#" th:action="@{/classes/create?category=GROUP}" th:object="${class}" method="post">
+            <form class="createClassForm" action="#" th:action="@{/classes/create?category=GROUP}" th:object="${classEntity}" method="post">
                 <div th:replace="fragments/create-class-form-base :: create-class-form-base"></div>
                 <hr class="createClassForm__hr">
                 <div class="createClassForm__addedCourses">
@@ -31,9 +31,34 @@
                         grupy
                     </button>
                     <div class="createClassForm__addedCourses__tableWrapper">
-                        <span class="createClassForm__noAddedCoursesSpan">Brak kursów w grupie</span>
+                        <span th:if="${classEntity.coursesInGroup == null || classEntity.coursesInGroup.isEmpty()}" class="createClassForm__noAddedCoursesSpan">Brak kursów w grupie</span>
+                        <table th:if="${classEntity.coursesInGroup != null && !classEntity.coursesInGroup.isEmpty()}" class="createClassForm__addedCourses__table fancyTable">
+                            <thead class="fancyTable__thead">
+                            <tr>
+                                <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--name">Nazwa</th>
+                                <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--ECTS">ECTS</th>
+                                <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--CNPS">CNPS</th>
+                                <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--ZZU">ZZU</th>
+                                <th class="fancyTable__cell createGroupForm__addedCourses__table__cell--courseType">Typ</th>
+                            </tr>
+                            </thead>
+                            <tbody class="fancyTable__tbody createClassForm__addedCourses__tbody">
+                                <tr th:each="c:${classEntity.coursesInGroup}" class="fancyTable__tbody__tr" th:id="'addedCourse' + ${c.id}">
+                                    <td class="fancyTable__cell createClassForm__addedCourses__table__cell--name" th:text="${c.name}"></td>
+                                    <td class="fancyTable__cell createClassForm__addedCourses__table__cell--ECTS" th:text="${c.ECTS}"></td>
+                                    <td class="fancyTable__cell createClassForm__addedCourses__table__cell--CNPS" th:text="${c.CNPS}"></td>
+                                    <td class="fancyTable__cell createClassForm__addedCourses__table__cell--ZZU" th:text="${c.ZZU}"></td>
+                                    <td class="fancyTable__cell createClassForm__addedCourses__table__cell--courseType" th:text="${courseTypeTranslations.get(c.courseType)}"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div th:if="${classEntity.coursesInGroup != null && !classEntity.coursesInGroup.isEmpty()}" class="createClassForm__addedCourses__buttonsColumn">
+                            <img th:each="c:${classEntity.coursesInGroup}" class="fancyTable__closeButtonDiv__icon" th:id="'deleteIcon' + ${c.id}" src="/img/close-icon.png" />
+                        </div>`
                     </div>
+                    <span class="createClassForm__errorMessage" id="courseInGroupErrors" th:errors="*{coursesInGroup}"></span>
                     <input type="text" name="coursesInGroup" id="coursesInGroup" th:field="*{coursesInGroup}">
+                    <span id="spanWithIds" th:text="${coursesInGroupIds}"></span>
                 </div>
                 <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>

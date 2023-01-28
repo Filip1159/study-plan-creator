@@ -28,10 +28,7 @@ public class ClassService {
     private final ClassEntityToDomainMapper mapper;
 
     public ClassEntity create(ClassEntity classEntity) {
-        try {
-            validatorFactory.getValidatorFor(classEntity).validate(classEntity);
-        } catch (Exception ignored) {}
-        System.out.println(classEntity);
+        validatorFactory.getValidatorFor(classEntity).validate(classEntity);
         return repo.save(classEntity);
     }
 

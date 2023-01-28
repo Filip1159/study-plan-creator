@@ -47,6 +47,7 @@ const coursesQuery = async e => {
                 deleteIconsColumn.appendChild(renderDeleteIcon(item.id))
                 addedCoursesInput.value += `${addedCoursesInput.value === '' ? '' : ','}${item.id}`
                 setBaseInputsEnabled(false)
+                removeCourseInGroupErrors()
             })
             tbody.appendChild(tr)
         }
@@ -54,6 +55,23 @@ const coursesQuery = async e => {
 }
 
 searchCoursesInput.addEventListener("input", coursesQuery)
+
+window.addEventListener('load', () => {
+    const spanWithIds = document.querySelector('#spanWithIds')
+    const coursesInGroupInput = document.querySelector('#coursesInGroup')
+    const courseIds = spanWithIds.textContent.split(',')
+    courseIds.forEach(id => {
+        const icon = document.querySelector(`#deleteIcon${id}`)
+        icon.addEventListener('click', () => removeAddedCourse(id))
+    })
+    coursesInGroupInput.value = spanWithIds.textContent
+    spanWithIds.parentNode.removeChild(spanWithIds)
+})
+
+const removeCourseInGroupErrors = () => {
+    const errorSpan = document.querySelector('#courseInGroupErrors')
+    errorSpan.parentNode.removeChild(errorSpan)
+}
 
 const renderEmptyAddedCoursesTable = () => {
     tableWrapper.innerHTML =

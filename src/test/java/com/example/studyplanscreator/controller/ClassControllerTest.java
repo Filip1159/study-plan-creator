@@ -49,4 +49,8 @@ class ClassControllerTest {
         assertThat(result.get(2)).isInstanceOf(Course.class);
     }
 
+    @Test
+    void shouldFindExistingProducts() {
+
+    }
 }
