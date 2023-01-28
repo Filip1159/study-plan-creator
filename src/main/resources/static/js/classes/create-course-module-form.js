@@ -132,3 +132,11 @@ const coursesQuery = async e => {
 }
 
 searchCoursesInput.addEventListener("input", coursesQuery)
+
+addCourseButton.addEventListener("click", e => {
+    e.preventDefault()
+    modal.classList.remove("modal--hidden")
+    renderNoResultsSpan()
+    searchCoursesInput.value = ''
+    searchCoursesInput.focus()
+})

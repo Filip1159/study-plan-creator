@@ -63,12 +63,14 @@
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="learningEffectsSelect">
                 <option disabled selected value="default"> -- wybierz -- </option>
-                <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}"></option>
+                <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}" th:title="${e.description}" th:class="${classEntity.learningEffects.contains(e) ? 'createClassForm__learningEffectOption--selected' : ''}"></option>
             </select>
             <span class="createClassForm__errorMessage" th:errors="*{learningEffects}"></span>
         </div>
     </div>
-    <div class="createClassForm__learningEffects"></div>
+    <div class="createClassForm__learningEffects">
+        <div th:each="l:${classEntity.learningEffects}" class="createClassForm__learningEffects__badge" th:id="'learningEffectBadge' + l.id" th:text="${l.symbol}"></div>
+    </div>
     <input type="text" name="learningEffects" id="learningEffects" th:field="*{learningEffects}"/>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label createClassForm__inputWrapper__label--bold" for="category">Kategoria

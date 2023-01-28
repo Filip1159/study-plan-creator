@@ -40,6 +40,7 @@ const removeAddedCourse = itemIdToDelete => {
     addedCoursesInput.value = addedCoursesInput.value.replace(`${itemIdToDelete}`, '')
     addedCoursesInput.value = addedCoursesInput.value.replace(',,', ',')
     addedCoursesInput.value = addedCoursesInput.value.replace(/^,/, '')
+    addedCoursesInput.value = addedCoursesInput.value.replace(/,$/, '')
     if (!addedCoursesInput.value) renderNoAddedCoursesSpan()
     removeCourseInGroupErrors()
 }
@@ -52,12 +53,6 @@ const renderDeleteIcon = itemIdToDelete => {
     img.addEventListener('click', () => removeAddedCourse(itemIdToDelete))
     return img
 }
-
-addCourseButton.addEventListener("click", e => {
-    e.preventDefault()
-    modal.classList.remove("modal--hidden")
-    searchCoursesInput.focus()
-})
 
 modalCloseButton.addEventListener('click', () => {
     modal.classList.add('modal--hidden')

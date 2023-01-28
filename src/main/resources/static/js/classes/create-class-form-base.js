@@ -19,6 +19,7 @@ learningEffectsSelect.addEventListener("change", () => {
         learningEffectsInput.value = learningEffectsInput.value.replace(`${selectedEffectId}`, '')
         learningEffectsInput.value = learningEffectsInput.value.replace(',,', ',')
         learningEffectsInput.value = learningEffectsInput.value.replace(/^,/, '')
+        learningEffectsInput.value = learningEffectsInput.value.replace(/,$/, '')
         selectedLearningEffects.filter(id => id !== selectedEffectId)
     } else {
         const badge = document.createElement("div")
