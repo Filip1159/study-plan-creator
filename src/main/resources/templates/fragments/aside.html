@@ -9,9 +9,10 @@
     </div>
     <nav class="appContainer__main__nav">
         <span class="appContainer__aside__nav__availableOptions">Dostępne opcje</span>
-        <span class="appContainer__aside__nav__option">Nowe zajęcie</span>
-        <span class="appContainer__aside__nav__option"><a th:href="@{create-plan-form}">Nowy plan studiów</a></span>
-        <span class="appContainer__aside__nav__option">Przeglądaj plany studiów</span>
-        <span class="appContainer__aside__nav__option"><a th:href="@{learning-effects}">Efekty uczenia się</a></span>
+        <a href="/classes/create?category=COURSE"><span class="appContainer__aside__nav__option">Nowe zajęcie</span></a>
+        <a href="/create-plan-form"><span class="appContainer__aside__nav__option">Nowy plan studiów</span></a>
+        <a href="/classes"><span class="appContainer__aside__nav__option">Przeglądaj zajęcia</span></a>
+        <a href="/plans"><span class="appContainer__aside__nav__option">Przeglądaj plany studiów</span></a>
+        <a href="/learning-effects"><span class="appContainer__aside__nav__option">Efekty uczenia się</span></a>
     </nav>
 </aside>

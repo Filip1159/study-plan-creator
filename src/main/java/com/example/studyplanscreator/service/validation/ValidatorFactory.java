@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 public class ValidatorFactory {
     private final CourseGroupValidator courseGroupValidator;
     private final CourseModuleValidator courseModuleValidator;
+    private final CourseValidator courseValidator;
 
     public ClassEntityValidator getValidatorFor(ClassEntity classEntity) {
         return switch (classEntity.getCategory()) {
             case GROUP -> courseGroupValidator;
             case MODULE -> courseModuleValidator;
-            default -> throw new RuntimeException("This category has no validator");
+            case COURSE -> courseValidator;
         };
     }
 }

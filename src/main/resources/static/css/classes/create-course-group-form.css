@@ -22,3 +22,7 @@
     width: 22%;
     text-align: left;
 }
+
+#coursesInGroup {
+    display: none;
+}

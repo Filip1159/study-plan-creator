@@ -9,6 +9,7 @@ const renderAddedCourseTableRow = courseData => {
 const renderFoundCourseTableRow = courseData => {
     const tr = renderCellsInTableRowForGroupForm(courseData)
     tr.classList.add('modal__table__foundCourseTr')
+    tr.id = `foundCourse${courseData.id}`
     return tr
 }
 
@@ -33,8 +34,10 @@ const coursesQuery = async e => {
     const area = areaInput.value
     const learningEffects = learningEffectsInput2.value
     const res = await fetch(
-        `/classes/query?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
-    const data = await res.json()
+        `/classes/query/GROUP?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
+    let data = await res.json()
+    const currentlyAddedCourses = addedCoursesInput.value.split(',').map(Number)
+    data = data.filter(foundClass => !currentlyAddedCourses.includes(foundClass.id))
     if (data.length === 0) renderNoResultsSpan()
     else {
         if (document.querySelector('.modal__noResultsSpan')) renderEmptyFoundCoursesTable()
@@ -47,6 +50,9 @@ const coursesQuery = async e => {
                 deleteIconsColumn.appendChild(renderDeleteIcon(item.id))
                 addedCoursesInput.value += `${addedCoursesInput.value === '' ? '' : ','}${item.id}`
                 setBaseInputsEnabled(false)
+                const foundCourseToRemove = document.querySelector(`#foundCourse${item.id}`)
+                tbody.removeChild(foundCourseToRemove)
+                removeCourseInGroupErrors()
             })
             tbody.appendChild(tr)
         }
@@ -54,6 +60,23 @@ const coursesQuery = async e => {
 }
 
 searchCoursesInput.addEventListener("input", coursesQuery)
+
+window.addEventListener('load', () => {
+    const spanWithIds = document.querySelector('#spanWithIds')
+    const coursesInGroupInput = document.querySelector('#coursesInGroup')
+    const courseIds = spanWithIds.textContent.split(',')
+    courseIds.forEach(id => {
+        const icon = document.querySelector(`#deleteIcon${id}`)
+        icon.addEventListener('click', () => removeAddedCourse(id))
+    })
+    coursesInGroupInput.value = spanWithIds.textContent
+    spanWithIds.parentNode.removeChild(spanWithIds)
+})
+
+const removeCourseInGroupErrors = () => {
+    const errorSpan = document.querySelector('#courseInGroupErrors')
+    errorSpan.parentNode.removeChild(errorSpan)
+}
 
 const renderEmptyAddedCoursesTable = () => {
     tableWrapper.innerHTML =

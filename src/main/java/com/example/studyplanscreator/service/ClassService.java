@@ -1,7 +1,7 @@
 package com.example.studyplanscreator.service;
 
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
-import com.example.studyplanscreator.model.AbstractClass;
+import com.example.studyplanscreator.model.entity.ClassCategory;
 import com.example.studyplanscreator.model.entity.ClassEntity;
 import com.example.studyplanscreator.model.entity.LearningEffect;
 import com.example.studyplanscreator.repo.ClassRepo;
@@ -17,6 +17,8 @@ import org.springframework.transaction.annotation.Transactional;
 import java.util.Arrays;
 import java.util.List;
 
+import static com.example.studyplanscreator.model.entity.ClassCategory.GROUP;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -28,10 +30,7 @@ public class ClassService {
     private final ClassEntityToDomainMapper mapper;
 
     public ClassEntity create(ClassEntity classEntity) {
-        try {
-            validatorFactory.getValidatorFor(classEntity).validate(classEntity);
-        } catch (Exception ignored) {}
-        System.out.println(classEntity);
+        validatorFactory.getValidatorFor(classEntity).validate(classEntity);
         return repo.save(classEntity);
     }
 
@@ -43,8 +42,11 @@ public class ClassService {
         return repo.findAll();
     }
 
-    public List<AbstractClass> getWithFilters(ClassFiltersDto filtersDto) {
-        var preFilteredClasses = repo.query(RepoClassesQueryParams.from(filtersDto));
+    public List<ClassEntity> getWithFilters(ClassFiltersDto filtersDto, ClassCategory notAssignedToAny) {
+        var queryParams = RepoClassesQueryParams.from(filtersDto);
+        var preFilteredClasses = notAssignedToAny.equals(GROUP)
+                ? repo.queryForGroup(queryParams)
+                : repo.queryForModule(queryParams);
         preFilteredClasses = preFilteredClasses.stream()
                 .filter(classEntity ->
                         ValidationUtils.deepEqual(
@@ -52,14 +54,12 @@ public class ClassService {
                                 classEntity.getLearningEffects().stream().map(LearningEffect::getId).toList()))
                 .toList();
         var criteria = creator.from(filtersDto);
-        System.out.println(criteria);
         return preFilteredClasses.stream()
                 .filter(classEntity -> {
                     var abstractClass = mapper.toDomain(classEntity);
                     var filters = filtersFactory.getFor(abstractClass);
                     return filters.matchesFilters(abstractClass, criteria);
                 })
-                .map(mapper::toDomain)
                 .toList();
     }
 
