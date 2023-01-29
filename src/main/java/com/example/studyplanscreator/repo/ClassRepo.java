@@ -19,7 +19,21 @@ public interface ClassRepo extends JpaRepository<ClassEntity, Long> {
             "AND (:#{#params.zzu} is null or c.ZZU = :#{#params.zzu}) " +
             "AND (:#{#params.classCategory} is null or c.category = :#{#params.classCategory}) " +
             "AND (:#{#params.type} is null or c.type = :#{#params.type}) " +
-            "AND (:#{#params.area} is null or c.area = :#{#params.area})"
+            "AND (:#{#params.area} is null or c.area = :#{#params.area}) " +
+            "AND c.groupId is null"
     )
-    List<ClassEntity> query(@Param("params") RepoClassesQueryParams params);
+    List<ClassEntity> queryForGroup(@Param("params") RepoClassesQueryParams params);
+
+    @Query(
+            "SELECT c FROM ClassEntity c " +
+                    "WHERE (:#{#params.name} is not null and :#{#params.name} != '' and lower(c.name) LIKE lower(concat('%', :#{#params.name}, '%'))) " +
+                    "AND (:#{#params.ects} is null or c.ECTS = :#{#params.ects}) " +
+                    "AND (:#{#params.cnps} is null or c.CNPS = :#{#params.cnps}) " +
+                    "AND (:#{#params.zzu} is null or c.ZZU = :#{#params.zzu}) " +
+                    "AND (:#{#params.classCategory} is null or c.category = :#{#params.classCategory}) " +
+                    "AND (:#{#params.type} is null or c.type = :#{#params.type}) " +
+                    "AND (:#{#params.area} is null or c.area = :#{#params.area}) " +
+                    "AND c.moduleId is null"
+    )
+    List<ClassEntity> queryForModule(@Param("params") RepoClassesQueryParams params);
 }

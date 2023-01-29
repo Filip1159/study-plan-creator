@@ -14,16 +14,15 @@ values (1, 4, 105, 45, 'area1', 'GROUP', NULL, 'Bazy danych', 'K', 'EXAM', NULL,
        (13, 0, 30, 30, 'area3', 'MODULE', 'EXERCISES', 'WF', 'KO', 'PASS', NULL, NULL),
        (14, 0, 30, 30, 'area3', 'COURSE', 'EXERCISES', 'Zdrowe plecy', 'KO', 'PASS', NULL, 13),
        (15, 0, 30, 30, 'area3', 'COURSE', 'EXERCISES', 'Babington', 'KO', 'PASS', NULL, 13),
-       (16, 5, 90, 45, 'area4', 'MODULE', NULL, 'Administrowanie systemami', 'K', 'EXAM', NULL, NULL),
-       (17, 5, 90, 45, 'area4', 'GROUP', NULL, 'Administrowanie systemami Linux', 'K', 'EXAM', NULL, 16),
-       (18, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Administrowanie systemami Linux', 'K', 'EXAM', 17, NULL),
-       (19, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Administrowanie systemami Linux', 'K', 'EXAM', 17, NULL),
-       (20, 5, 90, 45, 'area4', 'GROUP', NULL, 'Administrowanie systemami Windows', 'K', 'EXAM', NULL, 16),
-       (21, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Administrowanie systemami Windows', 'K', 'EXAM', 20, NULL),
-       (22, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Administrowanie systemami Windows', 'K', 'EXAM', 20, NULL),
-       (23, 5, 90, 45, 'area4', 'GROUP', NULL, 'Routing i przełączanie', 'K', 'EXAM', NULL, 16),
-       (24, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Routing i przełączanie', 'K', 'EXAM', 23, NULL),
-       (25, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Routing i przełączanie', 'K', 'EXAM', 23, NULL);
+       (16, 5, 90, 45, 'area4', 'GROUP', NULL, 'Administrowanie systemami Linux', 'K', 'EXAM', NULL, NULL),
+       (17, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Administrowanie systemami Linux', 'K', 'EXAM', 16, NULL),
+       (18, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Administrowanie systemami Linux', 'K', 'EXAM', 16, NULL),
+       (19, 5, 90, 45, 'area4', 'GROUP', NULL, 'Administrowanie systemami Windows', 'K', 'EXAM', NULL, NULL),
+       (20, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Administrowanie systemami Windows', 'K', 'EXAM', 19, NULL),
+       (21, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Administrowanie systemami Windows', 'K', 'EXAM', 19, NULL),
+       (22, 5, 90, 45, 'area4', 'GROUP', NULL, 'Routing i przełączanie', 'K', 'EXAM', NULL, NULL),
+       (23, 2, 30, 15, 'area4', 'COURSE', 'LECTURE', 'Routing i przełączanie', 'K', 'EXAM', 22, NULL),
+       (24, 3, 60, 30, 'area4', 'COURSE', 'LAB', 'Routing i przełączanie', 'K', 'EXAM', 22, NULL);
 
 
 insert into learning_effect (id, symbol, description)
@@ -49,7 +48,16 @@ values (1, 1),
        (4, 4),
        (13, 6),
        (14, 6),
-       (15, 6);
+       (15, 6),
+       (16, 5),
+       (17, 5),
+       (18, 5),
+       (19, 5),
+       (20, 5),
+       (21, 5),
+       (22, 5),
+       (23, 5),
+       (24, 5);
 
 insert into faculty
 values (1, 'Wydział Informatyki i Telekomunikacji'),

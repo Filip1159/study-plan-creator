@@ -34,7 +34,7 @@ const coursesQuery = async e => {
     const area = areaInput.value
     const learningEffects = learningEffectsInput2.value
     const res = await fetch(
-        `/classes/query?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
+        `/classes/query/GROUP?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`)
     let data = await res.json()
     const currentlyAddedCourses = addedCoursesInput.value.split(',').map(Number)
     data = data.filter(foundClass => !currentlyAddedCourses.includes(foundClass.id))
@@ -125,10 +125,3 @@ const renderEmptyFoundCoursesTable = () => {
     modal.appendChild(table)
     tbody = document.querySelector(".modal__tbody")
 }
-
-addCourseButton.addEventListener("click", e => {
-    e.preventDefault()
-    modal.classList.remove("modal--hidden")
-    renderNoResultsSpan()
-    searchCoursesInput.focus()
-})

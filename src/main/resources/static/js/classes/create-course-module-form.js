@@ -18,6 +18,23 @@ const labZzuInput = document.querySelector('#labZzu')
 const projectZzuInput = document.querySelector('#projectZzu')
 const seminaryZzuInput = document.querySelector('#seminaryZzu')
 
+window.addEventListener('load', () => {
+    const spanWithIds = document.querySelector('#spanWithIds')
+    const coursesInModuleInput = document.querySelector('#coursesInModule')
+    const courseIds = spanWithIds.textContent.split(',')
+    courseIds.forEach(id => {
+        const icon = document.querySelector(`#deleteIcon${id}`)
+        icon.addEventListener('click', () => removeAddedCourse(id))
+    })
+    coursesInModuleInput.value = spanWithIds.textContent
+    spanWithIds.parentNode.removeChild(spanWithIds)
+})
+
+const removeCourseInModuleErrors = () => {
+    const errorSpan = document.querySelector('#courseInModuleErrors')
+    errorSpan.parentNode.removeChild(errorSpan)
+}
+
 const renderAddedCourseTableRow = courseData => {
     const tr = renderTableRowForModuleForm(courseData)
     tr.id = `addedCourse${courseData.id}`
@@ -27,6 +44,7 @@ const renderAddedCourseTableRow = courseData => {
 const renderFoundCourseTableRow = courseData => {
     const tr = renderTableRowForModuleForm(courseData)
     tr.classList.add('modal__table__foundCourseTr')
+    tr.id = `foundCourse${courseData.id}`
     return tr
 }
 
@@ -107,12 +125,13 @@ const coursesQuery = async e => {
     const seminaryZzu = seminaryZzuInput.value
 
     const res = await fetch(
-        `/classes/query?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`
+        `/classes/query/MODULE?name=${name}&wayOfCrediting=${wayOfCrediting}&type=${type}&area=${area}&learningEffects=${learningEffects}`
            + `&lectureEcts=${lectureEcts}&exercisesEcts=${exercisesEcts}&labEcts=${labEcts}&projectEcts=${projectEcts}&seminaryEcts=${seminaryEcts}`
            + `&lectureCnps=${lectureCnps}&exercisesCnps=${exercisesCnps}&labCnps=${labCnps}&projectCnps=${projectCnps}&seminaryCnps=${seminaryCnps}`
            + `&lectureZzu=${lectureZzu}&exercisesZzu=${exercisesZzu}&labZzu=${labZzu}&projectZzu=${projectZzu}&seminaryZzu=${seminaryZzu}`)
-    const data = await res.json()
-    console.log(data)
+    let data = await res.json()
+    const currentlyAddedCourses = addedCoursesInput.value.split(',').map(Number)
+    data = data.filter(foundClass => !currentlyAddedCourses.includes(foundClass.id))
     if (data.length === 0) renderNoResultsSpan()
     else {
         if (document.querySelector('.modal__noResultsSpan')) renderEmptyFoundCoursesTable()
@@ -125,6 +144,9 @@ const coursesQuery = async e => {
                 deleteIconsColumn.appendChild(renderDeleteIcon(item.id))
                 addedCoursesInput.value += `${addedCoursesInput.value === '' ? '' : ','}${item.id}`
                 setBaseInputsEnabled(false)
+                const foundCourseToRemove = document.querySelector(`#foundCourse${item.id}`)
+                tbody.removeChild(foundCourseToRemove)
+                removeCourseInModuleErrors()
             })
             tbody.appendChild(tr)
         }
@@ -132,11 +154,3 @@ const coursesQuery = async e => {
 }
 
 searchCoursesInput.addEventListener("input", coursesQuery)
-
-addCourseButton.addEventListener("click", e => {
-    e.preventDefault()
-    modal.classList.remove("modal--hidden")
-    renderNoResultsSpan()
-    searchCoursesInput.value = ''
-    searchCoursesInput.focus()
-})

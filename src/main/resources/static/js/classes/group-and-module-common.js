@@ -41,7 +41,10 @@ const removeAddedCourse = itemIdToDelete => {
     addedCoursesInput.value = addedCoursesInput.value.replace(',,', ',')
     addedCoursesInput.value = addedCoursesInput.value.replace(/^,/, '')
     addedCoursesInput.value = addedCoursesInput.value.replace(/,$/, '')
-    if (!addedCoursesInput.value) renderNoAddedCoursesSpan()
+    if (!addedCoursesInput.value) {
+        renderNoAddedCoursesSpan()
+        setBaseInputsEnabled(true)
+    }
     removeCourseInGroupErrors()
 }
 
@@ -65,3 +68,11 @@ const renderNoResultsSpan = () => {
     span.innerText = 'Brak wyników'
     modal.appendChild(span)
 }
+
+addCourseButton.addEventListener("click", e => {
+    e.preventDefault()
+    modal.classList.remove("modal--hidden")
+    renderNoResultsSpan()
+    searchCoursesInput.value = ''
+    searchCoursesInput.focus()
+})

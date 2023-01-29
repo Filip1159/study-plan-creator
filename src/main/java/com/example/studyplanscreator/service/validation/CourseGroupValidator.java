@@ -13,9 +13,16 @@ public class CourseGroupValidator implements ClassEntityValidator {
 
     @Override
     public void validate(ClassEntity classEntity) {
+        validateCoursesAssigned(classEntity);
         validatePointSums(classEntity);
         validateType(classEntity);
         validateLearningEffectRealisation(classEntity);
+    }
+
+    private void validateCoursesAssigned(ClassEntity classEntity) {
+        if (classEntity.getCoursesInGroup() == null || classEntity.getCoursesInGroup().isEmpty()) {
+            throw new GroupOrModuleEmptyException();
+        }
     }
 
     private void validateLearningEffectRealisation(ClassEntity classEntity) {

@@ -72,9 +72,23 @@
                         modułu
                     </button>
                     <div class="createClassForm__addedCourses__tableWrapper">
-                        <span class="createClassForm__noAddedCoursesSpan">Brak kursów w module</span>
+                        <span th:if="${classEntity.coursesInModule == null || classEntity.coursesInModule.isEmpty()}" class="createClassForm__noAddedCoursesSpan">Brak kursów w module</span>
+                        <table th:if="${classEntity.coursesInModule != null && !classEntity.coursesInModule.isEmpty()}" class="createClassForm__addedCourses__table fancyTable">
+                            <thead class="fancyTable__thead">
+                            <tr>
+                                <th class="fancyTable__cell createModuleForm__addedCourses__table__cell--name">Nazwa</th>
+                            </tr>
+                            </thead>
+                            <tbody class="fancyTable__tbody createClassForm__addedCourses__tbody">
+                            </tbody>
+                        </table>
+                        <div th:if="${classEntity.coursesInModule != null && !classEntity.coursesInModule.isEmpty()}" class="createClassForm__addedCourses__buttonsColumn">
+                            <img th:each="c:${classEntity.coursesInModule}" class="fancyTable__closeButtonDiv__icon" th:id="'deleteIcon' + ${c.id}" src="/img/close-icon.png" />
+                        </div>
                     </div>
+                    <span class="createClassForm__errorMessage" id="courseInModuleErrors" th:errors="*{coursesInModule}"></span>
                     <input type="text" name="coursesInModule" id="coursesInModule" th:field="*{coursesInModule}">
+                    <span id="spanWithIds" th:text="${coursesInModuleIds}"></span>
                 </div>
                 <div th:replace="fragments/submit-cancel-class-form-buttons :: submit-cancel-class-form-buttons"></div>
             </form>
