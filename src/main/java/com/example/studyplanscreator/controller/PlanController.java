@@ -37,10 +37,11 @@ public class PlanController {
     }
 
     @GetMapping("/create-plan-form")
-    public String createPlanForm(Model model, PlanErrorContainer planErrorContainer) {
-        model.addAttribute("plan", new Plan());
+    public String createPlanForm(Model model, PlanErrorContainer planErrorContainer, Plan plan) {
+        if(plan != null) model.addAttribute("plan", plan);
+        else model.addAttribute("plan", new Plan());
         model.addAttribute("faculties", facultyService.getAll());
-        model.addAttribute("levels", EducationLevel.values());
+        model.addAttribute("levels", translationService.readableNames(EducationLevel.values())/*EducationLevel.values()*/);
 
         if(planErrorContainer != null){
             if(!(planErrorContainer.getAcademicYearError() == null))
@@ -65,6 +66,7 @@ public class PlanController {
 
         // errors occured
         else redirectAttributes.addFlashAttribute("planErrorContainer", planErrorContainer);
+        redirectAttributes.addFlashAttribute("plan", plan);
 
         return "redirect:/create-plan-form";
     }
