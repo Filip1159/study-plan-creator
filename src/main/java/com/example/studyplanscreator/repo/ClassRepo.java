@@ -23,8 +23,10 @@ public interface ClassRepo extends JpaRepository<ClassEntity, Long> {
             "AND (:#{#params.zzu} is null or c.ZZU = :#{#params.zzu}) " +
             "AND (:#{#params.classCategory} is null or c.category = :#{#params.classCategory}) " +
             "AND (:#{#params.type} is null or c.type = :#{#params.type}) " +
-            "AND (:#{#params.area} is null or c.area = :#{#params.area})"
+            "AND (:#{#params.area} is null or c.area = :#{#params.area}) " +
+            "AND c.groupId is null"
     )
+
     List<ClassEntity> query(@Param("params") RepoClassesQueryParams params);
 
     @Query("SELECT c FROM ClassEntity c WHERE (:category is null or :category = c.category) ")
@@ -44,6 +46,7 @@ public interface ClassRepo extends JpaRepository<ClassEntity, Long> {
     public List<ClassEntity> findByNameContainingAndCategory(String name, ClassCategory category);
 
     public ClassEntity getClassById(Long class_id);
+
 
 
 }

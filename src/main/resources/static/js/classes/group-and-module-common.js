@@ -32,29 +32,30 @@ const setBaseInputsEnabled = enabled => {
     )
 }
 
+const removeAddedCourse = itemIdToDelete => {
+    const trToDelete = document.querySelector(`#addedCourse${itemIdToDelete}`)
+    const deleteIconToDelete = document.querySelector(`#deleteIcon${itemIdToDelete}`)
+    addedCoursesTbody.removeChild(trToDelete)
+    deleteIconsColumn.removeChild(deleteIconToDelete)
+    addedCoursesInput.value = addedCoursesInput.value.replace(`${itemIdToDelete}`, '')
+    addedCoursesInput.value = addedCoursesInput.value.replace(',,', ',')
+    addedCoursesInput.value = addedCoursesInput.value.replace(/^,/, '')
+    addedCoursesInput.value = addedCoursesInput.value.replace(/,$/, '')
+    if (!addedCoursesInput.value) {
+        renderNoAddedCoursesSpan()
+        setBaseInputsEnabled(true)
+    }
+    removeCourseInGroupErrors()
+}
+
 const renderDeleteIcon = itemIdToDelete => {
     const img = document.createElement('img')
     img.classList.add('fancyTable__closeButtonDiv__icon')
     img.id = `deleteIcon${itemIdToDelete}`
     img.src = '/img/close-icon.png'
-    img.addEventListener('click', () => {
-        const trToDelete = document.querySelector(`#addedCourse${itemIdToDelete}`)
-        const deleteIconToDelete = document.querySelector(`#deleteIcon${itemIdToDelete}`)
-        addedCoursesTbody.removeChild(trToDelete)
-        deleteIconsColumn.removeChild(deleteIconToDelete)
-        addedCoursesInput.value = addedCoursesInput.value.replace(`${itemIdToDelete}`, '')
-        addedCoursesInput.value = addedCoursesInput.value.replace(',,', ',')
-        addedCoursesInput.value = addedCoursesInput.value.replace(/^,/, '')
-        if (!addedCoursesInput.value) renderNoAddedCoursesSpan()
-    })
+    img.addEventListener('click', () => removeAddedCourse(itemIdToDelete))
     return img
 }
-
-addCourseButton.addEventListener("click", e => {
-    e.preventDefault()
-    modal.classList.remove("modal--hidden")
-    searchCoursesInput.focus()
-})
 
 modalCloseButton.addEventListener('click', () => {
     modal.classList.add('modal--hidden')
@@ -67,3 +68,11 @@ const renderNoResultsSpan = () => {
     span.innerText = 'Brak wyników'
     modal.appendChild(span)
 }
+
+addCourseButton.addEventListener("click", e => {
+    e.preventDefault()
+    modal.classList.remove("modal--hidden")
+    renderNoResultsSpan()
+    searchCoursesInput.value = ''
+    searchCoursesInput.focus()
+})

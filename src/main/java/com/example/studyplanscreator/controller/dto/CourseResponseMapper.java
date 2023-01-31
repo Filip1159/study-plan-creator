@@ -1,6 +1,7 @@
 package com.example.studyplanscreator.controller.dto;
 
 import com.example.studyplanscreator.model.Course;
+import com.example.studyplanscreator.model.CourseGroup;
 import com.example.studyplanscreator.service.TranslationService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -18,5 +19,15 @@ public class CourseResponseMapper {
                 course.getCNPS(),
                 course.getZZU(),
                 translationService.translate(course.getCourseType()));
+    }
+
+    public CourseResponse from(CourseGroup courseGroup) {
+        return new CourseResponse(
+                courseGroup.getId(),
+                courseGroup.getName(),
+                courseGroup.getECTS(),
+                courseGroup.getCNPS(),
+                courseGroup.getZZU(),
+                null);
     }
 }

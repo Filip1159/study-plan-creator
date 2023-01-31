@@ -27,9 +27,9 @@
                 <input type="text" id="authorInput" placeholder="szukaj autora" th:value="${filters.author}">
                 <input type="text" id="fieldInput" placeholder="szukaj kierunku" th:value="${filters.field}">
                 <select id="levelSelect">
-                    <option selected value="">--poziom--</option>
+                    <option value="">--poziom--</option>
                     <option th:each="l:${levels}" th:text="${l.readableName()}" th:value="${l.value()}"
-                            th:selected="${l.value() == filters.academicYear}"></option>
+                            th:selected="${l.value() == filters.level}"></option>
                 </select>
                 <select id="yearSelect">
                     <option selected value="">--rok akademicki--</option>

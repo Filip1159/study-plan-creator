@@ -34,3 +34,7 @@
 .createModuleForm__filters__row__input {
     width: 30px;
 }
+
+#coursesInModule {
+    display: none;
+}

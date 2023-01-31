@@ -18,7 +18,7 @@ public interface PlanRepo extends JpaRepository<Plan, Long> {
             "SELECT p FROM Plan p " +
             "WHERE (:author is null or :author member of p.authors) " +
             "AND (:faculty is null or :faculty = p.faculty) " +
-            "AND (:field is null or :field = p.field) " +
+            "AND (:field is null or lower(p.field) LIKE lower(concat('%', :field, '%'))) " +
             "AND (:level is null or :level = p.level) " +
             "AND (:year is null or :year = p.academicYear)"
     )

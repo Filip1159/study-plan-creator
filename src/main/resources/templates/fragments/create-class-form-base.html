@@ -41,7 +41,7 @@
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
-        <label class="createClassForm__inputWrapper__label" for="type">Rodzaj zajęć:</label>
+        <label class="createClassForm__inputWrapper__label" for="type">Rodzaj bloku zajęć:</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="type" th:field="*{type}">
                 <option th:disabled th:selected th:value="''"> -- wybierz -- </option>
@@ -51,7 +51,7 @@
         </div>
     </div>
     <div class="createClassForm__inputWrapper">
-        <label class="createClassForm__inputWrapper__label" for="area">Obszar zajęć:</label>
+        <label class="createClassForm__inputWrapper__label" for="area">Obszar zajęć (nazwa bloku):</label>
         <div class="createClassForm__inputWrapper__inputDiv">
             <input class="createClassForm__inputWrapper__inputDiv__input" id="area" type="text" th:field="*{area}">
             <span class="createClassForm__errorMessage" th:errors="*{area}"></span>
@@ -63,12 +63,14 @@
         <div class="createClassForm__inputWrapper__inputDiv">
             <select class="createClassForm__inputWrapper__inputDiv__input" id="learningEffectsSelect">
                 <option disabled selected value="default"> -- wybierz -- </option>
-                <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}"></option>
+                <option th:each="e:${learningEffects}" th:value="${e.id}" th:text="${e.symbol}" th:title="${e.description}" th:class="${classEntity.learningEffects != null && classEntity.learningEffects.contains(e) ? 'createClassForm__learningEffectOption--selected' : ''}"></option>
             </select>
             <span class="createClassForm__errorMessage" th:errors="*{learningEffects}"></span>
         </div>
     </div>
-    <div class="createClassForm__learningEffects"></div>
+    <div class="createClassForm__learningEffects">
+        <div th:each="l:${classEntity.learningEffects}" class="createClassForm__learningEffects__badge" th:id="'learningEffectBadge' + l.id" th:text="${l.symbol}"></div>
+    </div>
     <input type="text" name="learningEffects" id="learningEffects" th:field="*{learningEffects}"/>
     <div class="createClassForm__inputWrapper">
         <label class="createClassForm__inputWrapper__label createClassForm__inputWrapper__label--bold" for="category">Kategoria

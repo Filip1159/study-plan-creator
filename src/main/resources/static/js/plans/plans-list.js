@@ -6,7 +6,6 @@ const yearSelect = document.querySelector('#yearSelect')
 
 const updateUrlWithParam = (paramName, paramValue) => {
     let currentUrl = window.location.pathname + window.location.search
-    console.log(currentUrl)
     const paramToRegex = new Map([
         ['facultyId', /[&|?]facultyId=\d+/],
         ['author', /[&|?]author=[\w%20]+/],
@@ -15,9 +14,9 @@ const updateUrlWithParam = (paramName, paramValue) => {
         ['academicYear', /[&|?]academicYear=[0-9/]+/]
     ])
     currentUrl = currentUrl.replace(paramToRegex.get(paramName), '')
-    console.log(currentUrl)
-    currentUrl = currentUrl === '/plans' ? `/plans?${paramName}=${paramValue}` : `${currentUrl}&${paramName}=${paramValue}`
-    console.log(currentUrl)
+    if (paramValue) {
+        currentUrl = currentUrl === '/plans' ? `/plans?${paramName}=${paramValue}` : `${currentUrl}&${paramName}=${paramValue}`
+    }
     return currentUrl.replace('/plans&', '/plans?')
 }
 
