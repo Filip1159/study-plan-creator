@@ -26,16 +26,16 @@
         </tr>
       </table>
       <p>
-        <form action="semester" method="get">
-           <input type="hidden" id="plan_id" name="plan_id" th:value="${plan_id}">
-           <input type="hidden" id="semester_number" name="semester_number" th:value="${semester_number}">
-          <button class="appContainer__semester__button">Wyjdź</button>
-        </form>
+      <form action="semester">
+        <input type="hidden" name="plan_id" th:value="${plan_id}">
+        <input type="hidden" name="semester_number" th:value="${semester_number}">
+        <button class="appContainer__semester__button">Wyjdź</button>
+      </form>
       </p>
       <p>
-      <form method="get" action="view-classes" style="margin-top: -30px">
-        <input type="hidden" name="plan_id" th:value="${plan_id}">
-        <input type="hidden"name="semester_number" th:value="${semester_number}">
+      <form method="get" action="add-class" style="margin-top: -30px">
+        <input type="hidden" id="plan_id" name="plan_id" th:value="${plan_id}">
+        <input type="hidden" id="semester_number" name="semester_number" th:value="${semester_number}">
         <input type="text" id="class_name" name="class_name" placeholder="Nazwa zajęcia" style="margin-left: 130px">
         <select id="class_type" name="class_type">
           <option value="no_choose">Typ zajęcia</option>
@@ -79,6 +79,9 @@
           <th>
             Obszar
           </th>
+          <th>
+
+          </th>
         </tr>
         </thead>
         <tbody>
@@ -99,9 +102,17 @@
           <td th:text="${k.wayOfCrediting}"></td>
           <td th:text="${k.type}"></td>
           <td th:text="${k.area}"></td>
+          <td>
+            <form action="#" th:action="@{/add-class-to-semester}" method="post">
+              <input type="hidden" th:value="${semester.getId()}" name="semester_id">
+              <input type="hidden" th:value="${k.getId()}" name="class_id">
+              <input class="fancyButton" type="submit" value="Dodaj" />
+            </form>
+          </td>
         </tr>
         </tbody>
       </table>
+
     </div>
   </main>
 </div>

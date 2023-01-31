@@ -11,11 +11,12 @@
 
 th,td {
     font-size: small;
-    border-right: solid black;
+    border-right: solid black 2px;
+    padding: 2px;
 }
 
 th{
-    border-bottom: solid black;
+    border-bottom: solid black 2px;
     background-color: #cc9864;
     color: black;
 }
@@ -32,13 +33,15 @@ hr {
 }
 
 table {
-    border: solid black;
+    border: solid black 2px;
     margin-right: 10px;
     border-collapse: collapse;
 }
 
 .table__semester__innerTable{
-    margin-left: 40px;
+    margin-bottom: 10px;
+    margin-left: 23px;
+    margin-right: 33px;
 }
 
 tr:nth-child(odd) {
@@ -69,12 +72,22 @@ tr:hover {
 .appContainer__semester__button {
     font-size: 12px;
     color: white;
-    padding: 4px 10px;
+    padding: 4px 6px;
     background-color: #B45F06;
     border: 2px solid black;
-    min-width: 80px;
-    margin: 5px 5px -10px;
+    margin: auto;
     float: right;
+
+}
+.appContainer__semester__button {
+    font-size: 12px;
+    color: white;
+    padding: 4px 6px;
+    background-color: #B45F06;
+    border: 2px solid black;
+    margin: 5px;
+    float: right;
+
 }
 
 .appContainer__semester__button:hover {
@@ -97,6 +110,8 @@ tr:hover {
 
 .appContainer__semester__deleteButton {
     font-size: 12px;
+    padding-top: 3px;
+    padding-down: 3px;
     color: white;
     background-color: #B45F06;
     border: 2px solid black;
@@ -105,4 +120,9 @@ tr:hover {
 
 .appContainer__semester__deleteButton:hover {
     background-color: #c96b07;
+}
+
+.semester__learningEffects__font
+{
+    font-size: 10px;
 }

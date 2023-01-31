@@ -16,12 +16,27 @@
   <main class="appContainer__main">
     <aside th:replace="fragments/aside :: aside"></aside>
     <div class="appContainer__semester__content">
+      <table class="table__semester__semesterInfo">
+        <tr>
+          <td th:text="${plan.faculty.name}"></td>
+          <td th:text="${plan.field} "></td>
+          <td th:text="|Stopień ${plan.level}|"></td>
+          <td th:text="|${plan.academicYear} rok|"></td>
+          <td th:text="|${semester.number} semestr|"></td>
+        </tr>
+      </table>
       <p>
-        <button class="appContainer__semester__button">Wyjdź</button>
+        <form action="semester" method="get">
+          <input type="hidden" id="plan_id" name="plan_id" th:value="${plan_id}">
+          <input type="hidden" id="semester_number" name="semester_number" th:value="${semester_number}">
+          <button class="appContainer__semester__button">Wyjdź</button>
+        </form>
       </p>
 
       <p>
         <form method="get" action="view-classes" style="margin-top: -30px">
+          <input type="hidden" name="plan_id" th:value="${plan_id}">
+          <input type="hidden" name="semester_number" th:value="${semester_number}">
           <input type="text" id="class_name" name="class_name" placeholder="Nazwa zajęcia" style="margin-left: 130px">
           <select id="class_type" name="class_type">
             <option value="no_choose">Typ zajęcia</option>
@@ -33,144 +48,6 @@
         </form>
       </p>
 
-      <table>
-        <thead>
-        <tr>
-          <th>
-            Lp.
-          </th>
-          <th>
-            Nazwa zajęcia
-          </th>
-          <th>
-            ZZU
-          </th>
-          <th>
-            CNPS
-          </th>
-          <th>
-            ECTS
-          </th>
-          <th>
-            W
-          </th>
-          <th>
-            C
-          </th>
-          <th>
-            L
-          </th>
-          <th>
-            P
-          </th>
-          <th>
-            S
-          </th>
-          <th>
-            Symbol efektu uczenia się
-          </th>
-          <th>
-            Sposób zaliczenia
-          </th>
-          <th>
-            Rodzaj
-          </th>
-          <th>
-            Obszar
-          </th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr>
-          <td>
-            Lp.
-          </td>
-          <td>
-            Nazwa kursu
-          </td>
-          <td>
-            ZZU
-          </td>
-          <td>
-            CNPS
-          </td>
-          <td>
-            ECTS
-          </td>
-          <td>
-            W
-          </td>
-          <td>
-            C
-          </td>
-          <td>
-            L
-          </td>
-          <td>
-            P
-          </td>
-          <td>
-            S
-          </td>
-          <td>
-            Symbol efektu uczenia się
-          </td>
-          <td>
-            Sposób zaliczenia
-          </td>
-          <td>
-            Rodzaj
-          </td>
-          <td>
-            Obszar
-          </td>
-        </tr>
-        <tr>
-          <td>
-            Lp.
-          </td>
-          <td>
-            Nazwa kursu
-          </td>
-          <td>
-            ZZU
-          </td>
-          <td>
-            CNPS
-          </td>
-          <td>
-            ECTS
-          </td>
-          <td>
-            W
-          </td>
-          <td>
-            C
-          </td>
-          <td>
-            L
-          </td>
-          <td>
-            P
-          </td>
-          <td>
-            S
-          </td>
-          <td>
-            Symbol efektu uczenia się
-          </td>
-          <td>
-            Sposób zaliczenia
-          </td>
-          <td>
-            Rodzaj
-          </td>
-          <td>
-            Obszar
-          </td>
-        </tr>
-        </tbody>
-      </table>
     </div>
   </main>
 </div>

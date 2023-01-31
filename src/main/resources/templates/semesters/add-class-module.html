@@ -26,16 +26,16 @@
         </tr>
       </table>
       <p>
-        <form action="semester" method="get">
-           <input type="hidden" id="plan_id" name="plan_id" th:value="${plan_id}">
-           <input type="hidden" id="semester_number" name="semester_number" th:value="${semester_number}">
-          <button class="appContainer__semester__button">Wyjdź</button>
-        </form>
+      <form action="semester">
+        <input type="hidden" name="plan_id" th:value="${plan_id}">
+        <input type="hidden" name="semester_number" th:value="${semester_number}">
+        <button class="appContainer__semester__button">Wyjdź</button>
+      </form>
       </p>
       <p>
-      <form method="get" action="view-classes" style="margin-top: -30px">
-        <input type="hidden" name="plan_id" th:value="${plan_id}">
-        <input type="hidden"name="semester_number" th:value="${semester_number}">
+      <form method="get" action="add-class" style="margin-top: -30px">
+        <input type="hidden" id="plan_id" name="plan_id" th:value="${plan_id}">
+        <input type="hidden" id="semester_number" name="semester_number" th:value="${semester_number}">
         <input type="text" id="class_name" name="class_name" placeholder="Nazwa zajęcia" style="margin-left: 130px">
         <select id="class_type" name="class_type">
           <option value="no_choose">Typ zajęcia</option>
@@ -46,6 +46,8 @@
         <input type="submit" value="Szukaj" class="appContainer__semester__searchButton" >
       </form>
       </p>
+
+      <span  th:each="k,i : ${courses}">
       <table>
         <thead>
         <tr>
@@ -53,10 +55,67 @@
             Lp.
           </th>
           <th>
-            Nazwa zajęcia
+            Nazwa modułu
           </th>
           <th>
-            Kategoria
+            ZZU
+          </th>
+          <th>
+            CNPS
+          </th>
+          <th>
+            ECTS
+          </th>
+          <th>
+            Symbol efektu uczenia się
+          </th>
+          <th>
+            Sposób zaliczenia
+          </th>
+          <th>
+            Rodzaj
+          </th>
+          <th>
+            Obszar
+          </th>
+          <th>
+
+          </th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr>
+          <td th:text="${i.index + 1}">
+          </td>
+          <td th:text="${k.name}"></td>
+          <td th:text="${k.ZZU}"></td>
+          <td th:text="${k.CNPS}"></td>
+          <td th:text="${k.ECTS}"></td>
+          <td>
+            <span th:each="l : ${k.learningEffects}">
+              <p class="semester__learningEffects__font" th:text="${l.symbol}">
+              </p>
+            </span>
+          </td>
+          <td th:text="${k.wayOfCrediting}"></td>
+          <td th:text="${k.type}"></td>
+          <td th:text="${k.area}"></td>
+          <td>
+            <form action="#" th:action="@{/add-class-to-semester}" method="post">
+              <input type="hidden" th:value="${semester.getId()}" name="semester_id">
+              <input type="hidden" th:value="${k.getId()}" name="class_id">
+              <input class="fancyButton" type="submit" value="Dodaj" />
+            </form>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+
+      <table class="table__semester__innerTable">
+        <thead>
+        <tr>
+          <th>
+            Kursy zawarte
           </th>
           <th>
             ZZU
@@ -82,26 +141,24 @@
         </tr>
         </thead>
         <tbody>
-        <tr th:each="k,i : ${courses}">
-          <td th:text="${i.index + 1}">
-          </td>
-          <td th:text="${k.name}"></td>
-          <td th:text="${k.category}"></td>
-          <td th:text="${k.ZZU}"></td>
-          <td th:text="${k.CNPS}"></td>
-          <td th:text="${k.ECTS}"></td>
-          <td>
-            <span th:each="l : ${k.learningEffects}">
-              <p class="semester__learningEffects__font" th:text="${l.symbol}">
-              </p>
-            </span>
-          </td>
-          <td th:text="${k.wayOfCrediting}"></td>
-          <td th:text="${k.type}"></td>
-          <td th:text="${k.area}"></td>
-        </tr>
+         <tr th:each="m,j : ${k.coursesInModule}">
+            <td th:text="${m.name}"></td>
+            <td th:text="${m.ZZU}"></td>
+            <td th:text="${m.CNPS}"></td>
+            <td th:text="${m.ECTS}"></td>
+            <td>
+              <span th:each="e : ${m.learningEffects}">
+                <p class="semester__learningEffects__font" th:text="${e.symbol}">
+                </p>
+              </span>
+            </td>
+            <td th:text="${m.wayOfCrediting}"></td>
+            <td th:text="${m.type}"></td>
+            <td th:text="${m.area}"></td>
+          </tr>
         </tbody>
       </table>
+      </span>
     </div>
   </main>
 </div>

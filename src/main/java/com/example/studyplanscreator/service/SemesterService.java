@@ -1,5 +1,6 @@
 package com.example.studyplanscreator.service;
 
+import com.example.studyplanscreator.model.entity.ClassEntity;
 import com.example.studyplanscreator.model.entity.Plan;
 import com.example.studyplanscreator.model.entity.Semester;
 import com.example.studyplanscreator.repo.SemesterRepo;
@@ -28,9 +29,14 @@ public class SemesterService {
     }
     public void delete(Semester semester){ semesterRepo.delete(semester); }
 
-    public Semester getSemesterById(long semesterId) {
-        return semesterRepo.getSemesterById(semesterId);
+    public Semester getSemesterByNumberAndPlan(Integer number, Plan plan) {
+        return semesterRepo.getSemesterByNumberAndPlan(number, plan);
+
     }
 
+    public Semester getSemesterById(Long number) {
+        return semesterRepo.getSemesterById(number);
+
+    }
 
 }

@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Plany Studiów PWR</title>
+    <link rel="stylesheet" href="/css/semester/semesters-list.css"/>
     <link rel="stylesheet" href="/css/semester/semester.css"/>
     <link rel="stylesheet" href="/css/fragments/header.css"/>
     <link rel="stylesheet" href="/css/fragments/aside.css"/>
@@ -19,32 +20,33 @@
 
             <table class="table__semester__semesterInfo">
                 <tr>
-                    <td>
-                        Wydział Informatyki i Telekomunikacji
-                    </td>
-                    <td>
-                        Informatyka Stosowana
-                    </td>
-                    <td>
-                        I Stopień
-                    </td>
-                    <td>
-                        rok 2022/2023
-                    </td>
-                    <td>
-                        Semestr 4
-                    </td>
+                    <td th:text="${plan.faculty.name}"></td>
+                    <td th:text="${plan.field} "></td>
+                    <td th:text="|Stopień ${plan.level}|"></td>
+                    <td th:text="|${plan.academicYear} rok|"></td>
+                    <td th:text="|${semester.number} semestr|"></td>
                 </tr>
             </table>
+
             <div>
                 <button class="appContainer__semester__button" >Wróć do semestrów</button>
-                <button class="appContainer__semester__button">Dodaj zajęcie</button>
-                <button class="appContainer__semester__button">Przeglądaj zajęcia</button>
+
+                <form action="add-class">
+                    <input type="hidden" name="plan_id" th:value="${plan.id}">
+                    <input type="hidden" name="semester_number" th:value="${semester.number}">
+                    <button type="submit" class="appContainer__semester__button">Dodaj zajęcie</button>
+                </form>
+
+                <form action="view-classes" method="get">
+                    <input type="hidden" id="plan_id" name="plan_id" th:value="${plan.id}">
+                    <input type="hidden" id="semester_number" name="semester_number" th:value="${semester.number}">
+                    <button type="submit" class="appContainer__semester__button">Przeglądaj zajęcia</button>
+                </form>
             </div>
             <p class="tabTitle">
                 Kursy
             </p>
-            <table>
+            <table th:if="${course.isEmpty()} == false">
                 <thead>
                 <tr>
                     <th>
@@ -61,21 +63,6 @@
                     </th>
                     <th>
                         ECTS
-                    </th>
-                    <th>
-                        W
-                    </th>
-                    <th>
-                        C
-                    </th>
-                    <th>
-                        L
-                    </th>
-                    <th>
-                        P
-                    </th>
-                    <th>
-                        S
                     </th>
                     <th>
                         Symbol efektu uczenia się
@@ -95,98 +82,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="k,i :${course}">
+                    <td th:text="${i.index + 1}"></td>
+                    <td th:text="${k.name}"></td>
+                    <td th:text="${k.ZZU}"></td>
+                    <td th:text="${k.CNPS}"></td>
+                    <td th:text="${k.ECTS}"></td>
                     <td>
-                        Lp.
+                      <span th:each="e : ${k.learningEffects}">
+                        <p class="semester__learningEffects__font" th:text="${e.symbol}">
+                        </p>
+                      </span>
                     </td>
+                    <td th:text="${k.wayOfCrediting}"></td>
+                    <td th:text="${k.type}"></td>
+                    <td th:text="${k.area}"></td>
+
                     <td>
-                        Nazwa kursu
-                    </td>
-                    <td>
-                        ZZU
-                    </td>
-                    <td>
-                        CNPS
-                    </td>
-                    <td>
-                        ECTS
-                    </td>
-                    <td>
-                        W
-                    </td>
-                    <td>
-                        C
-                    </td>
-                    <td>
-                        L
-                    </td>
-                    <td>
-                        P
-                    </td>
-                    <td>
-                        S
-                    </td>
-                    <td>
-                        Symbol efektu uczenia się
-                    </td>
-                    <td>
-                        Sposób zaliczenia
-                    </td>
-                    <td>
-                        Rodzaj
-                    </td>
-                    <td>
-                        Obszar
-                    </td>
-                    <td>
-                        <button class="appContainer__semester__deleteButton">Usuń</button>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        Lp.
-                    </td>
-                    <td>
-                        Nazwa kursu
-                    </td>
-                    <td>
-                        ZZU
-                    </td>
-                    <td>
-                        CNPS
-                    </td>
-                    <td>
-                        ECTS
-                    </td>
-                    <td>
-                        W
-                    </td>
-                    <td>
-                        C
-                    </td>
-                    <td>
-                        L
-                    </td>
-                    <td>
-                        P
-                    </td>
-                    <td>
-                        S
-                    </td>
-                    <td>
-                        Symbol efektu uczenia się
-                    </td>
-                    <td>
-                        Sposób zaliczenia
-                    </td>
-                    <td>
-                        Rodzaj
-                    </td>
-                    <td>
-                        Obszar
-                    </td>
-                    <td>
-                        <button class="appContainer__semester__deleteButton">Usuń</button>
+                        <form action="#" th:action="@{/delete-class-from-semester}" method="post">
+                            <input type="hidden" th:value="${semester.getId()}" name="semester_id">
+                            <input type="hidden" th:value="${k.getId()}" name="class_id">
+                            <input class="appContainer__semester__deleteButton" type="submit" value="Usuń" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -197,7 +114,7 @@
             <p class="tabTitle">
                 Grupy kursów
             </p>
-            <table>
+            <table th:if="${group.isEmpty()} == false">
                 <thead>
                 <tr>
                     <th>
@@ -216,21 +133,6 @@
                         ECTS
                     </th>
                     <th>
-                        W
-                    </th>
-                    <th>
-                        C
-                    </th>
-                    <th>
-                        L
-                    </th>
-                    <th>
-                        P
-                    </th>
-                    <th>
-                        S
-                    </th>
-                    <th>
                         Symbol efektu uczenia się
                     </th>
                     <th>
@@ -248,51 +150,28 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="k,i :${group}">
+                    <td th:text="${i.index + 1}"></td>
+                    <td th:text="${k.name}"></td>
+                    <td th:text="${k.ZZU}"></td>
+                    <td th:text="${k.CNPS}"></td>
+                    <td th:text="${k.ECTS}"></td>
                     <td>
-                        Lp.
+                      <span th:each="e : ${k.learningEffects}">
+                        <p class="semester__learningEffects__font" th:text="${e.symbol}">
+                        </p>
+                      </span>
                     </td>
+                    <td th:text="${k.wayOfCrediting}"></td>
+                    <td th:text="${k.type}"></td>
+                    <td th:text="${k.area}"></td>
+
                     <td>
-                        Nazwa kursu
-                    </td>
-                    <td>
-                        ZZU
-                    </td>
-                    <td>
-                        CNPS
-                    </td>
-                    <td>
-                        ECTS
-                    </td>
-                    <td>
-                        W
-                    </td>
-                    <td>
-                        C
-                    </td>
-                    <td>
-                        L
-                    </td>
-                    <td>
-                        P
-                    </td>
-                    <td>
-                        S
-                    </td>
-                    <td>
-                        Symbol efektu uczenia się
-                    </td>
-                    <td>
-                        Sposób zaliczenia
-                    </td>
-                    <td>
-                        Rodzaj
-                    </td>
-                    <td>
-                        Obszar
-                    </td>
-                    <td>
-                        <button class="appContainer__semester__deleteButton">Usuń</button>
+                        <form action="#" th:action="@{/delete-class-from-semester}" method="post">
+                            <input type="hidden" th:value="${semester.getId()}" name="semester_id">
+                            <input type="hidden" th:value="${k.getId()}" name="class_id">
+                            <input class="appContainer__semester__deleteButton" type="submit" value="Usuń" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -303,6 +182,7 @@
             <p class="tabTitle">
                 Moduły kursów wybieralnych
             </p>
+            <span  th:each="k,i : ${module}">
             <table>
                 <thead>
                 <tr>
@@ -322,21 +202,6 @@
                         ECTS
                     </th>
                     <th>
-                        W
-                    </th>
-                    <th>
-                        C
-                    </th>
-                    <th>
-                        L
-                    </th>
-                    <th>
-                        P
-                    </th>
-                    <th>
-                        S
-                    </th>
-                    <th>
                         Symbol efektu uczenia się
                     </th>
                     <th>
@@ -355,50 +220,27 @@
                 </thead>
                 <tbody>
                 <tr>
+                    <td th:text="${i.index +1}"></td>
+                    <td th:text="${k.name}"></td>
+                    <td th:text="${k.ZZU}"></td>
+                    <td th:text="${k.CNPS}"></td>
+                    <td th:text="${k.ECTS}"></td>
                     <td>
-                        Lp.
+                      <span th:each="e : ${k.learningEffects}">
+                        <p class="semester__learningEffects__font" th:text="${e.symbol}">
+                        </p>
+                      </span>
                     </td>
+                    <td th:text="${k.wayOfCrediting}"></td>
+                    <td th:text="${k.type}"></td>
+                    <td th:text="${k.area}"></td>
+
                     <td>
-                        Nazwa modułu
-                    </td>
-                    <td>
-                        ZZU
-                    </td>
-                    <td>
-                        CNPS
-                    </td>
-                    <td>
-                        ECTS
-                    </td>
-                    <td>
-                        W
-                    </td>
-                    <td>
-                        C
-                    </td>
-                    <td>
-                        L
-                    </td>
-                    <td>
-                        P
-                    </td>
-                    <td>
-                        S
-                    </td>
-                    <td>
-                        Symbol efektu uczenia się
-                    </td>
-                    <td>
-                        Sposób zaliczenia
-                    </td>
-                    <td>
-                        Rodzaj
-                    </td>
-                    <td>
-                        Obszar
-                    </td>
-                    <td>
-                        <button class="appContainer__semester__deleteButton">Usuń</button>
+                        <form action="#" th:action="@{/delete-class-from-semester}" method="post">
+                            <input type="hidden" th:value="${semester.getId()}" name="semester_id">
+                            <input type="hidden" th:value="${k.getId()}" name="class_id">
+                            <input class="appContainer__semester__deleteButton" type="submit" value="Usuń" />
+                        </form>
                     </td>
                 </tr>
                 </tbody>
@@ -409,10 +251,7 @@
                 <thead>
                 <tr>
                     <th>
-                        Lp.
-                    </th>
-                    <th>
-                        Nazwa modułu
+                        Nazwa kursu
                     </th>
                     <th>
                         ZZU
@@ -422,21 +261,6 @@
                     </th>
                     <th>
                         ECTS
-                    </th>
-                    <th>
-                        W
-                    </th>
-                    <th>
-                        C
-                    </th>
-                    <th>
-                        L
-                    </th>
-                    <th>
-                        P
-                    </th>
-                    <th>
-                        S
                     </th>
                     <th>
                         Symbol efektu uczenia się
@@ -453,53 +277,24 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr>
+                <tr th:each="m,j : ${k.coursesInModule}">
+                    <td th:text="${m.name}"></td>
+                    <td th:text="${m.ZZU}"></td>
+                    <td th:text="${m.CNPS}"></td>
+                    <td th:text="${m.ECTS}"></td>
                     <td>
-                        Lp.
+                      <span th:each="e : ${m.learningEffects}">
+                        <p class="semester__learningEffects__font" th:text="${e.symbol}">
+                        </p>
+                      </span>
                     </td>
-                    <td>
-                        Nazwa modułu
-                    </td>
-                    <td>
-                        ZZU
-                    </td>
-                    <td>
-                        CNPS
-                    </td>
-                    <td>
-                        ECTS
-                    </td>
-                    <td>
-                        W
-                    </td>
-                    <td>
-                        C
-                    </td>
-                    <td>
-                        L
-                    </td>
-                    <td>
-                        P
-                    </td>
-                    <td>
-                        S
-                    </td>
-                    <td>
-                        Symbol efektu uczenia się
-                    </td>
-                    <td>
-                        Sposób zaliczenia
-                    </td>
-                    <td>
-                        Rodzaj
-                    </td>
-                    <td>
-                        Obszar
-                    </td>
+                    <td th:text="${m.wayOfCrediting}"></td>
+                    <td th:text="${m.type}"></td>
+                    <td th:text="${m.area}"></td>
                 </tr>
                 </tbody>
             </table>
-
+            </span>
         </div>
     </main>
 </div>

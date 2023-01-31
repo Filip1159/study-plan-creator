@@ -2,8 +2,10 @@ package com.example.studyplanscreator.service;
 
 import com.example.studyplanscreator.controller.dto.ClassFiltersDto;
 import com.example.studyplanscreator.model.AbstractClass;
+import com.example.studyplanscreator.model.entity.ClassCategory;
 import com.example.studyplanscreator.model.entity.ClassEntity;
 import com.example.studyplanscreator.model.entity.LearningEffect;
+import com.example.studyplanscreator.model.entity.Semester;
 import com.example.studyplanscreator.repo.ClassRepo;
 import com.example.studyplanscreator.repo.RepoClassesQueryParams;
 import com.example.studyplanscreator.service.filtering.FilterCriteriaCreator;
@@ -41,6 +43,28 @@ public class ClassService {
 
     public List<ClassEntity> getAll() {
         return repo.findAll();
+    }
+
+    public List<ClassEntity> getByCategory(ClassCategory category) {
+        return repo.getByCategory(category);
+    }
+
+    public List<ClassEntity> findByNameLikeAndCategory(String name, ClassCategory category) {
+        return repo.findByNameContainingAndCategory(name, category);
+    }
+    public List<ClassEntity> getByCategoryAndSemester(ClassCategory category, Semester semester){
+        return repo.getByCategoryAndSemester(category,semester);
+    }
+
+    public void addToSemester(Semester semester, ClassEntity classes) {
+        repo.addToSemester(semester, classes.getId());
+    }
+
+    public void deleteFromSemester(Long class_id) {
+        repo.deleteFromSemester(class_id);
+    }
+    public ClassEntity getClassById(Long class_id) {
+        return repo.getClassById(class_id);
     }
 
     public List<AbstractClass> getWithFilters(ClassFiltersDto filtersDto) {
